@@ -31,3 +31,14 @@ C:\Users\klaas\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulat
 C:\Users\klaas\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.AssemblyInfo.cs
 C:\Users\klaas\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.dll
 C:\Users\klaas\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.pdb
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.deps.json
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.runtimeconfig.json
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.runtimeconfig.dev.json
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.dll
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.pdb
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.csprojResolveAssemblyReference.cache
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.csproj.CoreCompileInputs.cache
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.AssemblyInfoInputs.cache
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.AssemblyInfo.cs
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.dll
+C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.pdb
