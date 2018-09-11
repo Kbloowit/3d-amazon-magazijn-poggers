@@ -1,10 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Models {
-    public class Robot : ThreeDModels {
+namespace Models
+{
+    public class Truck : ThreeDModels
+    {
 
         private double _x = 0;
         private double _y = 0;
@@ -18,8 +20,9 @@ namespace Models {
 
         public bool needsUpdate = true;
 
-        public Robot(double x, double y, double z, double rotationX, double rotationY, double rotationZ) {
-            this.type = "robot";
+        public Truck(double x, double y, double z, double rotationX, double rotationY, double rotationZ)
+        {
+            this.type = "truck";
             this.guid = Guid.NewGuid();
 
             this._x = x;
@@ -31,7 +34,8 @@ namespace Models {
             this._rZ = rotationZ;
         }
 
-        public virtual void Rotate(double rotationX, double rotationY, double rotationZ) {
+        public virtual void Rotate(double rotationX, double rotationY, double rotationZ)
+        {
             this._rX = rotationX;
             this._rY = rotationY;
             this._rZ = rotationZ;
