@@ -26,13 +26,13 @@ namespace Controllers {
 
     public abstract class Model3DCommand : Command {
 
-        public Model3DCommand(string type, Robot parameters) : base(type, parameters) {
+        public Model3DCommand(string type, ThreeDModels parameters) : base(type, parameters) {
         }
     }
 
     public class UpdateModel3DCommand : Model3DCommand {
         
-        public UpdateModel3DCommand(Robot parameters) : base("update", parameters) {
+        public UpdateModel3DCommand(ThreeDModels parameters) : base("update", parameters) {
         }
     }
 }
