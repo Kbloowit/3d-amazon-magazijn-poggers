@@ -67,31 +67,26 @@
             exampleSocket.onmessage = function (event) {
                 var command = parseCommand(event.data);
 
-                if (command.command == "update") {
-                    console.log(Object.keys(worldObjects).indexOf(command.parameters.guid));
-
+                if (command.command === "update") {
                     if (Object.keys(worldObjects).indexOf(command.parameters.guid) < 0) {
-                        if (command.parameters.type == "shelf") {
-                            var geometryShelf = new THREE.BoxGeometry(0.9, 0.3, 0.9);
-                            var cubeMaterialsShelf = [
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //LEFT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //RIGHT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_top.png"), side: THREE.DoubleSide }), //TOP
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_bottom.png"), side: THREE.DoubleSide }), //BOTTOM
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //FRONT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //BACK
-                            ];
-                            var materialShelf = new THREE.MeshFaceMaterial(cubeMaterialsShelf);
-                            var modelShelf = new THREE.Mesh(geometryShelf, materialShelf);
-                            modelShelf.position.y = 0.15;
+                        if (command.parameters.type === "truck") {
+                            var groupTruck = new THREE.Group();
 
-                            var shelf = new THREE.Group();
-                            shelf.add(modelShelf);
+                            mtlLoader.load('textures/truck.mtl', function (materials) {
 
-                            scene.add(shelf);
-                            worldObjects[command.parameters.guid] = shelf;
+                                materials.preload();
+
+                                objLoader.setMaterials(materials);
+                                objLoader.load('textures/truck.obj', function (object) {
+
+                                    groupTruck.add(object);
+                                });
+                            });
+
+                            scene.add(groupTruck);
+                            worldObjects[command.parameters.guid] = groupTruck;
                         }
-                        if (command.parameters.type == "robot") {
+                        if (command.parameters.type === "robot") {
                             var geometryRobot = new THREE.BoxGeometry(0.9, 0.3, 0.9);
                             var cubeMaterialsRobot = [
                                 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //LEFT
@@ -111,25 +106,22 @@
                             scene.add(robotGroup);
                             worldObjects[command.parameters.guid] = robotGroup;
                         }
-                        if (command.parameters.type == "truck") {
-                            var geometryTruck = new THREE.BoxGeometry(0.9, 0.3, 0.9);
-                            var cubeMaterialsTruck = [
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //LEFT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //RIGHT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_top.png"), side: THREE.DoubleSide }), //TOP
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_bottom.png"), side: THREE.DoubleSide }), //BOTTOM
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //FRONT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //BACK
-                            ];
-                            var materialTruck = new THREE.MeshFaceMaterial(cubeMaterialsTruck);
-                            var modelTruck = new THREE.Mesh(geometryTruck, materialTruck);
-                            modelTruck.position.y = 0.15;
+                        if (command.parameters.type === "shelf") {
+                            var groupShelf = new THREE.Group();
 
-                            var truck = new THREE.Group();
-                            truck.add(modelTruck);
+                            mtlLoader.load('textures/shelf.mtl', function (materials) {
 
-                            scene.add(truck);
-                            worldObjects[command.parameters.guid] = truck;
+                                materials.preload();
+
+                                var ObjLoader = new THREE.OBJLoader();
+                                ObjLoader.setMaterials(materials);
+                                ObjLoader.load('textures/shelf.obj', function (object) {
+
+                                    groupShelf.add(object);
+                                });
+                            });
+                            scene.add(groupShelf);
+                            worldObjects[command.parameters.guid] = groupShelf;
                         }
                     }
                     var object = worldObjects[command.parameters.guid];
@@ -145,6 +137,11 @@
             }
             init();
             animate();
+
+            var mtlLoader = new THREE.MTLLoader();
+            var objLoader = new THREE.OBJLoader();
+
+
         }
            
 
@@ -154,6 +151,8 @@
 
     <script src="three.min.js"></script>
     <script src="OrbitControls.js"></script>
+    <script src="MTLLoader.js"></script>
+    <script src="OBJLoader.js"></script>
 </body>
 
 </html>
