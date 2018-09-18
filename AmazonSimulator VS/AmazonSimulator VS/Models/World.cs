@@ -13,6 +13,7 @@ namespace Models {
             Robot r = CreateRobot(0,0,0);
             Truck t = CreateTruck(0, 0, 0);
             Shelf s = CreateShelf(0, 0, 0);
+            
 
             t.Move(8.6, 3, 13);
             r.Move(4.6, 0, 13);
