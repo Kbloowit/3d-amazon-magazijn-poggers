@@ -8,11 +8,71 @@ namespace Models {
     {
         private List<ThreeDModels> worldObjects = new List<ThreeDModels>();
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
+        public List<Node> nodes = new List<Node>();
         
         public World() {
-            Robot r = CreateRobot(0,0,0);
+            Robot r = CreateRobot(2, 0, 2);
             Truck t = CreateTruck(0, 0, 0);
             Shelf s = CreateShelf(0, 0, 0);
+            addNodes();
+            //A(2,2)
+            //B(30,2)
+            //C(2,16)
+            //D(30,16)
+            //E(2,30)
+            //F(30,30)
+            //
+            List<char> lijst = new List<char>();
+            Graph g = new Graph();
+            g.add_vertex('A', new Dictionary<char, int>() { { 'B', 28 }, { 'C', 14 } });
+            g.add_vertex('B', new Dictionary<char, int>() { { 'A', 28 }, { 'D', 14 } });
+            g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'H', 2 } });
+            g.add_vertex('H', new Dictionary<char, int>() { { 'C', 2 }, { 'G', 12 } });
+            g.add_vertex('D', new Dictionary<char, int>() { { 'B', 14 }, {  'F', 14 }, { 'G', 14 } });
+            g.add_vertex('E', new Dictionary<char, int>() { { 'C', 14 }, { 'F', 28 } });
+            g.add_vertex('F', new Dictionary<char, int>() { { 'D', 14 }, { 'E', 28 } });
+            g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
+            g.add_vertex('I', new Dictionary<char, int>() { { 'G', 13 }, { 'D', 1 } });
+
+            g.shortest_path('A', 'I').ForEach(x => lijst.Add(x));
+            foreach(char i in lijst)
+            {
+                Console.WriteLine(i);
+            }
+            MoveObject(lijst, nodes);
+
+        }
+
+        public void addNodes()
+        {
+            nodes.Add(new Node('A', 2, 0, 2));
+            nodes.Add(new Node('B', 30, 0, 2));
+            nodes.Add(new Node('C', 2, 0, 16));
+            nodes.Add(new Node('D', 30, 0, 16));
+            nodes.Add(new Node('E', 2, 0, 30));
+            nodes.Add(new Node('F', 30, 0, 30));
+            nodes.Add(new Node('G', 16, 0, 16));
+            nodes.Add(new Node('H', 4, 0, 16));
+        }
+
+        public void MoveObject(List<char> lijst, List<Node> nodes)
+        {
+            List<Node> moveObject = new List<Node>();
+            for(int i = 0; i < lijst.Count(); i++)
+            {
+                foreach(Node l in nodes)
+                {
+                    if(l.name == lijst[i])
+                    {
+                        moveObject.Add(l);
+                    }
+                }
+            }
+            foreach (Node d in moveObject)
+                Console.WriteLine(d.name);
+
+            for (int i = 0; i < moveObject.Count(); i++)
+                worldObjects[0].AddDestination(moveObject[i]);
         }
 
         private Robot CreateRobot(double x, double y, double z) {
