@@ -7,12 +7,12 @@ namespace Models
 {
     public class ThreeDModels : IUpdatable
     {
-        private double _x = 0;
-        private double _y = 0;
-        private double _z = 0;
-        private double _rX = 0;
-        private double _rY = 0;
-        private double _rZ = 0;
+        public double _x = 0;
+        public double _y = 0;
+        public double _z = 0;
+        public double _rX = 0;
+        public double _rY = 0;
+        public double _rZ = 0;
 
         public string type { get; }
         public Guid guid { get; }
@@ -66,5 +66,11 @@ namespace Models
             }
             return false;
         }
+
+        public virtual void AddDestination(Node d)
+        {
+
+        }
+
     }
 }

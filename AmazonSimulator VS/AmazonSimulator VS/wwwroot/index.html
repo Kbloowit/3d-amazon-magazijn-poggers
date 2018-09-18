@@ -42,6 +42,7 @@
                 var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/floor.jpg"), side: THREE.DoubleSide });
                 var plane = new THREE.Mesh(geometryPlane, material);
                 plane.rotation.x = Math.PI / 2.0;
+                plane.position.y = 0;
                 plane.position.x = 15;
                 plane.position.z = 15;
                 scene.add(plane);
