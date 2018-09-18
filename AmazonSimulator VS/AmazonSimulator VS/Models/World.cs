@@ -13,6 +13,13 @@ namespace Models {
             Robot r = CreateRobot(0,0,0);
             Truck t = CreateTruck(0, 0, 0);
             Shelf s = CreateShelf(0, 0, 0);
+            Vertex v = new Vertex("A", 16, 0, 0);
+            Vertex v2 = new Vertex("B", 2, 0, 0);
+            Vertex v3 = new Vertex("C", 28, 0, 0);
+            Vertex v4 = new Vertex("D", 2, 0, 28);
+            Vertex v5 = new Vertex("E", 28, 0, 28);
+
+
         }
 
         private Robot CreateRobot(double x, double y, double z) {
