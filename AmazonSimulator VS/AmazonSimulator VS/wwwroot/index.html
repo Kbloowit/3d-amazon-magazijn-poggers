@@ -23,7 +23,7 @@
             var worldObjects = {};
 
             function init() {
-                camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+                camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1500);
                 cameraControls = new THREE.OrbitControls(camera);
                 camera.position.z = 15;
                 camera.position.y = 5;
@@ -38,13 +38,18 @@
 
                 window.addEventListener('resize', onWindowResize, false);
 
-                var geometry = new THREE.PlaneGeometry(30, 30, 32);
+                var geometryPlane = new THREE.PlaneGeometry(30, 30, 32);
                 var material = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
-                var plane = new THREE.Mesh(geometry, material);
+                var plane = new THREE.Mesh(geometryPlane, material);
                 plane.rotation.x = Math.PI / 2.0;
                 plane.position.x = 15;
                 plane.position.z = 15;
                 scene.add(plane);
+
+                var sphericalSkyboxGeometry = new THREE.SphereGeometry(1000, 32, 32);
+                var sphericalSkyboxMaterial = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/skybox/skybox.jpg"), side: THREE.DoubleSide });
+                var sphericalSkybox = new THREE.Mesh(sphericalSkyboxGeometry, sphericalSkyboxMaterial);
+                scene.add(sphericalSkybox);
 
                 var light = new THREE.AmbientLight(0x404040);
                 light.intensity = 4;
@@ -70,21 +75,17 @@
                 if (command.command === "update") {
                     if (Object.keys(worldObjects).indexOf(command.parameters.guid) < 0) {
                         if (command.parameters.type === "truck") {
-                            var groupTruck = new THREE.Group();
+                            var Truck = new THREE.Group();
 
-                            mtlLoader.load('textures/truck.mtl', function (materials) {
-
-                                materials.preload();
-
-                                objLoader.setMaterials(materials);
-                                objLoader.load('textures/truck.obj', function (object) {
-
-                                    groupTruck.add(object);
-                                });
+                            LoadOBJModel("textures/", "truck.obj", "textures/", "truck.mtl", (mesh) => {
+                                mesh.scale.set(10.0, 10.0, 10.0);
+                                mesh.position.y = 0.5;
+                                mesh.position.x = 4;
+                                mesh.position.z = 4;
+                                Truck.add(mesh);
+                                worldObjects[command.parameters.guid] = Truck;
                             });
-
-                            scene.add(groupTruck);
-                            worldObjects[command.parameters.guid] = groupTruck;
+                            scene.add(Truck);
                         }
                         if (command.parameters.type === "robot") {
                             var geometryRobot = new THREE.BoxGeometry(0.9, 0.3, 0.9);
@@ -107,21 +108,17 @@
                             worldObjects[command.parameters.guid] = robotGroup;
                         }
                         if (command.parameters.type === "shelf") {
-                            var groupShelf = new THREE.Group();
+                            var Shelf = new THREE.Group();
 
-                            mtlLoader.load('textures/shelf.mtl', function (materials) {
-
-                                materials.preload();
-
-                                var ObjLoader = new THREE.OBJLoader();
-                                ObjLoader.setMaterials(materials);
-                                ObjLoader.load('textures/shelf.obj', function (object) {
-
-                                    groupShelf.add(object);
-                                });
+                            LoadOBJModel("textures/", "shelf.obj", "textures/", "shelf.mtl", (mesh) => {
+                                mesh.scale.set(0.30, 0.30, 0.30);
+                                mesh.position.y = 0.5;
+                                mesh.position.x = 15;
+                                mesh.position.z = 15;
+                                Shelf.add(mesh);
+                                worldObjects[command.parameters.guid] = Shelf;
                             });
-                            scene.add(groupShelf);
-                            worldObjects[command.parameters.guid] = groupShelf;
+                            scene.add(Shelf);
                         }
                     }
                     var object = worldObjects[command.parameters.guid];
@@ -134,17 +131,26 @@
                     object.rotation.y = command.parameters.rotationY;
                     object.rotation.z = command.parameters.rotationZ;
                 }
-            }
+            };
             init();
             animate();
+        };
 
-            var mtlLoader = new THREE.MTLLoader();
-            var objLoader = new THREE.OBJLoader();
+        function LoadOBJModel(modelPath, modelName, texturePath, textureName, onload) {
+            new THREE.MTLLoader()
+                .setPath(texturePath)
+                .load(textureName, function (materials) {
 
+                    materials.preload();
 
+                    new THREE.OBJLoader()
+                        .setPath(modelPath)
+                        .setMaterials(materials)
+                        .load(modelName, function (object) {
+                            onload(object);
+                        }, function () { }, function (e) { console.log("Error loading model"); console.log(e); });
+                });
         }
-           
-
             
         
     </script>

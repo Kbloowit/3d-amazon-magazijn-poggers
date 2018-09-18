@@ -60,6 +60,8 @@ namespace Models
 
         public override bool Update(int tick)
         {
+            this.Move(this.x, this.y, this.z);
+
             if (needsUpdate)
             {
                 needsUpdate = false;
