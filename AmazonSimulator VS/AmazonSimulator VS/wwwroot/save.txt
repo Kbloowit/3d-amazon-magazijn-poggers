@@ -1,0 +1,11 @@
+var groupShelf = new THREE.Group();
+                            mtlLoader.load('textures/shelf.mtl', function (materials) {
+                                materials.preload();
+                                objLoader.setMaterials(materials);
+                                objLoader.load('textures/shelf.obj', function (object) {
+                                    object.scale.set(0.5, 0.5, 0.5);
+                                    groupShelf.add(object);
+                                });
+                            });
+                            scene.add(groupShelf);
+                            worldObjects[command.parameters.guid] = groupShelf;
