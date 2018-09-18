@@ -13,30 +13,24 @@ namespace Models {
             Robot r = CreateRobot(0,0,0);
             Truck t = CreateTruck(0, 0, 0);
             Shelf s = CreateShelf(0, 0, 0);
-
-            t.Move(8.6, 3, 13);
-            r.Move(4.6, 0, 13);
-            s.Move(8.6, 0, 6);
-            
-
         }
 
         private Robot CreateRobot(double x, double y, double z) {
-            Robot r = new Robot(x,y,z,0,0,0);
+            Robot r = new Robot("robot",x,y,z,0,0,0);
             worldObjects.Add(r);
             return r;
         }
 
         private Truck CreateTruck(double x, double y, double z)
         {
-            Truck t = new Truck(x, y, z, 0, 0, 0);
+            Truck t = new Truck("truck",x, y, z, 0, 0, 0);
             worldObjects.Add(t);
             return t;
         }
 
         private Shelf CreateShelf(double x, double y, double z)
         {
-            Shelf s = new Shelf(x, y, z, 0, 0, 0);
+            Shelf s = new Shelf("shelf",x, y, z, 0, 0, 0);
             worldObjects.Add(s);
             return s;
         }
