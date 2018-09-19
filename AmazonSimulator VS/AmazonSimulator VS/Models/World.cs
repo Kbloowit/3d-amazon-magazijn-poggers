@@ -34,7 +34,7 @@ namespace Models {
             g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
             g.add_vertex('I', new Dictionary<char, int>() { { 'G', 13 }, { 'D', 1 } });
 
-            g.shortest_path('A', 'H').ForEach(x => lijst.Add(x));
+            g.shortest_path('A', 'F').ForEach(x => lijst.Add(x));
             foreach(char i in lijst)
             {
                 Console.WriteLine(i);
