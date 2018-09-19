@@ -12,7 +12,7 @@ namespace Models
 
         double deltaX;
         double deltaZ;
-        int indexer = 0;
+
         //private double speed;
 
         public Robot(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("robot", x, y, z, rotationX, rotationY, rotationZ)
@@ -37,26 +37,38 @@ namespace Models
 
         public override bool Update(int tick)
         {
-            if(destinations.Count() != 0)
+            if(destinations.Count() != 0 && deltaZ == 0 && deltaX ==0)
             {
-            deltaX = Math.Abs(destinations[0].x - this.x);
-            deltaZ = Math.Abs(destinations[0].z - this.z);
+                deltaX = destinations[0].x - this.x;
+                deltaZ = destinations[0].z - this.z;
             }
 
-            if (deltaX != 0)
+            if (deltaX > 0)
             {
-                this.Move(this._x += 0.5, this._y, this._z);
-                deltaX -= 0.5;
+                this.Move(this._x += 0.20, this._y, this._z);
+                deltaX -= 0.20;
             }
-            else if(deltaZ != 0)
+            else if(deltaX < 0)
             {
-                this.Move(this._x, this._y, this._z += 0.5);
-                deltaZ -= 0.5;
+                this.Move(this._x -= 0.20, this._y, this._z);
+                deltaX += 0.20;
+            }
+            else if(deltaZ > 0)
+            {
+                this.Move(this._x, this._y, this._z += 0.20);
+                deltaZ -= 0.20;
+            }
+            else if(deltaZ < 0)
+            {
+                this.Move(this._x, this._y, this._z -= 0.20);
+                deltaZ += 0.20;
             }
             else
             {
                 if(destinations.Count() != 0)
-                destinations.RemoveAt(0);
+                {
+                    destinations.RemoveAt(0);
+                }
             }
             return base.Update(tick);
         }
