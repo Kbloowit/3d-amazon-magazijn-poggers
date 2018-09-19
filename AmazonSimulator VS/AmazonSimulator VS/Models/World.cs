@@ -11,8 +11,9 @@ namespace Models {
         public List<Node> nodes = new List<Node>();
         
         public World() {
-            Robot r = CreateRobot(2, 0, 2);
-            Truck t = CreateTruck(0, 0, 0);
+            Robot r = CreateRobot(2, 0, 32);
+            Truck t = CreateTruck(2, 0, 2);
+            //Truck t2 = CreateTruck(2, 0, 2);
             Shelf s = CreateShelf(0, 0, 0);
             addNodes();
             //A(2,2)
@@ -33,6 +34,9 @@ namespace Models {
             g.add_vertex('F', new Dictionary<char, int>() { { 'D', 14 }, { 'E', 28 } });
             g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
             g.add_vertex('I', new Dictionary<char, int>() { { 'G', 13 }, { 'D', 1 } });
+            g.add_vertex('t', new Dictionary<char, int>() { { 'u', 16 }, });
+            g.add_vertex('u', new Dictionary<char, int>() { { 't', 16 }, { 'v', 16 } });
+            g.add_vertex('v', new Dictionary<char, int>() { { 'u', 16 }, });
 
             g.shortest_path('A', 'F').ForEach(x => lijst.Add(x));
             foreach(char i in lijst)
@@ -54,6 +58,9 @@ namespace Models {
             nodes.Add(new Node('G', 16, 0, 16));
             nodes.Add(new Node('H', 4, 0, 16));
             nodes.Add(new Node('I', 29, 0, 10));
+            nodes.Add(new Node('t', 0, 0, 0));
+            nodes.Add(new Node('u', 16, 0, 0));
+            nodes.Add(new Node('v', 32, 0, 0));
         }
 
         public void MoveObject(List<char> lijst, List<Node> nodes)
@@ -75,6 +82,10 @@ namespace Models {
             for (int i = 0; i < moveObject.Count(); i++)
             {
                 worldObjects[0].AddDestination(moveObject[i]);
+            }
+            foreach(Truck t in worldObjects)
+            {
+                t.AddDestination()
             }
         }
 
