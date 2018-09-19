@@ -8,8 +8,11 @@ namespace Models
     public class Robot : ThreeDModels
     {
 
-        private List<Node> destinations; //later lijst van task, kunnen checken of ze al klaar zijn
+        private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
 
+        double deltaX;
+        double deltaZ;
+        int indexer = 0;
         //private double speed;
 
         public Robot(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("robot", x, y, z, rotationX, rotationY, rotationZ)
@@ -17,22 +20,43 @@ namespace Models
 
         }
 
+        public override double currentPositionX()
+        {
+            return _x;
+        }
+
+        public override double currentPositionZ()
+        {
+            return _z;
+        }
+
+        public override void Move(double x, double y, double z)
+        {
+            base.Move(x, y, z);
+        }
+
         public override bool Update(int tick)
         {
-            double deltaX;
-            double deltaZ;
-
             if(destinations.Count() != 0)
             {
-                for (int i = 0; i < destinations.Count(); i++)
-                {
-                    if(destinations[i].x != destinations[i+1].x)
-                        deltaX = Math.Abs(destinations[i].x - destinations[i + 1].x);
-                    if (destinations[i].z != destinations[i + 1].z)
-                        deltaZ = Math.Abs(destinations[i].z - destinations[i + 1].z);
+            deltaX = Math.Abs(destinations[0].x - this.x);
+            deltaZ = Math.Abs(destinations[0].z - this.z);
+            }
 
-                    
-                }
+            if (deltaX != 0)
+            {
+                this.Move(this._x += 0.5, this._y, this._z);
+                deltaX -= 0.5;
+            }
+            else if(deltaZ != 0)
+            {
+                this.Move(this._x, this._y, this._z += 0.5);
+                deltaZ -= 0.5;
+            }
+            else
+            {
+                if(destinations.Count() != 0)
+                destinations.RemoveAt(0);
             }
             return base.Update(tick);
         }

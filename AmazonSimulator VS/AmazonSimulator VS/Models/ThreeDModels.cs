@@ -72,5 +72,15 @@ namespace Models
 
         }
 
+        public virtual double currentPositionX()
+        {
+            return _x;
+        }
+
+        public virtual double currentPositionZ()
+        {
+            return _z;
+        }
+
     }
 }

@@ -28,13 +28,13 @@ namespace Models {
             g.add_vertex('B', new Dictionary<char, int>() { { 'A', 28 }, { 'D', 14 } });
             g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'H', 2 } });
             g.add_vertex('H', new Dictionary<char, int>() { { 'C', 2 }, { 'G', 12 } });
-            g.add_vertex('D', new Dictionary<char, int>() { { 'B', 14 }, {  'F', 14 }, { 'G', 14 } });
+            g.add_vertex('D', new Dictionary<char, int>() { { 'B', 14 }, {  'F', 14 }, { 'I', 1 } });
             g.add_vertex('E', new Dictionary<char, int>() { { 'C', 14 }, { 'F', 28 } });
             g.add_vertex('F', new Dictionary<char, int>() { { 'D', 14 }, { 'E', 28 } });
             g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
             g.add_vertex('I', new Dictionary<char, int>() { { 'G', 13 }, { 'D', 1 } });
 
-            g.shortest_path('A', 'I').ForEach(x => lijst.Add(x));
+            g.shortest_path('A', 'H').ForEach(x => lijst.Add(x));
             foreach(char i in lijst)
             {
                 Console.WriteLine(i);
@@ -53,6 +53,7 @@ namespace Models {
             nodes.Add(new Node('F', 30, 0, 30));
             nodes.Add(new Node('G', 16, 0, 16));
             nodes.Add(new Node('H', 4, 0, 16));
+            nodes.Add(new Node('I', 29, 0, 10));
         }
 
         public void MoveObject(List<char> lijst, List<Node> nodes)
@@ -68,11 +69,13 @@ namespace Models {
                     }
                 }
             }
-            foreach (Node d in moveObject)
-                Console.WriteLine(d.name);
+            //foreach (Node d in moveObject)
+            //    Console.WriteLine(d.name);
 
             for (int i = 0; i < moveObject.Count(); i++)
+            {
                 worldObjects[0].AddDestination(moveObject[i]);
+            }
         }
 
         private Robot CreateRobot(double x, double y, double z) {
