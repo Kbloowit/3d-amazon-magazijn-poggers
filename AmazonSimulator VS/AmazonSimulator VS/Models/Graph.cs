@@ -12,13 +12,14 @@ namespace Models
             vertices[name] = edges;
         }
 
-        public List<char> shortest_path(char start, char finish)
+        public List<Node> shortest_path(char start, char finish, List<Node> allNodes)
         {
             var previous = new Dictionary<char, char>();
             var distances = new Dictionary<char, int>();
             var nodes = new List<char>();
 
             List<char> path = new List<char>();
+            List<Node> nodePath = new List<Node>();
 
             foreach (var vertex in vertices)
             {
@@ -70,7 +71,17 @@ namespace Models
             }
             path.Add(start);
             path.Reverse();
-            return path;
+            for (int i = 0; i < path.Count; i++)
+            {
+                foreach (Node l in allNodes)
+                {
+                    if (l.name == path[i])
+                    {
+                        nodePath.Add(l);
+                    }
+                }
+            }
+            return nodePath;
         }
     }
 }
