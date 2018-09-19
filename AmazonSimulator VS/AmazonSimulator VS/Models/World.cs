@@ -37,13 +37,7 @@ namespace Models {
             g.add_vertex('t', new Dictionary<char, int>() { { 'u', 16 }, });
             g.add_vertex('u', new Dictionary<char, int>() { { 't', 16 }, { 'v', 16 } });
             g.add_vertex('v', new Dictionary<char, int>() { { 'u', 16 }, });
-
-            g.shortest_path('A', 'F').ForEach(x => lijst.Add(x));
-            foreach(char i in lijst)
-            {
-                Console.WriteLine(i);
-            }
-            MoveObject(lijst, nodes);
+        }
 
         public void addNodes()
         {
@@ -67,11 +61,10 @@ namespace Models {
 
             for (int i = 0; i < nodePath.Count(); i++)
             {
-                worldObjects[0].AddDestination(nodePath[i]);
-            }
-            foreach(Truck t in worldObjects)
-            {
-                t.AddDestination()
+                foreach (Robot t in worldObjects)
+                {
+                    t.AddDestination(nodePath[i]);
+                }
             }
         }
 
