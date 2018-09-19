@@ -20,16 +20,6 @@ namespace Models
 
         }
 
-        public override double currentPositionX()
-        {
-            return _x;
-        }
-
-        public override double currentPositionZ()
-        {
-            return _z;
-        }
-
         public override void Move(double x, double y, double z)
         {
             base.Move(x, y, z);
@@ -37,53 +27,41 @@ namespace Models
 
         public override bool Update(int tick)
         {
-            if (destinations.Count() != 0 && deltaZ == 0 && deltaX == 0)
+            if(destinations.Count() != 0)
             {
-                deltaX = destinations[0].x - this.x;
-                deltaZ = destinations[0].z - this.z;
-            }
-            if (Math.Round(this.x) != destinations[0].x)
-            {
-                if (deltaX > 0)
+                if (Math.Round(deltaZ) == 0 && Math.Round(deltaX) == 0)
                 {
+                    destinations.RemoveAt(0);
+                    if(destinations.Count() != 0)
+                    {
+                    deltaX = destinations[0].x - this.x;
+                    deltaZ = destinations[0].z - this.z;
+                    }
+                }
 
+                if (Math.Round(deltaX) > 0)
+                {
                     this.Move(this._x += 0.20, this._y, this._z);
                     deltaX -= 0.20;
                 }
-                else if (deltaX < 0)
+                else if (Math.Round(deltaX) < 0)
                 {
                     this.Move(this._x -= 0.20, this._y, this._z);
                     deltaX += 0.20;
                 }
-            }
-            else if (Math.Round(this.x) == destinations[0].x)
-            {
-                this.Move(Math.Round(this.x), this._y, this._z);
-            }
-            else if (Math.Round(this.z) != destinations[0].z)
-            {  
-                if (deltaZ > 0)
+
+                if (Math.Round(deltaZ) > 0)
                 {
                     this.Move(this._x, this._y, this._z += 0.20);
                     deltaZ -= 0.20;
                 }
-                else if (deltaZ < 0)
+                else if (Math.Round(deltaZ) < 0)
                 {
                     this.Move(this._x, this._y, this._z -= 0.20);
                     deltaZ += 0.20;
                 }
             }
-            else if (Math.Round(this.z) == destinations[0].z)
-            {
-                this.Move(this._x, this._y, Math.Round(this.z));
-            }
-            else
-            {
-                if (destinations.Count() != 0)
-                {
-                    destinations.RemoveAt(0);
-                }
-            }
+            
             return base.Update(tick);
         }
 
