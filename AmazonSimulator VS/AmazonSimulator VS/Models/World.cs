@@ -11,8 +11,8 @@ namespace Models {
         public List<Node> nodes = new List<Node>();
         
         public World() {
-            Robot r = CreateRobot(2, 0, 2);
-            Truck t = CreateTruck(0, 0, 0);
+            Robot r = CreateRobot(20, 0, 2);
+            Truck t = CreateTruck(-1, 0, -10);
             Shelf s = CreateShelf(0, 0, 0);
             addNodes();
             //A(2,2)
@@ -34,7 +34,7 @@ namespace Models {
             g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
             g.add_vertex('I', new Dictionary<char, int>() { { 'G', 13 }, { 'D', 1 } });
 
-            g.shortest_path('A', 'H').ForEach(x => lijst.Add(x));
+            g.shortest_path('A', 'I').ForEach(x => lijst.Add(x));
             foreach(char i in lijst)
             {
                 Console.WriteLine(i);

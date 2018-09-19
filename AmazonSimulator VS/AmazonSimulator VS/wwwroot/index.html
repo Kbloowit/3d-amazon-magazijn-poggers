@@ -79,10 +79,7 @@
                             var Truck = new THREE.Group();
 
                             LoadOBJModel("textures/", "truck.obj", "textures/", "truck.mtl", (mesh) => {
-                                mesh.scale.set(10.0, 10.0, 10.0);
-                                mesh.position.y = 0.5;
-                                mesh.position.x = 4;
-                                mesh.position.z = 4;
+                                mesh.scale.set(30.0, 30.0, 30.0);
                                 Truck.add(mesh);
                                 worldObjects[command.parameters.guid] = Truck;
                             });
