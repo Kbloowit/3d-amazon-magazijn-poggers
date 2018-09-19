@@ -8,7 +8,7 @@ namespace Models
     public class Robot : ThreeDModels
     {
 
-        private List<Node> destinations; //later lijst van task, kunnen checken of ze al klaar zijn
+        private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
 
         //private double speed;
 
