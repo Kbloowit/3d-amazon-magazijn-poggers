@@ -13,14 +13,15 @@ namespace Models {
 
 
         public World() {
-            Robot r = CreateRobot(2, 0, 32);
-            Truck t = CreateTruck(2, 0, 2);
+            Robot r = CreateRobot(2, 0, 2);
+            Truck t = CreateTruck(0, 0, 0);
             //Truck t2 = CreateTruck(2, 0, 2);
             Shelf s = CreateShelf(0, 0, 0);
 
             addNodes();
             AddVertexes();
             moveRobot(nodes, 'A', 'I');
+            moveTruck(nodes);
 
         }
         public void AddVertexes()
@@ -61,11 +62,26 @@ namespace Models {
 
             for (int i = 0; i < nodePath.Count(); i++)
             {
-                foreach (Robot t in worldObjects)
+                foreach (Robot r in worldObjects)
                 {
-                    t.AddDestination(nodePath[i]);
+                    r.AddDestination(nodePath[i]);
                 }
             }
+        }
+
+        public void moveTruck(List<Node> nodes)
+        {
+            //foreach (Truck t in worldObjects)
+            //{
+            //    foreach(Node i in nodes)
+            //    {
+            //        foreach(char n in i.GetName())
+            //        {
+
+            //        }
+            //    }
+            //    t.AddDestination(nodes);
+            //}
         }
 
         private Robot CreateRobot(double x, double y, double z) {
