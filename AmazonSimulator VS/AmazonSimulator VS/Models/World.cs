@@ -14,9 +14,9 @@ namespace Models {
 
         public World() {
             Robot r = CreateRobot(2, 0, 32);
-            Truck t = CreateTruck(2, 0, 2);
+            Truck t = CreateTruck(2, 4, 2);
             //Truck t2 = CreateTruck(2, 0, 2);
-            Shelf s = CreateShelf(0, 0, 0);
+            Shelf s = CreateShelf(0, 4, 0);
 
             addNodes();
             AddVertexes();

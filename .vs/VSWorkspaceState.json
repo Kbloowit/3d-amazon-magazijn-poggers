@@ -2,11 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\AmazonSimulator VS",
-    "\\AmazonSimulator VS\\AmazonSimulator VS",
     "\\AmazonSimulator VS\\AmazonSimulator VS\\Models",
     "\\AmazonSimulator VS\\AmazonSimulator VS\\wwwroot",
     "\\AmazonSimulator VS\\AmazonSimulator VS\\wwwroot\\textures"
   ],
-  "SelectedNode": "\\AmazonSimulator VS\\AmazonSimulator VS\\Models\\World.cs",
+  "SelectedNode": "\\AmazonSimulator VS\\AmazonSimulator VS.sln",
   "PreviewInSolutionExplorer": false
 }
