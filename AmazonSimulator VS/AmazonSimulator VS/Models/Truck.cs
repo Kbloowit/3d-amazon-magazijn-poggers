@@ -24,6 +24,7 @@ namespace Models
 
         public override bool Update(int tick)
         {
+            this.Rotate(this._rX, this._rY, this._rZ);
             if (destinations.Count() != 0)
             {
                 if (Math.Round(deltaX) == 0)
