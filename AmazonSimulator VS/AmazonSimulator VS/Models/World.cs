@@ -20,15 +20,14 @@ namespace Models {
             //Robot robot3 = CreateRobot(2, 0, 2);
             //int indexRobot3 = worldObjects.FindIndex(a => a.guid == robot3.guid);
             Truck t = CreateTruck(0, 1, -5);
-            //int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
-            //var check = worldObjects[indexTruck].rotationY;
-            //Shelf s = CreateShelf(4, 0, 18);
-            //int indexShelf = worldObjects.FindIndex(a => a.guid == s.guid);
+            int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
+            Shelf s = CreateShelf(4, 0, 18);
+            int indexShelf = worldObjects.FindIndex(a => a.guid == s.guid);
 
             addNodes();
             AddVertexes();
             moveRobot(nodes, 'A', 'I', 0);
-            moveTruck(nodes);
+            moveTruck(nodes, indexTruck, 'u');
 
         }
         public void AddVertexes()
@@ -85,19 +84,13 @@ namespace Models {
             }
         }
 
-        public void moveTruck(List<Node> nodes)
+        public void moveTruck(List<Node> nodes, int truckIndex, char to)
         {
-            //foreach (Truck t in worldObjects)
-            //{
-            //    foreach(Node i in nodes)
-            //    {
-            //        foreach(char n in i.GetName())
-            //        {
-
-            //        }
-            //    }
-            //    t.AddDestination(nodes);
-            //}
+            var node = from s in nodes
+                       where s.name == to
+                       select s;
+            foreach(Node i in node)
+            worldObjects[truckIndex].AddDestination(i);
         }
 
         private Robot CreateRobot(double x, double y, double z) {

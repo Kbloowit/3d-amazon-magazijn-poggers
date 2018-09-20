@@ -25,25 +25,24 @@ namespace Models
         public override bool Update(int tick)
         {
             this.Rotate(this._rX, this._rY, this._rZ);
-            if (destinations.Count() != 0)
-            {
                 if (Math.Round(deltaX) == 0)
                 {
-                    destinations.RemoveAt(0);
                     if (destinations.Count() != 0)
                     {
-                        deltaX = destinations[0].x - this.x;
+                    deltaX = destinations[0].x - this.x; //waar hij naar toe moet - waar hij is
+                    destinations.RemoveAt(0);
                     }
                 }
-                if (Math.Round(deltaX) > 0)
+                if (Math.Round(deltaX) > 0) // als deltaX positief is gaat hij vooruit
                 {
                     this.Move(this._x += 0.20, this._y, this._z);
                     deltaX -= 0.20;
                 }
-            }
-
-
-
+                else if (Math.Round(deltaX) < 0) // als deltaX negatief is gaat hij actheruit
+                {
+                    this.Move(this._x -= 0.20, this._y, this._z);
+                    deltaX += 0.20;
+                }
                 return base.Update(tick);
         }
 
