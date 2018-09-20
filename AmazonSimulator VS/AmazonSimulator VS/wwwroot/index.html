@@ -81,9 +81,10 @@
                             LoadOBJModel("textures/", "truck.obj", "textures/", "truck.mtl", (mesh) => {
                                 mesh.scale.set(30.0, 30.0, 30.0);
                                 Truck.add(mesh);
-                                worldObjects[command.parameters.guid] = Truck;
+                                
                             });
                             scene.add(Truck);
+                            worldObjects[command.parameters.guid] = Truck;
                             console.log("Truck added")
                         }
                         if (command.parameters.type === "robot") {
@@ -113,9 +114,10 @@
                             LoadOBJModel("textures/", "shelf.obj", "textures/", "shelf.mtl", (mesh) => {
                                 mesh.scale.set(0.30, 0.30, 0.30);
                                 Shelf.add(mesh);
-                                worldObjects[command.parameters.guid] = Shelf;
+                                
                             });
                             scene.add(Shelf);
+                            worldObjects[command.parameters.guid] = Shelf;
                             console.log("shelf added")
                         }
                     }
