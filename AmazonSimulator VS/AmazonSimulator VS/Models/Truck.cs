@@ -9,6 +9,8 @@ namespace Models
     {
 
         private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
+        //private List<int> items = new List<int>();
+        private bool arrived = false;
         double deltaX;
 
 
@@ -25,13 +27,17 @@ namespace Models
         public override bool Update(int tick)
         {
             this.Rotate(this._rX, this._rY, this._rZ);
-                if (Math.Round(deltaX) == 0)
+            if (Math.Round(deltaX) == 0)
+            {
+                if (destinations.Count() != 0)
                 {
-                    if (destinations.Count() != 0)
-                    {
                     deltaX = destinations[0].x - this.x; //waar hij naar toe moet - waar hij is
                     destinations.RemoveAt(0);
-                    }
+                }
+                else if( destinations.Count() == 0 && Math.Round(this.x) == 16)
+                {
+                    arrived = true;
+                }
                 }
                 if (Math.Round(deltaX) > 0) // als deltaX positief is gaat hij vooruit
                 {
@@ -42,8 +48,8 @@ namespace Models
                 {
                     this.Move(this._x -= 0.20, this._y, this._z);
                     deltaX += 0.20;
-                }
-                return base.Update(tick);
+            }
+           return base.Update(tick);
         }
 
         public override void AddDestination(Node d)
@@ -51,5 +57,9 @@ namespace Models
             destinations.Add(d);
         }
 
+        public bool Status()
+        {
+            return arrived;
+        }
     }
 }

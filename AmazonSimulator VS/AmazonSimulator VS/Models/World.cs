@@ -26,8 +26,12 @@ namespace Models {
 
             addNodes();
             AddVertexes();
-            moveRobot(nodes, 'A', 'I', 0);
-            moveTruck(nodes, indexTruck, 'u');
+            //moveRobot('A', 'I', 0);
+            moveTruck(indexTruck, 'u');
+            if (Truck.Status())
+            {
+                //move robot?
+            }
 
         }
         public void AddVertexes()
@@ -74,7 +78,7 @@ namespace Models {
             nodes.Add(new Node('v', 32, 0, 0));//truck eind
         }
 
-        public void moveRobot(List<Node> nodes, Char from, Char to, int robotIndex)
+        public void moveRobot(Char from, Char to, int robotIndex)
         {
             List<Node> nodePath = g.shortest_path(from, to, nodes);
 
@@ -84,7 +88,7 @@ namespace Models {
             }
         }
 
-        public void moveTruck(List<Node> nodes, int truckIndex, char to)
+        public void moveTruck(int truckIndex, char to)
         {
             var node = from s in nodes
                        where s.name == to
