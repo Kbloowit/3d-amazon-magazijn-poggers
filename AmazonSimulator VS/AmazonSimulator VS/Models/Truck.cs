@@ -36,7 +36,9 @@ namespace Models
                 }
                 else if( destinations.Count() == 0 && Math.Round(this.x) == 16)
                 {
+                    deltaX = 0;
                     arrived = true;
+                     
                 }
                 }
                 if (Math.Round(deltaX) > 0) // als deltaX positief is gaat hij vooruit
@@ -57,9 +59,16 @@ namespace Models
             destinations.Add(d);
         }
 
-        public bool Status()
+        public bool GetStatus()
         {
+            Console.Write("Status has been checked");
             return arrived;
         }
+
+        public void ResetStatus()
+        {
+            arrived = false;
+        }
+
     }
 }

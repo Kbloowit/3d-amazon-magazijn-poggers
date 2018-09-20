@@ -28,9 +28,11 @@ namespace Models {
             AddVertexes();
             //moveRobot('A', 'I', 0);
             moveTruck(indexTruck, 'u');
-            if (Truck.Status())
+            
+            if (t.GetStatus() == true)
             {
-                //move robot?
+                Console.WriteLine("1");
+                moveRobot('A', 'I', 0);
             }
 
         }
