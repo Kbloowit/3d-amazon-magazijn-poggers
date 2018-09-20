@@ -12,5 +12,22 @@ namespace Models
         {
 
         }
+
+        public override void Rotate(double rotationX, double rotationY, double rotationZ)
+        {
+            base.Rotate(rotationX, rotationY, rotationZ);
+        }
+
+        public override void Move(double x, double y, double z)
+        {
+            base.Move(x, y, z);
+        }
+
+        public override bool Update(int tick)
+        {
+            this.Move(this._x, this._y, this._z);
+            this.Rotate(this._rX, this._rY, this._rZ);
+            return base.Update(tick);
+        }
     }
 }

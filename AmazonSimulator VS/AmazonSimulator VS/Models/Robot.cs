@@ -36,13 +36,13 @@ namespace Models
                     {
                     deltaX = destinations[0].x - this.x; //waar hij naar toe moet - waar hij is
                     deltaZ = destinations[0].z - this.z; //waar hij naar toe moet - waar hij is
-                        if (destinations[0].x > this.x)
+                        if (destinations[0].x > Math.Round(this.x))
                             this.Rotate(this._rX, this._rY = -(Math.PI / 2), this._rZ);
-                        else if (destinations[0].x < this.x)
+                        else if (destinations[0].x < Math.Round(this.x))
                             this.Rotate(this._rX, this._rY = (Math.PI / 2), this._rZ);
-                        else if (destinations[0].z > 0)
+                        else if (destinations[0].z > Math.Round(this.z))
                             this.Rotate(this._rX, this._rY = 0, this._rZ);
-                        else if (destinations[0].z < 0)
+                        else if (destinations[0].z < Math.Round(this.z))
                             this.Rotate(this._rX, this._rY = Math.PI, this._rZ);
                     }
                 }

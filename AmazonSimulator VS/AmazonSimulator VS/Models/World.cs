@@ -13,14 +13,21 @@ namespace Models {
 
 
         public World() {
-            Robot r = CreateRobot(2, 0, 2);
-            Truck t = CreateTruck(0, 0, 0);
-            //Truck t2 = CreateTruck(2, 0, 2);
-            Shelf s = CreateShelf(0, 0, 0);
+            Robot robot1 = CreateRobot(2, 0, 2);
+            int indexRobot1 = worldObjects.FindIndex(a => a.guid == robot1.guid);
+            //Robot robot2 = CreateRobot(2, 0, 2);
+            //int indexRobot2 = worldObjects.FindIndex(a => a.guid == robot2.guid);
+            //Robot robot3 = CreateRobot(2, 0, 2);
+            //int indexRobot3 = worldObjects.FindIndex(a => a.guid == robot3.guid);
+            Truck t = CreateTruck(0, 1, -5);
+            //int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
+            //var check = worldObjects[indexTruck].rotationY;
+            //Shelf s = CreateShelf(4, 0, 18);
+            //int indexShelf = worldObjects.FindIndex(a => a.guid == s.guid);
 
             addNodes();
             AddVertexes();
-            moveRobot(nodes, 'A', 'I');
+            moveRobot(nodes, 'A', 'I', 0);
             moveTruck(nodes);
 
         }
@@ -28,13 +35,19 @@ namespace Models {
         {
             g.add_vertex('A', new Dictionary<char, int>() { { 'B', 28 }, { 'C', 14 } });
             g.add_vertex('B', new Dictionary<char, int>() { { 'A', 28 }, { 'D', 14 } });
-            g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'H', 2 } });
-            g.add_vertex('H', new Dictionary<char, int>() { { 'C', 2 }, { 'G', 12 } });
+            g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'G', 2 } });
             g.add_vertex('D', new Dictionary<char, int>() { { 'B', 14 }, { 'F', 14 }, { 'I', 1 } });
             g.add_vertex('E', new Dictionary<char, int>() { { 'C', 14 }, { 'F', 28 } });
             g.add_vertex('F', new Dictionary<char, int>() { { 'D', 14 }, { 'E', 28 } });
             g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
-            g.add_vertex('I', new Dictionary<char, int>() { { 'G', 13 }, { 'D', 1 } });
+            g.add_vertex('H', new Dictionary<char, int>() { { 'G', 2 } });
+            g.add_vertex('I', new Dictionary<char, int>() { { 'G', 2 } });
+            g.add_vertex('J', new Dictionary<char, int>() { { 'G', 12 }, { 'M', 12 } });
+            g.add_vertex('K', new Dictionary<char, int>() { { 'J', 2 } });
+            g.add_vertex('L', new Dictionary<char, int>() { { 'J', 2 } });
+            g.add_vertex('M', new Dictionary<char, int>() { { 'J', 12 }, { 'D', 2 } });
+            g.add_vertex('L', new Dictionary<char, int>() { { 'M', 2 } });
+            g.add_vertex('L', new Dictionary<char, int>() { { 'M', 2 } });
             g.add_vertex('t', new Dictionary<char, int>() { { 'u', 16 }, });
             g.add_vertex('u', new Dictionary<char, int>() { { 't', 16 }, { 'v', 16 } });
             g.add_vertex('v', new Dictionary<char, int>() { { 'u', 16 }, });
@@ -42,30 +55,33 @@ namespace Models {
 
         public void addNodes()
         {
-            nodes.Add(new Node('A', 2, 0, 2));
-            nodes.Add(new Node('B', 30, 0, 2));
-            nodes.Add(new Node('C', 2, 0, 16));
-            nodes.Add(new Node('D', 30, 0, 16));
-            nodes.Add(new Node('E', 2, 0, 30));
-            nodes.Add(new Node('F', 30, 0, 30));
-            nodes.Add(new Node('G', 16, 0, 16));
-            nodes.Add(new Node('H', 4, 0, 16));
-            nodes.Add(new Node('I', 29, 0, 10));
-            nodes.Add(new Node('t', 0, 0, 0));
-            nodes.Add(new Node('u', 16, 0, 0));
-            nodes.Add(new Node('v', 32, 0, 0));
+            nodes.Add(new Node('A', 2, 0, 2));//hoekpunt
+            nodes.Add(new Node('B', 30, 0, 2));//hoekpunt
+            nodes.Add(new Node('C', 2, 0, 16));//midden links
+            nodes.Add(new Node('D', 30, 0, 16));//midden rechts
+            nodes.Add(new Node('E', 2, 0, 30));//hoekpunt
+            nodes.Add(new Node('F', 30, 0, 30));//hoekpunt
+            nodes.Add(new Node('G', 4, 0, 16));//connectie node
+            nodes.Add(new Node('H', 4, 0, 14));//shelf node
+            nodes.Add(new Node('I', 4, 0, 18));//shelf node
+            nodes.Add(new Node('J', 16, 0, 14));//connectie node
+            nodes.Add(new Node('K', 16, 0, 16));//shelf node
+            nodes.Add(new Node('L', 16, 0, 18));//shelf node
+            nodes.Add(new Node('M', 28, 0, 14));//connectie node
+            nodes.Add(new Node('N', 28, 0, 16));//shelf node
+            nodes.Add(new Node('O', 28, 0, 18));//shelf node
+            nodes.Add(new Node('t', 0, 0, 0));//truck start
+            nodes.Add(new Node('u', 16, 0, 0));//truck midden
+            nodes.Add(new Node('v', 32, 0, 0));//truck eind
         }
 
-        public void moveRobot(List<Node> nodes, Char from, Char to)
+        public void moveRobot(List<Node> nodes, Char from, Char to, int robotIndex)
         {
             List<Node> nodePath = g.shortest_path(from, to, nodes);
 
             for (int i = 0; i < nodePath.Count(); i++)
             {
-                foreach (Robot r in worldObjects)
-                {
-                    r.AddDestination(nodePath[i]);
-                }
+                    worldObjects[robotIndex].AddDestination(nodePath[i]);
             }
         }
 
@@ -92,7 +108,7 @@ namespace Models {
 
         private Truck CreateTruck(double x, double y, double z)
         {
-            Truck t = new Truck("truck",x, y, z, 0, 0, 0);
+            Truck t = new Truck("truck",x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
             return t;
         }
