@@ -3,48 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using Controllers;
 
-namespace Models {
+namespace Models
+{
     public class World : IObservable<Command>, IUpdatable
     {
-        private List<ThreeDModels> worldObjects = new List<ThreeDModels>();
+        List<ThreeDModels> worldObjects = new List<ThreeDModels>();
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
         public List<Node> nodes = new List<Node>();
         Graph g = new Graph();
 
 
-        public World() {
-            Robot robot1 = CreateRobot(2, 0, 2);
+        public World()
+        {
+            Robot robot1 = CreateRobot(13, 0, 2);
             int indexRobot1 = worldObjects.FindIndex(a => a.guid == robot1.guid);
-            //Robot robot2 = CreateRobot(2, 0, 2);
-            //int indexRobot2 = worldObjects.FindIndex(a => a.guid == robot2.guid);
-            //Robot robot3 = CreateRobot(2, 0, 2);
-            //int indexRobot3 = worldObjects.FindIndex(a => a.guid == robot3.guid);
+            Robot robot2 = CreateRobot(14, 0, 2);
+            int indexRobot2 = worldObjects.FindIndex(a => a.guid == robot2.guid);
+            Robot robot3 = CreateRobot(15, 0, 2);
+            int indexRobot3 = worldObjects.FindIndex(a => a.guid == robot3.guid);
             Truck t = CreateTruck(0, 1, -5);
+            t.addPackage("1");
+            t.addPackage("1");
+            t.addPackage("1");
+            t.addPackage("1");
             int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
             Shelf s = CreateShelf(4, 0, 18);
             int indexShelf = worldObjects.FindIndex(a => a.guid == s.guid);
 
             addNodes();
             AddVertexes();
-            //moveRobot('A', 'I', 0);
             moveTruck(indexTruck, 'u');
-            
-            if (t.GetStatus() == true)
-            {
-                Console.WriteLine("1");
-                moveRobot('A', 'I', 0);
-            }
-
         }
         public void AddVertexes()
         {
-            g.add_vertex('A', new Dictionary<char, int>() { { 'B', 28 }, { 'C', 14 } });
-            g.add_vertex('B', new Dictionary<char, int>() { { 'A', 28 }, { 'D', 14 } });
+            g.add_vertex('A', new Dictionary<char, int>() { { 'P', 11 }, { 'C', 14 } });
+            g.add_vertex('B', new Dictionary<char, int>() { { 'S', 15 }, { 'D', 14 } });//
             g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'G', 2 } });
             g.add_vertex('D', new Dictionary<char, int>() { { 'B', 14 }, { 'F', 14 }, { 'I', 1 } });
             g.add_vertex('E', new Dictionary<char, int>() { { 'C', 14 }, { 'F', 28 } });
             g.add_vertex('F', new Dictionary<char, int>() { { 'D', 14 }, { 'E', 28 } });
-            g.add_vertex('G', new Dictionary<char, int>() { { 'C', 14 }, { 'I', 13 } });
+            g.add_vertex('G', new Dictionary<char, int>() { { 'C', 2 }, { 'I', 13 } });
             g.add_vertex('H', new Dictionary<char, int>() { { 'G', 2 } });
             g.add_vertex('I', new Dictionary<char, int>() { { 'G', 2 } });
             g.add_vertex('J', new Dictionary<char, int>() { { 'G', 12 }, { 'M', 12 } });
@@ -53,6 +51,11 @@ namespace Models {
             g.add_vertex('M', new Dictionary<char, int>() { { 'J', 12 }, { 'D', 2 } });
             g.add_vertex('L', new Dictionary<char, int>() { { 'M', 2 } });
             g.add_vertex('L', new Dictionary<char, int>() { { 'M', 2 } });
+            g.add_vertex('O', new Dictionary<char, int>() { { 'M', 2 } });
+            g.add_vertex('P', new Dictionary<char, int>() { { 'A', 11 }, { 'Q', 1 } });
+            g.add_vertex('Q', new Dictionary<char, int>() { { 'P', 1 }, { 'R', 1 } });
+            g.add_vertex('R', new Dictionary<char, int>() { { 'Q', 1 } });
+            g.add_vertex('S', new Dictionary<char, int>() { { 'B', 14 } });
             g.add_vertex('t', new Dictionary<char, int>() { { 'u', 16 }, });
             g.add_vertex('u', new Dictionary<char, int>() { { 't', 16 }, { 'v', 16 } });
             g.add_vertex('v', new Dictionary<char, int>() { { 'u', 16 }, });
@@ -75,6 +78,9 @@ namespace Models {
             nodes.Add(new Node('M', 28, 0, 14));//connectie node
             nodes.Add(new Node('N', 28, 0, 16));//shelf node
             nodes.Add(new Node('O', 28, 0, 18));//shelf node
+            nodes.Add(new Node('P', 13, 0, 2));//robot node
+            nodes.Add(new Node('Q', 14, 0, 2));//robot node
+            nodes.Add(new Node('R', 15, 0, 2));//robot node
             nodes.Add(new Node('t', 0, 0, 0));//truck start
             nodes.Add(new Node('u', 16, 0, 0));//truck midden
             nodes.Add(new Node('v', 32, 0, 0));//truck eind
@@ -86,7 +92,7 @@ namespace Models {
 
             for (int i = 0; i < nodePath.Count(); i++)
             {
-                    worldObjects[robotIndex].AddDestination(nodePath[i]);
+                worldObjects[robotIndex].AddDestination(nodePath[i]);
             }
         }
 
@@ -95,26 +101,27 @@ namespace Models {
             var node = from s in nodes
                        where s.name == to
                        select s;
-            foreach(Node i in node)
-            worldObjects[truckIndex].AddDestination(i);
+            foreach (Node i in node)
+                worldObjects[truckIndex].AddDestination(i);
         }
 
-        private Robot CreateRobot(double x, double y, double z) {
-            Robot r = new Robot("robot",x,y,z,0,0,0);
+        private Robot CreateRobot(double x, double y, double z)
+        {
+            Robot r = new Robot("robot", x, y, z, 0, 0, 0);
             worldObjects.Add(r);
             return r;
         }
 
         private Truck CreateTruck(double x, double y, double z)
         {
-            Truck t = new Truck("truck",x, y, z, 0, Math.PI, 0);
+            Truck t = new Truck("truck", x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
             return t;
         }
 
         private Shelf CreateShelf(double x, double y, double z)
         {
-            Shelf s = new Shelf("shelf",x, y, z, 0, 0, 0);
+            Shelf s = new Shelf("shelf", x, y, z, 0, 0, 0);
             worldObjects.Add(s);
             return s;
         }
@@ -122,7 +129,8 @@ namespace Models {
 
         public IDisposable Subscribe(IObserver<Command> observer)
         {
-            if (!observers.Contains(observer)) {
+            if (!observers.Contains(observer))
+            {
                 observers.Add(observer);
 
                 SendCreationCommandsToObserver(observer);
@@ -130,51 +138,100 @@ namespace Models {
             return new Unsubscriber<Command>(observers, observer);
         }
 
-        private void SendCommandToObservers(Command c) {
-            for(int i = 0; i < this.observers.Count; i++) {
+        private void SendCommandToObservers(Command c)
+        {
+            for (int i = 0; i < this.observers.Count; i++)
+            {
                 this.observers[i].OnNext(c);
             }
         }
 
-        private void SendCreationCommandsToObserver(IObserver<Command> obs) {
-            foreach(ThreeDModels m3d in worldObjects) {
+        private void SendCreationCommandsToObserver(IObserver<Command> obs)
+        {
+            foreach (ThreeDModels m3d in worldObjects)
+            {
                 obs.OnNext(new UpdateModel3DCommand(m3d));
             }
         }
 
         public bool Update(int tick)
         {
-            for(int i = 0; i < worldObjects.Count; i++) {
+            for (int i = 0; i < worldObjects.Count; i++)
+            {
                 ThreeDModels u = worldObjects[i];
 
-                if(u is IUpdatable) {
+                var trucks = from world in worldObjects
+                             where world.type == "truck"
+                             select world;
+
+                var shelfs = from world in worldObjects
+                             where world.type == "shelf"
+                             select world;
+
+                var robots = from world in worldObjects
+                             where world.type == "robot"
+                             select world;
+
+                //var t = (from world in trucks
+                //         select world).First();
+
+                //Truck t = trucks.First();
+                foreach (Truck t in trucks)
+                {
+                    if (Math.Round(t.x) == 16 && !t.getStatus())
+                    {
+                        if (t.GetPacklist().Count() != 0)
+                        {
+                                ThreeDModels robot = (from world in robots
+                                                      where world.getStatus() == false
+                                                      select world).First();
+                                int indexRobot = worldObjects.FindIndex(a => a.guid == robot.guid);
+                                //zoek waar het paket is op de shelves
+                                //een robot selecteren die niet busy is
+                                moveRobot('P', 'I', indexRobot);
+                                moveRobot('I', 'S', indexRobot);
+                                t.packlistRemove();
+                        }
+                    }
+                    else if (t.GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
+                    {
+                        t.updateStatus();
+                    }
+                    if (t.getStatus() == true)
+                    {
+                        int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
+                        moveTruck(indexTruck, 'v');
+                    }
+                }
+                    if (u is IUpdatable)
+                {
                     bool needsCommand = ((IUpdatable)u).Update(tick);
 
-                    if(needsCommand) {
+                    if (needsCommand){
                         SendCommandToObservers(new UpdateModel3DCommand(u));
                     }
                 }
-            }
+        }
 
             return true;
         }
-    }
+}
 
-    internal class Unsubscriber<Command> : IDisposable
+internal class Unsubscriber<Command> : IDisposable
+{
+    private List<IObserver<Command>> _observers;
+    private IObserver<Command> _observer;
+
+    internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
     {
-        private List<IObserver<Command>> _observers;
-        private IObserver<Command> _observer;
-
-        internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
-        {
-            this._observers = observers;
-            this._observer = observer;
-        }
-
-        public void Dispose() 
-        {
-            if (_observers.Contains(_observer))
-                _observers.Remove(_observer);
-        }
+        this._observers = observers;
+        this._observer = observer;
     }
+
+    public void Dispose()
+    {
+        if (_observers.Contains(_observer))
+            _observers.Remove(_observer);
+    }
+}
 }

@@ -71,5 +71,9 @@ namespace Models
         {
 
         }
+        public virtual bool getStatus()
+        {
+            return false;
+        }
     }
 }

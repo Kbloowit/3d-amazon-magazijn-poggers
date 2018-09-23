@@ -9,10 +9,10 @@ namespace Models
     {
 
         private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
+        private List<string> packlist = new List<string>();
         //private List<int> items = new List<int>();
-        private bool arrived = false;
+        private bool done = false;
         double deltaX;
-
 
         public Truck(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("truck", x, y, z, rotationX, rotationY, rotationZ)
         {
@@ -34,12 +34,6 @@ namespace Models
                     deltaX = destinations[0].x - this.x; //waar hij naar toe moet - waar hij is
                     destinations.RemoveAt(0);
                 }
-                else if( destinations.Count() == 0 && Math.Round(this.x) == 16)
-                {
-                    deltaX = 0;
-                    arrived = true;
-                     
-                }
                 }
                 if (Math.Round(deltaX) > 0) // als deltaX positief is gaat hij vooruit
                 {
@@ -59,15 +53,29 @@ namespace Models
             destinations.Add(d);
         }
 
-        public bool GetStatus()
+        public override bool getStatus()
         {
-            Console.Write("Status has been checked");
-            return arrived;
+            return done;
         }
 
-        public void ResetStatus()
+        public List<string> GetPacklist()
         {
-            arrived = false;
+            return packlist;
+        }
+
+        public void packlistRemove()
+        {
+            packlist.RemoveAt(0);
+        }
+
+        public void addPackage(string package)
+        {
+            packlist.Add(package);
+        }
+
+        public void updateStatus()
+        {
+            done = true;
         }
 
     }

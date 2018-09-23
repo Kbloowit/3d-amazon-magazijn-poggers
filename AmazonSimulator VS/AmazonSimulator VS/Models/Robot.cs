@@ -10,8 +10,9 @@ namespace Models
 
         private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
 
-        double deltaX;
-        double deltaZ;
+        private double deltaX;
+        private double deltaZ;
+        private bool busy;
 
         //private double speed;
 
@@ -78,7 +79,10 @@ namespace Models
             destinations.Add(d);
         }
 
-
+        public override bool getStatus()
+        {
+            return busy;
+        }
 
     }
 }
