@@ -37,7 +37,7 @@ namespace Models
         public void AddVertexes()
         {
             g.add_vertex('A', new Dictionary<char, int>() { { 'P', 11 }, { 'C', 14 } });
-            g.add_vertex('B', new Dictionary<char, int>() { { 'S', 15 }, { 'D', 14 } });//
+            g.add_vertex('B', new Dictionary<char, int>() { { 'S', 15 }, { 'D', 14 } });
             g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'G', 2 } });
             g.add_vertex('D', new Dictionary<char, int>() { { 'B', 14 }, { 'F', 14 }, { 'I', 1 } });
             g.add_vertex('E', new Dictionary<char, int>() { { 'C', 14 }, { 'F', 28 } });
