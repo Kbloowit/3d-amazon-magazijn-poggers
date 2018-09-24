@@ -16,23 +16,13 @@ namespace Models
         public World()
         {
             Robot robot1 = CreateRobot(13, 0, 2);
-            int indexRobot1 = worldObjects.FindIndex(a => a.guid == robot1.guid);
             Robot robot2 = CreateRobot(14, 0, 2);
-            int indexRobot2 = worldObjects.FindIndex(a => a.guid == robot2.guid);
             Robot robot3 = CreateRobot(15, 0, 2);
-            int indexRobot3 = worldObjects.FindIndex(a => a.guid == robot3.guid);
             Truck t = CreateTruck(0, 1, -5);
-            t.addPackage("1");
-            t.addPackage("1");
-            t.addPackage("1");
-            t.addPackage("1");
-            int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
             Shelf s = CreateShelf(4, 0, 18);
-            int indexShelf = worldObjects.FindIndex(a => a.guid == s.guid);
 
             addNodes();
             AddVertexes();
-            moveTruck(indexTruck, 'u');
         }
         public void AddVertexes()
         {
@@ -105,6 +95,13 @@ namespace Models
                 worldObjects[truckIndex].AddDestination(i);
         }
 
+        public void resetTruck(int truckIndex)
+        {
+            worldObjects[truckIndex]._x = 0;
+            worldObjects[truckIndex]._y = 1;
+            worldObjects[truckIndex]._z = -5;
+        }
+
         private Robot CreateRobot(double x, double y, double z)
         {
             Robot r = new Robot("robot", x, y, z, 0, 0, 0);
@@ -168,13 +165,37 @@ namespace Models
                              where world.type == "shelf"
                              select world;
 
+                var robots = from world in worldObjects
+                             where world.type == "robot"
+                             select world;
+
+                foreach(Robot x in robots)
+                {
+                    if (x.getStatus() == true && x.getDestinations().Count() == 0)
+                    {
+                        x.updateStatus();
+                    }
+                }
                 List<Truck> truck = new List<Truck>();
                 foreach (Truck t in trucks)
                     truck.Add(t);
 
-                    if (Math.Round(truck[0].x) == 16 && !truck[0].getStatus())
+                if(truck[0].x == 0 && truck[0].getStatus() == false)
+                {
+                    int indexTruck = worldObjects.FindIndex(a => a.guid == truck[0].guid);
+                    moveTruck(indexTruck, 'u');
+                }
+                if(Math.Round(truck[0].x) == 16 && truck[0].getStatus() == false)
                     {
-                        if (truck[0].GetPacklist().Count() != 0)
+                    if(truck[0].GetPacklist().Count() == 0 && Math.Round(truck[0].x) == 16 && truck[0].getStatus() == false)
+                    {
+                        Random r = new Random();
+                        int random = r.Next(2, 6);
+                        for (int j = 0; j < 4; j++)
+                            truck[0].addPackage("1");
+                    }
+
+                    if (truck[0].GetPacklist().Count() != 0)
                         {
                             var r = from world in (from world in worldObjects where world.type == "robot" select world)
                                     where world.getStatus() == false
@@ -183,8 +204,9 @@ namespace Models
                             foreach (Robot x in r)
                                 notBusyRobots.Add(x);
 
-                           if(notBusyRobots.Count() != 0)//een robot selecteren die niet busy is
+                        if(notBusyRobots.Count() != 0 && truck[0].GetPacklist().Count() != 0)//een robot selecteren die niet busy is
                         {
+                            int indicator = truck[0].GetPacklist().Count();
                             int indexRobot = worldObjects.FindIndex(a => a.guid == notBusyRobots[0].guid);
                             //zoek waar het paket is op de shelves
                             notBusyRobots[0].updateStatus();
@@ -195,9 +217,10 @@ namespace Models
                     }
                         
                     }
-                    else if (truck[0].GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
+                    if (truck[0].GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
                     {
                     truck[0].updateStatus();
+                    resetTruck(worldObjects.FindIndex(a => a.guid == truck[0].guid));
                     }
                 if (truck[0].getStatus() == true)
                 {

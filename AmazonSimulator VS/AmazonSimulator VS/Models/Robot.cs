@@ -74,6 +74,11 @@ namespace Models
             return base.Update(tick);
         }
 
+        public List<Node> getDestinations()
+        {
+            return destinations;
+        }
+
         public override void AddDestination(Node d)
         {
             destinations.Add(d);
