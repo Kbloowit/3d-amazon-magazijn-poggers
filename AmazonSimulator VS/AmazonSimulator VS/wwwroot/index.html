@@ -47,10 +47,19 @@
                 plane.position.z = 15;
                 scene.add(plane);
 
-                var sphericalSkyboxGeometry = new THREE.SphereGeometry(1000, 32, 32);
-                var sphericalSkyboxMaterial = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/skybox/skybox.jpg"), side: THREE.DoubleSide });
-                var sphericalSkybox = new THREE.Mesh(sphericalSkyboxGeometry, sphericalSkyboxMaterial);
-                scene.add(sphericalSkybox);
+                var cubeSkyboxGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
+                var cubeSkyboxMaterial = [
+                    
+                    new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_lf.tga"), side: THREE.DoubleSide }), //LEFT
+                    new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_rt.tga"), side: THREE.DoubleSide }), //RIGHT
+                    new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_up.tga"), side: THREE.DoubleSide }), //TOP
+                    new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_dn.tga"), side: THREE.DoubleSide }), //BOTTOM
+                    new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_ft.tga"), side: THREE.DoubleSide }), //FRONT
+                    new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_bk.tga"), side: THREE.DoubleSide }) //BACK
+                ];
+                
+                var cubeSkybox = new THREE.Mesh(cubeSkyboxGeometry, cubeSkyboxMaterial);
+                scene.add(cubeSkybox);
 
                 var light = new THREE.AmbientLight(0x404040);
                 light.intensity = 4;
@@ -81,7 +90,7 @@
                             LoadOBJModel("textures/", "truck.obj", "textures/", "truck.mtl", (mesh) => {
                                 mesh.scale.set(30.0, 30.0, 30.0);
                                 Truck.add(mesh);
-                                
+
                             });
                             scene.add(Truck);
                             worldObjects[command.parameters.guid] = Truck;
@@ -112,7 +121,7 @@
                             LoadOBJModel("textures/", "shelf.obj", "textures/", "shelf.mtl", (mesh) => {
                                 mesh.scale.set(0.30, 0.30, 0.30);
                                 Shelf.add(mesh);
-                                
+
                             });
                             scene.add(Shelf);
                             worldObjects[command.parameters.guid] = Shelf;
@@ -148,14 +157,16 @@
                         }, function () { }, function (e) { console.log("Error loading model"); console.log(e); });
                 });
         }
-            
-        
+
+
     </script>
 
     <script src="three.min.js"></script>
     <script src="OrbitControls.js"></script>
     <script src="MTLLoader.js"></script>
     <script src="OBJLoader.js"></script>
+    <script src="TGALoader.js"></script>
+
 </body>
 
 </html>
