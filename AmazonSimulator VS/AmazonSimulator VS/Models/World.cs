@@ -168,40 +168,41 @@ namespace Models
                              where world.type == "shelf"
                              select world;
 
-                var robots = from world in worldObjects
-                             where world.type == "robot"
-                             select world;
-
-                //var t = (from world in trucks
-                //         select world).First();
-
-                //Truck t = trucks.First();
+                List<Truck> truck = new List<Truck>();
                 foreach (Truck t in trucks)
-                {
-                    if (Math.Round(t.x) == 16 && !t.getStatus())
+                    truck.Add(t);
+
+                    if (Math.Round(truck[0].x) == 16 && !truck[0].getStatus())
                     {
-                        if (t.GetPacklist().Count() != 0)
+                        if (truck[0].GetPacklist().Count() != 0)
                         {
-                                ThreeDModels robot = (from world in robots
-                                                      where world.getStatus() == false
-                                                      select world).First();
-                                int indexRobot = worldObjects.FindIndex(a => a.guid == robot.guid);
-                                //zoek waar het paket is op de shelves
-                                //een robot selecteren die niet busy is
-                                moveRobot('P', 'I', indexRobot);
-                                moveRobot('I', 'S', indexRobot);
-                                t.packlistRemove();
+                            var r = from world in (from world in worldObjects where world.type == "robot" select world)
+                                    where world.getStatus() == false
+                                    select world;
+                            List<Robot> notBusyRobots = new List<Robot>();
+                            foreach (Robot x in r)
+                                notBusyRobots.Add(x);
+
+                           if(notBusyRobots.Count() != 0)//een robot selecteren die niet busy is
+                        {
+                            int indexRobot = worldObjects.FindIndex(a => a.guid == notBusyRobots[0].guid);
+                            //zoek waar het paket is op de shelves
+                            notBusyRobots[0].updateStatus();
+                            moveRobot('P', 'I', indexRobot);
+                            moveRobot('I', 'S', indexRobot);
+                            truck[0].packlistRemove();
                         }
                     }
-                    else if (t.GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
-                    {
-                        t.updateStatus();
+                        
                     }
-                    if (t.getStatus() == true)
+                    else if (truck[0].GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
                     {
-                        int indexTruck = worldObjects.FindIndex(a => a.guid == t.guid);
-                        moveTruck(indexTruck, 'v');
+                    truck[0].updateStatus();
                     }
+                if (truck[0].getStatus() == true)
+                {
+                    int indexTruck = worldObjects.FindIndex(a => a.guid == truck[0].guid);
+                    moveTruck(indexTruck, 'v');
                 }
                     if (u is IUpdatable)
                 {

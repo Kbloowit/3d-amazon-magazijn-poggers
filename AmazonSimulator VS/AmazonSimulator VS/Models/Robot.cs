@@ -84,5 +84,16 @@ namespace Models
             return busy;
         }
 
+        public override void updateStatus()
+        {
+            if(busy == false)
+            {
+                busy = true;
+            }
+            else
+            {
+                busy = false;
+            }
+        }
     }
 }

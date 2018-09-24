@@ -75,5 +75,10 @@ namespace Models
         {
             return false;
         }
+
+        public virtual void updateStatus()
+        {
+            
+        }
     }
 }
