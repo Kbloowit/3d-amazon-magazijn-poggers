@@ -12670,11 +12670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ikke\\Source\\Repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
+      "projectUniqueName": "C:\\Users\\Ikke\\source\\repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
       "projectName": "AmazonSimulator VS",
-      "projectPath": "C:\\Users\\Ikke\\Source\\Repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
+      "projectPath": "C:\\Users\\Ikke\\source\\repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
       "packagesPath": "C:\\Users\\Ikke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ikke\\Source\\Repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\obj\\",
+      "outputPath": "C:\\Users\\Ikke\\source\\repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
