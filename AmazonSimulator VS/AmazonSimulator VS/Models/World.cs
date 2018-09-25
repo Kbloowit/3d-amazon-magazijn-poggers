@@ -16,8 +16,8 @@ namespace Models
         public World()
         {
             Robot robot1 = CreateRobot(13, 0, 2);
-            Robot robot2 = CreateRobot(14, 0, 2);
-            Robot robot3 = CreateRobot(15, 0, 2);
+            //Robot robot2 = CreateRobot(14, 0, 2);
+            //Robot robot3 = CreateRobot(15, 0, 2);
             Truck t = CreateTruck(0, 1, -5);
             Shelf s = CreateShelf(4, 0, 18);
 
@@ -95,30 +95,30 @@ namespace Models
                 worldObjects[truckIndex].AddDestination(i);
         }
 
-        public void resetTruck(int truckIndex)
-        {
-            worldObjects[truckIndex]._x = 0;
-            worldObjects[truckIndex]._y = 1;
-            worldObjects[truckIndex]._z = -5;
-        }
+        //public void resetTruck(int truckIndex)
+        //{
+        //    worldObjects[truckIndex].x = 0;
+        //    worldObjects[truckIndex]._y = 1;
+        //    worldObjects[truckIndex]._z = -5;
+        //}
 
         private Robot CreateRobot(double x, double y, double z)
         {
-            Robot r = new Robot("robot", x, y, z, 0, 0, 0);
+            Robot r = new Robot(x, y, z, 0, 0, 0);
             worldObjects.Add(r);
             return r;
         }
 
         private Truck CreateTruck(double x, double y, double z)
         {
-            Truck t = new Truck("truck", x, y, z, 0, Math.PI, 0);
+            Truck t = new Truck(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
             return t;
         }
 
         private Shelf CreateShelf(double x, double y, double z)
         {
-            Shelf s = new Shelf("shelf", x, y, z, 0, 0, 0);
+            Shelf s = new Shelf(x, y, z, 0, 0, 0);
             worldObjects.Add(s);
             return s;
         }
@@ -220,7 +220,7 @@ namespace Models
                     if (truck[0].GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
                     {
                     truck[0].updateStatus();
-                    resetTruck(worldObjects.FindIndex(a => a.guid == truck[0].guid));
+                    //resetTruck(worldObjects.FindIndex(a => a.guid == truck[0].guid));
                     }
                 if (truck[0].getStatus() == true)
                 {
