@@ -14,7 +14,7 @@ namespace Models
         private bool done = false;
         double deltaX;
 
-        public Truck(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("truck", x, y, z, rotationX, rotationY, rotationZ)
+        public Truck(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("truck", x, y, z, rotationX, rotationY, rotationZ)
         {
 
         }
@@ -26,7 +26,7 @@ namespace Models
 
         public override bool Update(int tick)
         {
-            this.Rotate(this._rX, this._rY, this._rZ);
+            this.Rotate(this.rotationX, this.rotationY, this.rotationZ);
             if (Math.Round(deltaX) == 0)
             {
                 if (destinations.Count() != 0)
@@ -37,12 +37,12 @@ namespace Models
                 }
                 if (Math.Round(deltaX) > 0) // als deltaX positief is gaat hij vooruit
                 {
-                    this.Move(this._x += 0.20, this._y, this._z);
+                    this.Move(this.x + 0.20, this.y, this.z);
                     deltaX -= 0.20;
                 }
                 else if (Math.Round(deltaX) < 0) // als deltaX negatief is gaat hij actheruit
                 {
-                    this.Move(this._x -= 0.20, this._y, this._z);
+                    this.Move(this.x - 0.20, this.y, this.z);
                     deltaX += 0.20;
             }
            return base.Update(tick);

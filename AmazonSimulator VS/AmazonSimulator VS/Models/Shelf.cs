@@ -8,7 +8,7 @@ namespace Models
     public class Shelf : ThreeDModels
     {
 
-        public Shelf(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("shelf", x, y, z, rotationX, rotationY, rotationZ)
+        public Shelf(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("shelf", x, y, z, rotationX, rotationY, rotationZ)
         {
 
         }
@@ -25,8 +25,8 @@ namespace Models
 
         public override bool Update(int tick)
         {
-            this.Move(this._x, this._y, this._z);
-            this.Rotate(this._rX, this._rY, this._rZ);
+            this.Move(this.x, this.y, this.z);
+            this.Rotate(this.rotationX, this.rotationY, this.rotationZ);
             return base.Update(tick);
         }
     }
