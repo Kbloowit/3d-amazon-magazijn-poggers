@@ -11,6 +11,7 @@ namespace Models
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
         public List<Node> nodes = new List<Node>();
         Graph g = new Graph();
+        WorldManager manager = new WorldManager();
 
 
         public World()
@@ -106,6 +107,7 @@ namespace Models
         {
             Robot r = new Robot("robot", x, y, z, 0, 0, 0);
             worldObjects.Add(r);
+            manager.AddRobotToList(r);
             return r;
         }
 
