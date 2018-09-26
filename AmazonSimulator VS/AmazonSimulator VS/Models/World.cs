@@ -24,8 +24,23 @@ namespace Models
             addNodes();
             AddVertexes();
         }
+        public void AddConnections()
+        {
+            nodes
+        }
+
         public void AddVertexes()
         {
+            foreach(Node item in nodes)
+                foreach(Node connection in item.connections)
+                {
+                    int deltaX = Math.Abs((int)item.x - (int)connection.x);
+                    int deltaZ = Math.Abs((int)item.z - (int)connection.z);
+                    if (deltaX != 0)
+                        g.add_vertex(item.name, new Dictionary<char, int>() { { item.name, deltaX } });
+                    else if(deltaZ != 0)
+                        g.add_vertex(item.name, new Dictionary<char, int>() { { item.name, deltaZ } });
+                }
             g.add_vertex('A', new Dictionary<char, int>() { { 'P', 11 }, { 'C', 14 } });
             g.add_vertex('B', new Dictionary<char, int>() { { 'S', 15 }, { 'D', 14 } });
             g.add_vertex('C', new Dictionary<char, int>() { { 'A', 14 }, { 'E', 14 }, { 'G', 2 } });
@@ -79,6 +94,8 @@ namespace Models
         public void moveRobot(Char from, Char to, int robotIndex)
         {
             List<Node> nodePath = g.shortest_path(from, to, nodes);
+            foreach (Node item in nodePath)
+                Console.WriteLine(item.name);
 
             for (int i = 0; i < nodePath.Count(); i++)
             {
@@ -94,13 +111,6 @@ namespace Models
             foreach (Node i in node)
                 worldObjects[truckIndex].AddDestination(i);
         }
-
-        //public void resetTruck(int truckIndex)
-        //{
-        //    worldObjects[truckIndex].x = 0;
-        //    worldObjects[truckIndex]._y = 1;
-        //    worldObjects[truckIndex]._z = -5;
-        //}
 
         private Robot CreateRobot(double x, double y, double z)
         {
@@ -191,7 +201,7 @@ namespace Models
                     {
                         Random r = new Random();
                         int random = r.Next(2, 6);
-                        for (int j = 0; j < 4; j++)
+                        for (int j = 0; j < random; j++)
                             truck[0].addPackage("1");
                     }
 
@@ -210,7 +220,7 @@ namespace Models
                             int indexRobot = worldObjects.FindIndex(a => a.guid == notBusyRobots[0].guid);
                             //zoek waar het paket is op de shelves
                             notBusyRobots[0].updateStatus();
-                            moveRobot('P', 'I', indexRobot);
+                            moveRobot('t', 'B', indexRobot);
                             moveRobot('I', 'S', indexRobot);
                             truck[0].packlistRemove();
                         }

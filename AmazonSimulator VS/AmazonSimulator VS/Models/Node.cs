@@ -11,6 +11,7 @@ namespace Models
         public double x { get; set; }
         public double y { get; set; }
         public double z { get; set; }
+        public List<Node> connections { get; set; }
 
         public Node(char name, double x, double y, double z)
         {

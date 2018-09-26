@@ -12664,19 +12664,19 @@
   },
   "packageFolders": {
     "C:\\Users\\klaas\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\klaas\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
+      "projectUniqueName": "C:\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
       "projectName": "AmazonSimulator VS",
-      "projectPath": "C:\\Users\\klaas\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
+      "projectPath": "C:\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
       "packagesPath": "C:\\Users\\klaas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\klaas\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\obj\\",
+      "outputPath": "C:\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\klaas\\AppData\\Roaming\\NuGet\\NuGet.Config",
