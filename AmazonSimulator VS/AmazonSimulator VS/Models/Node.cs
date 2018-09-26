@@ -26,6 +26,8 @@ namespace Models
         /// The Z cordinate for the node
         /// </summary>
         public double z { get; set; }
+
+        public List<Node> connections = new List<Node>();
         /// <summary>
         /// Constructor
         /// </summary>
