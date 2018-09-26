@@ -7,6 +7,7 @@ namespace Models
 {
     public class ThreeDModels : IUpdatable
     {
+      
         private double _x = 0;
         private double _y = 0;
         private double _z = 0;

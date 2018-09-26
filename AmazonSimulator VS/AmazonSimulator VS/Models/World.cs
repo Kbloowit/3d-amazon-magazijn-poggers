@@ -7,13 +7,30 @@ namespace Models
 {
     public class World : IObservable<Command>, IUpdatable
     {
+        /// <summary>
+        /// List containing all objects currently loaded in the world
+        /// </summary>
         List<ThreeDModels> worldObjects = new List<ThreeDModels>();
+        /// <summary>
+        /// list with all observers
+        /// </summary>
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
+        /// <summary>
+        /// List containing all of the nodes on the main plane
+        /// </summary>
         public List<Node> nodes = new List<Node>();
+        /// <summary>
+        /// Instance of the Graph class
+        /// </summary>
         Graph g = new Graph();
+        /// <summary>
+        /// Instance of the worldmanager class
+        /// </summary>
         WorldManager manager = new WorldManager();
 
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public World()
         {
             Robot robot1 = CreateRobot(13, 0, 2);
@@ -25,6 +42,9 @@ namespace Models
             addNodes();
             AddVertexes();
         }
+        /// <summary>
+        /// Adds the distances between the connected nodes in a disctionary format
+        /// </summary>
         public void AddVertexes()
         {
             g.add_vertex('A', new Dictionary<char, int>() { { 'P', 11 }, { 'C', 14 } });
@@ -51,7 +71,9 @@ namespace Models
             g.add_vertex('u', new Dictionary<char, int>() { { 't', 16 }, { 'v', 16 } });
             g.add_vertex('v', new Dictionary<char, int>() { { 'u', 16 }, });
         }
-
+        /// <summary>
+        /// Adds all of the nodes on the main plane
+        /// </summary>
         public void addNodes()
         {
             nodes.Add(new Node('A', 2, 0, 2));//hoekpunt
@@ -76,9 +98,15 @@ namespace Models
             nodes.Add(new Node('u', 16, 0, 0));//truck midden
             nodes.Add(new Node('v', 32, 0, 0));//truck eind
         }
-
+        /// <summary>
+        /// Allows the robot to move along the shortest path between 2 nodes
+        /// </summary>
+        /// <param name="from">Starting node</param>
+        /// <param name="to">Destination node</param>
+        /// <param name="robotIndex">The robot that needs to move</param>
         public void moveRobot(Char from, Char to, int robotIndex)
         {
+            
             List<Node> nodePath = g.shortest_path(from, to, nodes);
 
             for (int i = 0; i < nodePath.Count(); i++)
@@ -86,7 +114,11 @@ namespace Models
                 worldObjects[robotIndex].AddDestination(nodePath[i]);
             }
         }
-
+        /// <summary>
+        /// Allows the truck to move to a node
+        /// </summary>
+        /// <param name="truckIndex">The truck that needs to move</param>
+        /// <param name="to">Destination node</param>
         public void moveTruck(int truckIndex, char to)
         {
             var node = from s in nodes
@@ -103,6 +135,13 @@ namespace Models
         //    worldObjects[truckIndex]._z = -5;
         //}
 
+        /// <summary>
+        /// Creates a new instance of a robot object
+        /// </summary>
+        /// <param name="x">starting x cordinate in the world</param>
+        /// <param name="y">starting y cordinate in the world</param>
+        /// <param name="z">starting z cordinate in the world</param>
+        /// <returns>Robot object</returns>
         private Robot CreateRobot(double x, double y, double z)
         {
             Robot r = new Robot(x, y, z, 0, 0, 0);
@@ -110,14 +149,26 @@ namespace Models
             manager.AddRobotToList(r);
             return r;
         }
-
+        /// <summary>
+        /// Creates a new instance of a truck object
+        /// </summary>
+        /// <param name="x">starting x cordinate in the world</param>
+        /// <param name="y">starting y cordinate in the world</param>
+        /// <param name="z">starting z cordinate in the world</param>
+        /// <returns>Truck object</returns>
         private Truck CreateTruck(double x, double y, double z)
         {
             Truck t = new Truck(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
             return t;
         }
-
+        /// <summary>
+        /// Creates a new instance of a truck object
+        /// </summary>
+        /// <param name="x">starting x cordinate in the world</param>
+        /// <param name="y">starting y cordinate in the world</param>
+        /// <param name="z">starting z cordinate in the world</param>
+        /// <returns>Shelf object</returns>
         private Shelf CreateShelf(double x, double y, double z)
         {
             Shelf s = new Shelf(x, y, z, 0, 0, 0);
@@ -125,7 +176,11 @@ namespace Models
             return s;
         }
 
-
+        /// <summary>
+        /// Adds observers to a list
+        /// </summary>
+        /// <param name="observer"></param>
+        /// <returns></returns>
         public IDisposable Subscribe(IObserver<Command> observer)
         {
             if (!observers.Contains(observer))
@@ -152,7 +207,11 @@ namespace Models
                 obs.OnNext(new UpdateModel3DCommand(m3d));
             }
         }
-
+        /// <summary>
+        /// Updates the world (excuted 20 times per second)
+        /// </summary>
+        /// <param name="tick">server tick</param>
+        /// <returns>boolean value indicating sucessfull update</returns>
         public bool Update(int tick)
         {
             for (int i = 0; i < worldObjects.Count; i++)
@@ -242,7 +301,10 @@ namespace Models
             return true;
         }
 }
-
+/// <summary>
+/// removes an observer from the list
+/// </summary>
+/// <typeparam name="Command"></typeparam>
 internal class Unsubscriber<Command> : IDisposable
 {
     private List<IObserver<Command>> _observers;
