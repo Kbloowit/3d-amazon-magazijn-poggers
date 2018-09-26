@@ -34,11 +34,10 @@ namespace Models
         public World()
         {
             Robot robot1 = CreateRobot(13, 0, 2);
-            //Robot robot2 = CreateRobot(14, 0, 2);
-            //Robot robot3 = CreateRobot(15, 0, 2);
+            Robot robot2 = CreateRobot(14, 0, 2);
+            Robot robot3 = CreateRobot(15, 0, 2);
             Truck t = CreateTruck(0, 1, -5);
             Shelf s = CreateShelf(4, 0, 18);
-
             addNodes();
         }
 
@@ -67,13 +66,6 @@ namespace Models
             foreach (Node i in node)
                 worldObjects[truckIndex].AddDestination(i);
         }
-
-        //public void resetTruck(int truckIndex)
-        //{
-        //    worldObjects[truckIndex].x = 0;
-        //    worldObjects[truckIndex]._y = 1;
-        //    worldObjects[truckIndex]._z = -5;
-        //}
 
         /// <summary>
         /// Creates a new instance of a robot object

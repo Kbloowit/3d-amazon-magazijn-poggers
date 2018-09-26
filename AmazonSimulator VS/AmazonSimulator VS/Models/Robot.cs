@@ -9,6 +9,7 @@ namespace Models
     {
 
         private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
+        private List<IRobotTask> tasks = new List<IRobotTask>();
 
         private double deltaX;
         private double deltaZ;

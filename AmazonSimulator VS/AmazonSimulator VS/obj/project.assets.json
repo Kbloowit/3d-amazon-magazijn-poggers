@@ -12663,27 +12663,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ikke\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\klaas\\.nuget\\packages\\": {},
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ikke\\source\\repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
+      "projectUniqueName": "C:\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
       "projectName": "AmazonSimulator VS",
-      "projectPath": "C:\\Users\\Ikke\\source\\repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
-      "packagesPath": "C:\\Users\\Ikke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ikke\\source\\repos\\3d-amazon-magazijn-poggers\\AmazonSimulator VS\\AmazonSimulator VS\\obj\\",
+      "projectPath": "C:\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\AmazonSimulator VS.csproj",
+      "packagesPath": "C:\\Users\\klaas\\.nuget\\packages\\",
+      "outputPath": "C:\\Dropbox\\HBO-ICT\\Amazon Warehouse\\AmazonSimulator VS\\AmazonSimulator VS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ikke\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Users\\klaas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
