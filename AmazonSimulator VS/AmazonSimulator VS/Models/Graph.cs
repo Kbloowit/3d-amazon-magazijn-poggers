@@ -69,7 +69,6 @@ namespace Models
                     }
                 }
             }
-            path.Add(start);
             path.Reverse();
             for (int i = 0; i < path.Count; i++)
             {

@@ -205,12 +205,12 @@ namespace Models
                         {
                             foreach(Robot robot in robots)
                             {
-                                if(robot.getStatus() == true && robot.getTasks().Count() == 0)
+                                if(robot.getStatus() == true && robot.getTasksCount() == 0)
                                     robot.updateStatus();
                             }
                         }
-                        if (truck.First().GetPacklist().Count() == 0)
-                            truck.First().updateStatus();
+                        if (truck.First().GetPacklist().Count() == 0 && notBusyRobots.Count() == robots.Count())
+                            truck.First().UpdateStatus();
                     }
                     if (truck.First().getStatus() == true)
                         moveTruck(worldObjects.FindIndex(a => a.guid == truck.First().guid), 'v');

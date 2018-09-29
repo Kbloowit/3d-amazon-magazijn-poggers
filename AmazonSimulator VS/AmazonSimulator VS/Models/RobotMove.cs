@@ -24,10 +24,6 @@ namespace Models
 
         public bool taskCompleted(Robot robot)
         {
-            //double fasdfa = path.Last().x;
-            //double asdfasdg = Math.Round(robot.x, 2);
-            //double fasdfafg = path.Last().z;
-            //double asdfgasdg = Math.Round(robot.z, 2);
             return Math.Round(robot.x, 1) == path.Last().x && Math.Round(robot.z, 1) == path.Last().z;
         }
     }

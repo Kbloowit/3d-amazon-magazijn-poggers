@@ -19,11 +19,6 @@ namespace Models
 
         }
 
-        public override void Move(double x, double y, double z)
-        {
-            base.Move(x, y, z);
-        }
-
         public override bool Update(int tick)
         {
             this.Rotate(this.rotationX, this.rotationY, this.rotationZ);
@@ -73,7 +68,7 @@ namespace Models
             packlist.Add(package);
         }
 
-        public void updateStatus()
+        public void UpdateStatus()
         {
             if (done == true)
                 done = false;

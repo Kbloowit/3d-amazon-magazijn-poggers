@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class WorldManager : IUpdatable
+    public class WorldManager
     {
         private List<Robot> robots = new List<Robot>();
         private List<Truck> trucks = new List<Truck>();
@@ -16,13 +16,10 @@ namespace Models
 
         }
 
-        public bool Update(int tick)
+        public void robotsUpdate()
         {
-            foreach (Robot x in robots)
-            {
-                
-            }
-            return Update(tick);
+            Robot robot = robots.Find(x => x.getStatus() == false);
+            
         }
 
         public void AddRobotToList(Robot robot)

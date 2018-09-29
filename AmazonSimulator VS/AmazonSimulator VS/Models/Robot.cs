@@ -7,8 +7,6 @@ namespace Models
 {
     public class Robot : ThreeDModels
     {
-
-        private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
         private List<IRobotTask> tasks = new List<IRobotTask>();
 
         private double deltaX;
@@ -33,6 +31,7 @@ namespace Models
                 {
                     tasks.Clear();
                 }
+                if(tasks.Count != 0)
                 tasks.First().startTask(this);
             }
 
@@ -41,28 +40,25 @@ namespace Models
 
         public void MoveOverPath(List<Node> path)
         {
-            foreach (Node x in path)
-                destinations.Add(x);
-
-            if (destinations.Count() != 0)
+            if (path.Count() != 0)
             {
                 if (Math.Round(deltaZ) == 0 && Math.Round(deltaX) == 0)
                 {
-
-                    destinations.RemoveAt(0);
-                    if (destinations.Count() != 0)
+                    if (path.Count() != 0)
                     {
-                        deltaX = this.destinations[0].x - this.x; //waar hij naar toe moet - waar hij is
-                        deltaZ = this.destinations[0].z - this.z; //waar hij naar toe moet - waar hij is
+                        deltaX = path.First().x - this.x; //waar hij naar toe moet - waar hij is
+                        deltaZ = path.First().z - this.z; //waar hij naar toe moet - waar hij is
 
-                        if (this.destinations[0].x > Math.Round(this.x))
+                        if (path.First().x > Math.Round(this.x))
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY - (Math.PI / 2), this.rotationZ);
-                        else if (this.destinations[0].x < Math.Round(this.x))
+                        else if (path.First().x < Math.Round(this.x))
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY + (Math.PI / 2), this.rotationZ);
-                        else if (this.destinations[0].z > Math.Round(this.z))
+                        else if (path.First().z > Math.Round(this.z))
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY, this.rotationZ);
-                        else if (this.destinations[0].z < Math.Round(this.z))
+                        else if (path.First().z < Math.Round(this.z))
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY + Math.PI, this.rotationZ);
+                        if(path.Count != 1)
+                        path.RemoveAt(0);
                     }
                 }
 
@@ -90,16 +86,6 @@ namespace Models
             }
         }
 
-        public List<Node> getDestinations()
-        {
-            return destinations;
-        }
-
-        public override void AddDestination(Node d)
-        {
-            destinations.Add(d);
-        }
-
         public void addTask(RobotMove robotMove)
         {
             tasks.Add(robotMove);
@@ -118,9 +104,9 @@ namespace Models
                 busy = false;
         }
 
-        public List<IRobotTask> getTasks()
+        public int getTasksCount()
         {
-            return tasks;
+            return tasks.Count;
         }
     }
 }
