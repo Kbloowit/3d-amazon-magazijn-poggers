@@ -26,7 +26,7 @@ namespace Models
         /// <summary>
         /// Instance of the worldmanager class
         /// </summary>
-        WorldManager manager = new WorldManager();
+        WorldManager worldManager = new WorldManager();
 
         /// <summary>
         /// Constructor
@@ -34,25 +34,26 @@ namespace Models
         public World()
         {
             Robot robot1 = CreateRobot(13, 0, 2);
-            Robot robot2 = CreateRobot(14, 0, 2);
-            Robot robot3 = CreateRobot(15, 0, 2);
-            Truck t = CreateTruck(0, 1, -5);
-            Shelf s = CreateShelf(4, 0, 18);
+            //Robot robot2 = CreateRobot(14, 0, 2);
+            //Robot robot3 = CreateRobot(15, 0, 2);
+            Truck truck1 = CreateTruck(0, 1, -5);
+            Shelf shelf1 = CreateShelf(4, 0, 18);
             addNodes();
         }
 
-        public void moveRobot(Char from, Char to, int robotIndex)
-        {
-            
-            List<Node> nodePath = g.shortest_path(from, to, nodes);
-            foreach (Node item in nodePath)
-                Console.WriteLine(item.name);
+        //public void moveRobot(Char from, Char to, int robotIndex)
+        //{
+        //    List<Node> nodePath = g.shortest_path(from, to, nodes);
+        //    for (int i = 0; i < nodePath.Count(); i++){
+        //        worldObjects[robotIndex].AddDestination(nodePath[i]);
+        //    }
+        //}
 
-            for (int i = 0; i < nodePath.Count(); i++)
-            {
-                worldObjects[robotIndex].AddDestination(nodePath[i]);
-            }
+        public List<Node> moveRobot(char from, char to)
+        {
+            return g.shortest_path(from, to, nodes);
         }
+
         /// <summary>
         /// Allows the truck to move to a node
         /// </summary>
@@ -78,7 +79,7 @@ namespace Models
         {
             Robot r = new Robot(x, y, z, 0, 0, 0);
             worldObjects.Add(r);
-            manager.AddRobotToList(r);
+            worldManager.AddRobotToList(r);
             return r;
         }
         /// <summary>
@@ -92,6 +93,7 @@ namespace Models
         {
             Truck t = new Truck(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
+            worldManager.AddTruckToList(t);
             return t;
         }
         /// <summary>
@@ -105,6 +107,7 @@ namespace Models
         {
             Shelf s = new Shelf(x, y, z, 0, 0, 0);
             worldObjects.Add(s);
+            worldManager.AddShelfToList(s);
             return s;
         }
 
@@ -162,63 +165,55 @@ namespace Models
                              where world.type == "robot"
                              select world;
 
-                foreach(Robot x in robots)
-                {
-                    if (x.getStatus() == true && x.getDestinations().Count() == 0)
-                    {
-                        x.updateStatus();
-                    }
-                }
                 List<Truck> truck = new List<Truck>();
                 foreach (Truck t in trucks)
                     truck.Add(t);
 
-                if(truck[0].x == 0 && truck[0].getStatus() == false)
+                if (truck.First().x == 0)
                 {
-                    int indexTruck = worldObjects.FindIndex(a => a.guid == truck[0].guid);
+                    int indexTruck = worldObjects.FindIndex(a => a.guid == truck.First().guid);
                     moveTruck(indexTruck, 'u');
                 }
-                if(Math.Round(truck[0].x) == 16 && truck[0].getStatus() == false)
-                    {
-                    if(truck[0].GetPacklist().Count() == 0 && Math.Round(truck[0].x) == 16 && truck[0].getStatus() == false)
+                else if (Math.Round(truck.First().x) == 16 && truck[0].getStatus() == false)
+                {
+                    if (truck.First().GetPacklist().Count() == 0 && Math.Round(truck.First().x) == 16 && truck.First().getStatus() == false)
                     {
                         Random r = new Random();
                         int random = r.Next(2, 6);
-                        for (int j = 0; j < random; j++)
-                            truck[0].addPackage("1");
+                        for (int j = 0; j < 2; j++)
+                            truck.First().addPackage("1");
                     }
-
-                    if (truck[0].GetPacklist().Count() != 0)
-                        {
-                            var r = from world in (from world in worldObjects where world.type == "robot" select world)
-                                    where world.getStatus() == false
-                                    select world;
-                            List<Robot> notBusyRobots = new List<Robot>();
-                            foreach (Robot x in r)
-                                notBusyRobots.Add(x);
-
-                        if(notBusyRobots.Count() != 0 && truck[0].GetPacklist().Count() != 0)//een robot selecteren die niet busy is
-                        {
-                            int indicator = truck[0].GetPacklist().Count();
-                            int indexRobot = worldObjects.FindIndex(a => a.guid == notBusyRobots[0].guid);
-                            //zoek waar het paket is op de shelves
-                            notBusyRobots[0].updateStatus();
-                            moveRobot('P', 'I', indexRobot);
-                            moveRobot('I', 'S', indexRobot);
-                            truck[0].packlistRemove();
-                        }
-                    }
-                        
-                    }
-                    if (truck[0].GetPacklist().Count() == 0 && Math.Round(worldObjects[0].x) == 30 && Math.Round(worldObjects[0].z) == 2)
+                    else if (truck.First().GetPacklist().Count() != 0)
                     {
-                    truck[0].updateStatus();
-                    //resetTruck(worldObjects.FindIndex(a => a.guid == truck[0].guid));
+                        var r = from world in (from world in worldObjects where world.type == "robot" select world)
+                                where world.getStatus() == false
+                                select world;
+                        List<Robot> notBusyRobots = new List<Robot>();
+                        foreach (Robot x in r)
+                            notBusyRobots.Add(x);
+
+                        if(notBusyRobots.Count() != 0) {
+                            //een robot selecteren die niet busy is
+                            //zoek waar het paket is op de shelves
+                            truck[0].packlistRemove();
+                            notBusyRobots.First().updateStatus();
+                            notBusyRobots.First().addTask(new RobotMove(moveRobot('P', 'I')));
+                            notBusyRobots.First().addTask(new RobotMove(moveRobot('I', 'R')));
+                            int indexer = truck.First().GetPacklist().Count();
+                        }
+                        else if(notBusyRobots.Count() == 0)
+                        {
+                            foreach(Robot robot in robots)
+                            {
+                                if(robot.getStatus() == true && robot.getTasks().Count() == 0)
+                                    robot.updateStatus();
+                            }
+                        }
+                        if (truck.First().GetPacklist().Count() == 0)
+                            truck.First().updateStatus();
                     }
-                if (truck[0].getStatus() == true)
-                {
-                    int indexTruck = worldObjects.FindIndex(a => a.guid == truck[0].guid);
-                    moveTruck(indexTruck, 'v');
+                    if (truck.First().getStatus() == true)
+                        moveTruck(worldObjects.FindIndex(a => a.guid == truck.First().guid), 'v');
                 }
                     if (u is IUpdatable)
                 {

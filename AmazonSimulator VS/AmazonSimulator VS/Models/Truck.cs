@@ -75,7 +75,10 @@ namespace Models
 
         public void updateStatus()
         {
-            done = true;
+            if (done == true)
+                done = false;
+            else if (done == false)
+                done = true;
         }
 
     }

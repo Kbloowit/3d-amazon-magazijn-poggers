@@ -8,6 +8,8 @@ namespace Models
     public class WorldManager : IUpdatable
     {
         private List<Robot> robots = new List<Robot>();
+        private List<Truck> trucks = new List<Truck>();
+        private List<Shelf> shelfs = new List<Shelf>();
 
         public WorldManager()
         {
@@ -18,12 +20,9 @@ namespace Models
         {
             foreach (Robot x in robots)
             {
-                if (x.getStatus() == true && x.getDestinations().Count() == 0)
-                {
-                    x.updateStatus();
-                }
+                
             }
-            return true;
+            return Update(tick);
         }
 
         public void AddRobotToList(Robot robot)
@@ -31,6 +30,15 @@ namespace Models
             robots.Add(robot);
         }
 
-        
+        public void AddTruckToList(Truck truck)
+        {
+            trucks.Add(truck);
+        }
+
+        public void AddShelfToList(Shelf shelf)
+        {
+            shelfs.Add(shelf);
+        }
+
     }
 }
