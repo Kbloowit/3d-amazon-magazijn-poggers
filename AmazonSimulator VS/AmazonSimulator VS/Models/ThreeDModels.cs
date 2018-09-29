@@ -72,7 +72,7 @@ namespace Models
         {
 
         }
-        public virtual bool getStatus()
+        public virtual bool Status()
         {
             return false;
         }

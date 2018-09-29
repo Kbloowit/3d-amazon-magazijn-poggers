@@ -9,7 +9,6 @@ namespace Models
 {
         private bool startupComplete = false;
         private bool complete = false;
-
         private List<Node> path = new List<Node>();
 
         public RobotMove(List<Node> path)

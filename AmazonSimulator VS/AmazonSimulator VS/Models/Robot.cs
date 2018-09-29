@@ -8,7 +8,7 @@ namespace Models
     public class Robot : ThreeDModels
     {
         private List<IRobotTask> tasks = new List<IRobotTask>();
-
+        private Shelf shelf;
         private double deltaX;
         private double deltaZ;
         private bool busy;
@@ -34,7 +34,6 @@ namespace Models
                 if(tasks.Count != 0)
                 tasks.First().startTask(this);
             }
-
             return base.Update(tick);
         }
 
@@ -65,33 +64,41 @@ namespace Models
                 if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
                 {
                     this.Move(this.x + 0.20, this.y, this.z);
+                    if (shelf != null)
+                        shelf.Move(x + 0.20, y, z);
                     deltaX -= 0.20;
                 }
                 else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
                 {
                     this.Move(this.x - 0.20, this.y, this.z);
+                    if (shelf != null)
+                        shelf.Move(x - 0.20, y, z);
                     deltaX += 0.20;
                 }
 
                 if (Math.Round(deltaZ, 1) > 0) // als deltaY positief is dan gaat hij vooruit
                 {
                     this.Move(this.x, this.y, this.z + 0.20);
+                    if (shelf != null)
+                        shelf.Move(x, y, z + 0.20);
                     deltaZ -= 0.20;
                 }
                 else if (Math.Round(deltaZ, 1) < 0) // als deltaY negatief is dan gaat hij achteruit
                 {
                     this.Move(this.x, this.y, this.z - 0.20);
+                    if (shelf != null)
+                        shelf.Move(x, y, z - 0.20);
                     deltaZ += 0.20;
                 }
             }
         }
 
-        public void addTask(RobotMove robotMove)
+        public void addTask(IRobotTask robotMove)
         {
             tasks.Add(robotMove);
         }
 
-        public override bool getStatus()
+        public override bool Status()
         {
             return busy;
         }
@@ -107,6 +114,11 @@ namespace Models
         public int getTasksCount()
         {
             return tasks.Count;
+        }
+
+        public void addShelf(Shelf s)
+        {
+            shelf = s;
         }
     }
 }

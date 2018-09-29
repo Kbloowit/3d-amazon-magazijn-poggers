@@ -7,10 +7,9 @@ namespace Models
 {
     public class Truck : ThreeDModels
     {
-
         private List<Node> destinations = new List<Node>(); //later lijst van task, kunnen checken of ze al klaar zijn
         private List<string> packlist = new List<string>();
-        //private List<int> items = new List<int>();
+        private bool arrived = false;
         private bool done = false;
         double deltaX;
 
@@ -22,7 +21,7 @@ namespace Models
         public override bool Update(int tick)
         {
             this.Rotate(this.rotationX, this.rotationY, this.rotationZ);
-            if (Math.Round(deltaX) == 0)
+            if (Math.Round(deltaX, 1) == 0)
             {
                 if (destinations.Count() != 0)
                 {
@@ -30,16 +29,16 @@ namespace Models
                     destinations.RemoveAt(0);
                 }
                 }
-                if (Math.Round(deltaX) > 0) // als deltaX positief is gaat hij vooruit
+                if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
                 {
                     this.Move(this.x + 0.20, this.y, this.z);
                     deltaX -= 0.20;
                 }
-                else if (Math.Round(deltaX) < 0) // als deltaX negatief is gaat hij actheruit
+                else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
                 {
                     this.Move(this.x - 0.20, this.y, this.z);
                     deltaX += 0.20;
-            }
+                }
            return base.Update(tick);
         }
 
@@ -48,9 +47,14 @@ namespace Models
             destinations.Add(d);
         }
 
-        public override bool getStatus()
+        public override bool Status()
         {
             return done;
+        }
+
+        public bool Arrived()
+        {
+            return arrived;
         }
 
         public List<string> GetPacklist()
@@ -68,13 +72,22 @@ namespace Models
             packlist.Add(package);
         }
 
-        public void UpdateStatus()
+        public void updateDone()
         {
             if (done == true)
                 done = false;
             else if (done == false)
                 done = true;
         }
+
+        public void updateArrived()
+        {
+            if (done == true)
+                done = false;
+            else if (done == false)
+                done = true;
+        }
+
 
     }
 }
