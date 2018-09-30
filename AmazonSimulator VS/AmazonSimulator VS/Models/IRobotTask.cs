@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    interface IRobotTask
+    public interface IRobotTask
 {
         void startTask(Robot robot);
 
-        bool robotDone(Robot robot);
+        bool taskCompleted(Robot robot);
 }
 }
