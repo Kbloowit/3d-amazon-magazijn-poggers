@@ -21,10 +21,9 @@ namespace Models
         {
             Truck truck = trucks.First();
             Robot robot = robots.Find(x => x.Status() == false);
-            Shelf shelf = shelfs.First();
             if (Math.Round(truck.x) == 0)
             {
-                truck.AddDestination(g.truckPath('u'));
+                truck.AddDestination(g.truckPath("u"));
             }
             else if (Math.Round(truck.x, 1) == 16)
             {
@@ -32,16 +31,24 @@ namespace Models
                 {
                     Random r = new Random();
                     int random = r.Next(2, 6);
-                    for (int j = 0; j < 1; j++)
+                    for (int j = 0; j < 4; j++)
                         truck.addPackage("1");
                     truck.updateArrived();
                 }
                 else if (truck.GetPacklist().Count() != 0 && robot != null)
                 {
-                    robot.addTask(new RobotMove(g.shortest_path('P', 'I')));//eigenlijk eerst naar shelf zoeken niet gwn een nummer
+                    List<Shelf> shelves = new List<Shelf>();
+                    foreach(Shelf s in shelfs)
+                        if(s.Status() == true)
+                            shelves.Add(s);
+                    Random r = new Random();
+                    int random = r.Next(0, shelves.Count());
+                    Shelf shelf = shelves[random]; // afvangen wanneer er geen shelfs meer zijn
+                    robot.addTask(new RobotMove(g.shortest_path("P", shelf.getName()))); //eigenlijk eerst naar shelf zoeken niet gwn een nummer
                     robot.addTask(new RobotPickUp(shelf));
-                    robot.addTask(new RobotMove(g.shortest_path('I', 'R')));
+                    robot.addTask(new RobotMove(g.shortest_path(shelf.getName(), "S")));
                     robot.addTask(new RobotDeliver());
+                    shelf.updateStatus();
                     robot.updateStatus();
                     truck.packlistRemove();
                 }
@@ -49,7 +56,7 @@ namespace Models
                 {
                     truck.updateStatus();
                     truck.updateArrived();
-                    truck.AddDestination(g.truckPath('v'));
+                    truck.AddDestination(g.truckPath("v"));
                 }
             }
             else if (Math.Round(truck.x, 1) == 32)
@@ -73,6 +80,11 @@ namespace Models
         public void AddShelfToList(Shelf shelf)
         {
             shelfs.Add(shelf);
+        }
+
+        public List<Node> getGraphNodes()
+        {
+            return g.nodes;
         }
     }
 }

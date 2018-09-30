@@ -13,7 +13,7 @@ namespace Models
         /// <summary>
         /// The name of the node (get, set)
         /// </summary>
-        public char name { get; set; }
+        public string name { get; set; }
         /// <summary>
         /// The X cordinate for the node
         /// </summary>
@@ -26,8 +26,8 @@ namespace Models
         /// The Z cordinate for the node
         /// </summary>
         public double z { get; set; }
-
         public List<Node> connections = new List<Node>();
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -35,7 +35,7 @@ namespace Models
         /// <param name="x">given x cordinate</param>
         /// <param name="y">given y cordinate</param>
         /// <param name="z">given z cordinate</param>
-        public Node(char name, double x, double y, double z)
+        public Node(string name, double x, double y, double z)
         {
             this.name = name;
             this.x = x;
@@ -46,7 +46,7 @@ namespace Models
         /// Returns the name of the node
         /// </summary>
         /// <returns>Char name</returns>
-        public char GetName()
+        public string GetName()
         {
             return name;
         }

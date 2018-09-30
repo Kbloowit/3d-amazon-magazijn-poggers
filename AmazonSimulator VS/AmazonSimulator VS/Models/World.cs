@@ -29,7 +29,11 @@ namespace Models
             Robot robot2 = CreateRobot(14, 0, 2);
             Robot robot3 = CreateRobot(15, 0, 2);
             Truck truck1 = CreateTruck(0, 1, -5);
-            Shelf shelf1 = CreateShelf(4, 0, 18);
+            foreach(Node n in worldManager.getGraphNodes())
+            {
+                if (n.name.Contains("Shelf"))
+                    CreateShelf(n.name, n.x, n.y, n.z);
+            }
         }
 
         /// <summary>
@@ -67,9 +71,9 @@ namespace Models
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
         /// <returns>Shelf object</returns>
-        private Shelf CreateShelf(double x, double y, double z)
+        private Shelf CreateShelf(string node, double x, double y, double z)
         {
-            Shelf s = new Shelf(x, y, z, 0, 0, 0);
+            Shelf s = new Shelf(node, x, y, z, 0, 0, 0);
             worldObjects.Add(s);
             worldManager.AddShelfToList(s);
             return s;

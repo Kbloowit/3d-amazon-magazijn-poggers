@@ -49,13 +49,28 @@ namespace Models
                         deltaZ = path.First().z - this.z; //waar hij naar toe moet - waar hij is
 
                         if (path.First().x > Math.Round(this.x))
+                        {
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY - (Math.PI / 2), this.rotationZ);
+                            if (shelf != null)
+                                shelf.Rotate(rotationX, rotationY - rotationY - (Math.PI / 2), rotationZ);
+                        }
                         else if (path.First().x < Math.Round(this.x))
+                        {
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY + (Math.PI / 2), this.rotationZ);
+                            if (shelf != null)
+                                shelf.Rotate(rotationX, rotationY - rotationY + (Math.PI / 2), rotationZ);
+                        }
                         else if (path.First().z > Math.Round(this.z))
+                        {
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY, this.rotationZ);
-                        else if (path.First().z < Math.Round(this.z))
+                            if (shelf != null)
+                                shelf.Rotate(rotationX, rotationY - rotationY, rotationZ);
+                        }
+                        else if (path.First().z < Math.Round(this.z)){
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY + Math.PI, this.rotationZ);
+                            if (shelf != null)
+                                shelf.Rotate(rotationX, rotationY - rotationY + Math.PI, rotationZ);
+                        }
                         if(path.Count != 1)
                         path.RemoveAt(0);
                     }
