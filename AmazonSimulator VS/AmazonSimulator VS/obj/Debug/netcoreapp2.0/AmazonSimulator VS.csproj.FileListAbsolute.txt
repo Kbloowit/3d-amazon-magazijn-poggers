@@ -35,7 +35,6 @@ C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonS
 C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.runtimeconfig.dev.json
 C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.dll
 C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\bin\Debug\netcoreapp2.0\AmazonSimulator VS.pdb
-C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.csprojResolveAssemblyReference.cache
 C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.csproj.CoreCompileInputs.cache
 C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.AssemblyInfoInputs.cache
 C:\Users\Ikke\Source\Repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.AssemblyInfo.cs
@@ -53,3 +52,4 @@ C:\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\De
 C:\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.AssemblyInfo.cs
 C:\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.dll
 C:\Dropbox\HBO-ICT\Amazon Warehouse\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.pdb
+C:\Users\Ikke\source\repos\3d-amazon-magazijn-poggers\AmazonSimulator VS\AmazonSimulator VS\obj\Debug\netcoreapp2.0\AmazonSimulator VS.csprojAssemblyReference.cache
