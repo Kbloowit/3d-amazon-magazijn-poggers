@@ -15,13 +15,16 @@ namespace Models
         public bool robotDone(Robot robot)
         {
             //robot check of hij klaar is
-            return true;
+            return done;
         }
 
         public void startTask(Robot robot)
         {
-            //opdracht geven aan de robot. toevoegen aan tasks?
+            //opdracht geven aan de robot, hij begint nu dus done == false
+            done = false;
             throw new NotImplementedException();
+            //wanneer de robot klaar is done op true zetten
+            //done = true;
         }
     }
 }
