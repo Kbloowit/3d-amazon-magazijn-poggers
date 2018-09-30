@@ -41,6 +41,7 @@ namespace Models
                     robot.addTask(new RobotMove(g.shortest_path('P', 'I')));//eigenlijk eerst naar shelf zoeken niet gwn een nummer
                     robot.addTask(new RobotPickUp(shelf));
                     robot.addTask(new RobotMove(g.shortest_path('I', 'R')));
+                    robot.addTask(new RobotDeliver());
                     robot.updateStatus();
                     truck.packlistRemove();
                 }
@@ -52,7 +53,7 @@ namespace Models
                 }
             }
             else if (Math.Round(truck.x, 1) == 32)
-                truck.AddDestination(g.truckPath('t')); // or truck.resetTruck (moet nog anders)
+                truck.Move(truck.x - truck.x, truck.y, truck.z);
 
             foreach (Robot r in robots)
                 if (r.Status() == true && r.getTasksCount() == 0)

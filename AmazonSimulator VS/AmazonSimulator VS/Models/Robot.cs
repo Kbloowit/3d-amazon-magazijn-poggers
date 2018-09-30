@@ -120,5 +120,10 @@ namespace Models
         {
             shelf = s;
         }
+
+        public void removeShelf()
+        {
+            shelf = null;
+        }
     }
 }
