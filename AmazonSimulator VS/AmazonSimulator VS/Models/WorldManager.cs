@@ -21,6 +21,11 @@ namespace Models
         {
             Truck truck = trucks.First();
             Robot robot = robots.Find(x => x.Status() == false);
+            List<Node> shelvesInPlace = new List<Node>();
+            foreach (Node s in g.getNodes())
+                if (s.shelf != null)
+                    if (s.shelf.inPlace == true)
+                        shelvesInPlace.Add(s); //vul de lijst van shelverInPlace met nodes die een shelferop hebben staan
             if (Math.Round(truck.x) == 0)
             {
                 truck.AddDestination(g.truckPath("u"));
@@ -29,28 +34,32 @@ namespace Models
             {
                 if (truck.GetPacklist().Count() == 0 && truck.Status() == false && truck.Arrived() == false)
                 {
+                    if(shelvesInPlace.Count() != 0)
+                    {
                     Random r = new Random();
-                    int random = r.Next(2, 6);
-                    for (int j = 0; j < 4; j++)
+                    int random = r.Next(1, shelvesInPlace.Count());
+                    for (int j = 0; j <= random; j++)
                         truck.addPackage("1");
+                    }
                     truck.updateArrived();
                 }
                 else if (truck.GetPacklist().Count() != 0 && robot != null)
                 {
-                    List<Shelf> shelves = new List<Shelf>();
-                    foreach(Shelf s in shelfs)
-                        if(s.Status() == true)
-                            shelves.Add(s);
+                    if(shelvesInPlace.Count() != 0)
+                    {
                     Random r = new Random();
-                    int random = r.Next(0, shelves.Count());
-                    Shelf shelf = shelves[random]; // afvangen wanneer er geen shelfs meer zijn
-                    robot.addTask(new RobotMove(g.shortest_path("P", shelf.getName()))); //eigenlijk eerst naar shelf zoeken niet gwn een nummer
-                    robot.addTask(new RobotPickUp(shelf));
-                    robot.addTask(new RobotMove(g.shortest_path(shelf.getName(), "S")));
+                    int random = r.Next(0, shelvesInPlace.Count());
+                    Node shelfNode = shelvesInPlace[random]; //random node met een shelf erop
+                    robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
+                    robot.addTask(new RobotPickUp(shelfNode.shelf));
+                    robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
                     robot.addTask(new RobotDeliver());
-                    shelf.updateStatus();
+                    robot.addTask(new RobotReset());
                     robot.updateStatus();
                     truck.packlistRemove();
+                    shelfNode.shelf.updateStatus();
+                    shelfNode.shelf = null;
+                    }
                 }
                 if (truck.GetPacklist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
                 {
@@ -84,7 +93,7 @@ namespace Models
 
         public List<Node> getGraphNodes()
         {
-            return g.nodes;
+            return g.getNodes();
         }
     }
 }

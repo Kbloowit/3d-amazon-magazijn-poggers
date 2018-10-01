@@ -143,9 +143,13 @@
                         if (command.parameters.type === 'shelf') {
                             var Shelf = new THREE.Group();
                             LoadOBJModel('textures/', 'shelf.obj', 'textures/', 'shelf.mtl', mesh => {
-                                mesh.scale.set(0.3, 0.3, 0.3);
+                                var box = new THREE.Box3().setFromObject(mesh);
+                                box.center(mesh.position); // this re-sets the mesh position
+                                mesh.position.y = 0;
+                                mesh.position.multiplyScalar(- 1);
                                 Shelf.add(mesh);
                             });
+                            Shelf.scale.set(0.3, 0.3, 0.3);
                             scene.add(Shelf);
                             worldObjects[command.parameters.guid] = Shelf;
                         }

@@ -26,6 +26,10 @@ namespace Models
         /// The Z cordinate for the node
         /// </summary>
         public double z { get; set; }
+        /// <summary>
+        /// Shelf that is on the node
+        /// </summary>
+        public Shelf  shelf { get; set; }
         public List<Node> connections = new List<Node>();
 
         /// <summary>

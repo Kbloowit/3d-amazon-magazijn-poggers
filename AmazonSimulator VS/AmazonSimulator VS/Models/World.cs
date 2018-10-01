@@ -25,14 +25,17 @@ namespace Models
         /// </summary>
         public World()
         {
-            Robot robot1 = CreateRobot(13, 0, 2);
-            Robot robot2 = CreateRobot(14, 0, 2);
-            Robot robot3 = CreateRobot(15, 0, 2);
+            Robot robot1 = CreateRobot("P", 13, 0, 2);
+            Robot robot2 = CreateRobot("Q", 14, 0, 2);
+            Robot robot3 = CreateRobot("R", 15, 0, 2);
             Truck truck1 = CreateTruck(0, 1, -5);
             foreach(Node n in worldManager.getGraphNodes())
             {
-                if (n.name.Contains("Shelf"))
-                    CreateShelf(n.name, n.x, n.y, n.z);
+                if (n.name.Contains("Shelf") && n.shelf == null)
+                {
+                    Shelf shelf  = CreateShelf(n.x, n.y, n.z);
+                    n.shelf = shelf;
+                }
             }
         }
 
@@ -43,9 +46,10 @@ namespace Models
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
         /// <returns>Robot object</returns>
-        private Robot CreateRobot(double x, double y, double z)
+        private Robot CreateRobot(string robotStation, double x, double y, double z)
         {
-            Robot r = new Robot(x, y, z, 0, 0, 0);
+            Node node = worldManager.getGraphNodes()[worldManager.getGraphNodes().FindIndex(a => a.GetName() == robotStation)];
+            Robot r = new Robot(node, x, y, z, 0, 0, 0);
             worldObjects.Add(r);
             worldManager.AddRobotToList(r);
             return r;
@@ -71,9 +75,9 @@ namespace Models
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
         /// <returns>Shelf object</returns>
-        private Shelf CreateShelf(string node, double x, double y, double z)
+        private Shelf CreateShelf(double x, double y, double z)
         {
-            Shelf s = new Shelf(node, x, y, z, 0, 0, 0);
+            Shelf s = new Shelf(x, y, z, 0, 0, 0);
             worldObjects.Add(s);
             worldManager.AddShelfToList(s);
             return s;
