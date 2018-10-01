@@ -9,7 +9,7 @@ namespace Models
         /// <summary>
         /// List containing all of the nodes on the main plane
         /// </summary>
-        public List<Node> nodes = new List<Node>();
+        private List<Node> nodes = new List<Node>();
 
         public void add_vertex(string name, Dictionary<string, int> edges)
         {
@@ -83,6 +83,11 @@ namespace Models
                 }
             }
             return nodePath;
+        }
+
+        public List<Node> getNodes()
+        {
+            return nodes;
         }
 
         public Node truckPath(string to)
