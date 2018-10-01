@@ -94,7 +94,7 @@
                             AddPointLight(Truck, 0xffffff, 1, 0, -2.69, -0.3, 0.8);
                             AddPointLight(Truck, 0xff0000, 1, 0, 2.45, -0.3, -0.8);
                             AddPointLight(Truck, 0xff0000, 1, 0, 2.45, -0.3, 0.8);
-                            AddSpotLight(Truck, 0xffffff, 1, 0, 1, -5, 5, -5, 5, -5, -35)
+                            AddSpotLight(Truck, 0xffffff, 1, 0, 2.45, -0.3, 0.8, 6.45, -0.3, 0.8)
 
                             scene.add(Truck);
                             worldObjects[command.parameters.guid] = Truck;
@@ -203,7 +203,7 @@
             object.add(Light.target);
             Light.target.position.set(tx, ty, tz);
 
-            var box = new THREE.Mesh(new THREE.BoxGeometry(4, 4, 4), new THREE.MeshLambaMaterial(0xffffff));
+            var box = new THREE.Mesh(new THREE.BoxGeometry(4, 4, 4), new THREE.MeshPhongMaterial(0xffffff));
             box.position.set(x, y, z);
             object.add(box);
 
