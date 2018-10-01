@@ -31,7 +31,7 @@ namespace Models
                 {
                     Random r = new Random();
                     int random = r.Next(2, 6);
-                    for (int j = 0; j < 4; j++)
+                    for (int j = 0; j < random; j++)
                         truck.addPackage("1");
                     truck.updateArrived();
                 }
