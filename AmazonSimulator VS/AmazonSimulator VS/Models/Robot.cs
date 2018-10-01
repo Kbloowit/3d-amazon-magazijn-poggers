@@ -86,14 +86,14 @@ namespace Models
                 {
                     this.Move(this.x + 0.20, this.y, this.z);
                     if (shelf != null)
-                        shelf.Move(x + 0.20, y, z);
+                        shelf.Move(this.x, shelf.y, this.z);
                     deltaX -= 0.20;
                 }
                 else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
                 {
                     this.Move(this.x - 0.20, this.y, this.z);
                     if (shelf != null)
-                        shelf.Move(x - 0.20, y, z);
+                        shelf.Move(this.x, shelf.y, this.z);
                     deltaX += 0.20;
                 }
 
@@ -101,14 +101,14 @@ namespace Models
                 {
                     this.Move(this.x, this.y, this.z + 0.20);
                     if (shelf != null)
-                        shelf.Move(x, y, z + 0.20);
+                        shelf.Move(this.x, shelf.y, this.z);
                     deltaZ -= 0.20;
                 }
                 else if (Math.Round(deltaZ, 1) < 0) // als deltaY negatief is dan gaat hij achteruit
                 {
                     this.Move(this.x, this.y, this.z - 0.20);
-                    if (shelf != null)
-                        shelf.Move(x, y, z - 0.20);
+                    if (shelf != null) 
+                        shelf.Move(this.x, shelf.y, this.z);
                     deltaZ += 0.20;
                 }
             }
