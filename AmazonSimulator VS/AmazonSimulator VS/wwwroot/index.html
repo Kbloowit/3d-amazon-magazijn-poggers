@@ -90,6 +90,12 @@
                                 mesh.scale.set(30, 30, 30);
                                 Truck.add(mesh);
                             });
+                            AddPointLight(Truck, 0xffffff, 1, 0, -2.69, -0.3, -0.8);
+                            AddPointLight(Truck, 0xffffff, 1, 0, -2.69, -0.3, 0.8);
+                            AddPointLight(Truck, 0xff0000, 1, 0, 2.45, -0.3, -0.8);
+                            AddPointLight(Truck, 0xff0000, 1, 0, 2.45, -0.3, 0.8);
+                            AddSpotLight(Truck, 0xffffff, 1, 0, 1, -5, 5, -5, 5, -5, -35)
+
                             scene.add(Truck);
                             worldObjects[command.parameters.guid] = Truck;
                         }
@@ -170,7 +176,37 @@
                 });
             }
 
-            //function AddPointLight(object, colour, x, y, z)
+        function AddPointLight(object, colour, intensity, distance, x, y, z) {
+
+            var Light = new THREE.PointLight(colour, intensity, distance);
+            Light.position.set(x, y, z);
+            object.add(Light);
+
+            var box = new THREE.Mesh(new THREE.BoxGeometry(1, 0.8, 0.8), new THREE.MeshBasicMaterial(0xffffff));
+            box.position.set(x, y, z);
+            object.add(box);
+            
+
+
+
+        }
+        function AddSpotLight(object, colour, intensity, distance, x, y, z, tx, ty, tz) {
+            var Light = new THREE.SpotLight(colour, intensity, distance);
+            Light.castShadow = true;
+            Light.position.set(x, y, z);
+            object.add(Light);
+
+            object.add(Light.target);
+            Light.target.position.set(tx, ty, tz);
+
+            var box = new THREE.Mesh(new THREE.BoxGeometry(4, 4, 4), new THREE.MeshLambaMaterial(0xffffff));
+            box.position.set(x, y, z);
+            object.add(box);
+
+        }
+        
+
+
             //function LoadModel()
 
            
