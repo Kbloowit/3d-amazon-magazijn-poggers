@@ -36,6 +36,8 @@ namespace Models
                     Shelf shelf  = CreateShelf(n.x, n.y, n.z);
                     n.shelf = shelf;
                 }
+            for (int i = 0; i < 6; i++)
+                CreateForklift(32, 1000, 32);
         }
 
         /// <summary>
@@ -97,6 +99,20 @@ namespace Models
             worldObjects.Add(train);
             worldManager.AddTrainToList(train);
             return train;
+        }
+
+        /// <summary>
+        /// Creates a new instance of a forklift object
+        /// </summary>
+        /// <param name="x">starting x cordinate in the world</param>
+        /// <param name="y">starting y cordinate in the world</param>
+        /// <param name="z">starting z cordinate in the world</param>
+        /// <returns>Forklift object</returns>
+        private void CreateForklift(double x, double y, double z)
+        {
+            Forklift forklift = new Forklift(x, y, z, 0, Math.PI, 0);
+            worldObjects.Add(forklift);
+            worldManager.AddForkliftToList(forklift);
         }
 
         /// <summary>

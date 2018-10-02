@@ -11,11 +11,13 @@ namespace Models
         private List<Truck> trucks = new List<Truck>();
         private List<Shelf> shelfs = new List<Shelf>();
         private List<Train> trains = new List<Train>();
+        private List<Forklift> forklifts = new List<Forklift>();
         private List<Node> shelvesInPlace = new List<Node>();
+        private List<Node> alreadyDestinated = new List<Node>();
         private Graph g = new Graph();
 
         //shelfs verwijder list maken die de world checkt en verwijderd uit de worldobjectlist hij blijft dan nog wel in de wereld dus dan verplaats je hem naar 2000 ofzo
-        
+
         public WorldManager()
         {
             g.addNodes();
@@ -26,61 +28,63 @@ namespace Models
         /// </summary>
         public void Update()
         {
+            ShelvesInPlace();
             Truck truck = trucks.First();
             Train train = trains.First();
             Robot robot = robots.Find(x => x.Status() == false);
-            ShelvesInPlace();
-            switch(Math.Round(truck.x, 1))
+                switch (Math.Round(truck.x, 1))
+                {
+                    case 0:
+                        truck.AddDestination(g.transportVehicle("TruckMid"));
+                        break;
+                    case 16:
+                        if (truck.GetItemlist().Count() == 0 && truck.Status() == false)
+                        {
+                            truck.updateArrived();
+                            if (shelvesInPlace.Count() != 0)
+                            {
+                                Random r = new Random();
+                                int random = r.Next(1, shelvesInPlace.Count());
+                                for (int j = 0; j < 6; j++)
+                                    truck.addItem("1");
+                            }
+                        }
+                        else if (truck.GetItemlist().Count() != 0 && robot != null)
+                        {
+                            if (shelvesInPlace.Count() != 0)
+                            {
+                                Random r = new Random();
+                                int random = r.Next(0, shelvesInPlace.Count());
+                                Node shelfNode = shelvesInPlace[random]; //random node met een shelf erop
+                                robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
+                                robot.addTask(new RobotPickUp(shelfNode, shelfNode.shelf));
+                                robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
+                                robot.addTask(new RobotDeliver(shelfNode.shelf));
+                                robot.addTask(new RobotReset());
+                                robot.updateStatus();
+                                truck.itemListRemove();
+                                shelfNode.shelf.updateStatus();
+                            }
+                        }
+                        else if (truck.GetItemlist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
+                        {
+                            truck.updateArrived();
+                            truck.AddDestination(g.transportVehicle("TruckEnd"));
+                        }
+                        break;
+                    case 32:
+                        truck.Move(0, 0, -5);
+                        break;
+                }
+            
+            switch (Math.Round(train.x, 1))
             {
-                case 0:
-                    truck.AddDestination(g.transportVehicle("TruckMid"));
+                case 32:
+                    if (shelvesInPlace.Count() == 0 && robots.Exists(x => x.Status() == true) == false)
+                        train.AddDestination(g.transportVehicle("TrainMid"));
                     break;
                 case 16:
-                    if (truck.GetItemlist().Count() == 0 && truck.Status() == false)
-                    {
-                        truck.updateArrived();
-                        if (shelvesInPlace.Count() != 0)
-                        {
-                            Random r = new Random();
-                            int random = r.Next(1, shelvesInPlace.Count());
-                            for (int j = 0; j < 6; j++)
-                                truck.addItem("1");
-                        }
-                    }
-                    else if (truck.GetItemlist().Count() != 0 && robot != null)
-                    {
-                        if (shelvesInPlace.Count() != 0)
-                        {
-                            Random r = new Random();
-                            int random = r.Next(0, shelvesInPlace.Count());
-                            Node shelfNode = shelvesInPlace[random]; //random node met een shelf erop
-                            robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
-                            robot.addTask(new RobotPickUp(shelfNode.shelf));
-                            robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
-                            robot.addTask(new RobotDeliver());
-                            robot.addTask(new RobotReset());
-                            robot.updateStatus();
-                            truck.itemListRemove();
-                            shelfNode.shelf.updateStatus();
-                            shelfNode.shelf = null;
-                        }
-                    }
-                    else if (truck.GetItemlist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
-                    {
-                        truck.updateArrived();
-                        truck.AddDestination(g.transportVehicle("TruckEnd"));
-                    }
-                    break;
-                case 32:
-                    truck.Move(0, 0, -5);
-                    break;
-            }
-            switch(Math.Round(train.x, 1)){
-                case 32:
-                    if(shelvesInPlace.Count() == 0 && robots.Exists(x => x.Status() == true) == false)
-                    train.AddDestination(g.transportVehicle("TrainMid"));
-                    break;
-                case 16:
+                    bool test = g.getNodes().Exists(x => x.name.Contains("Res") && x.shelf != null);
                     if (train.GetItemlist().Count() == 0 && train.Status() == false)
                     {
                         foreach (Shelf s in shelfs)
@@ -89,7 +93,37 @@ namespace Models
                         train.updateArrived();
                     }
                     else if (train.GetItemlist().Count() != 0)
+                    {
                         shelfRestock(train);
+                    }
+                    else if (g.getNodes().Exists(x => x.shelf != null && x.name.Contains("Res")) == true)
+                    {
+                        //truck moet anders aangestuurd worden
+                        if (robot != null)
+                        {
+                            Node FromNode;
+                            if (alreadyDestinated.Count() != 0)
+                                FromNode = g.getNodes().First(x => x.shelf != null && x.name.Contains("Res") && alreadyDestinated.Exists(z => z.name == x.name) == false);
+                            else
+                                FromNode = g.getNodes().First(x => x.shelf != null && x.name.Contains("Res"));
+                            Node ToNode = g.getNodes().First(x => x.shelf == null && x.name.Contains("Shelf"));
+                            robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, FromNode.name)));
+                            robot.addTask(new RobotPickUp(FromNode, FromNode.shelf));
+                            robot.addTask(new RobotMove(g.shortest_path(FromNode.name, ToNode.name)));
+                            robot.addTask(new RobotDeliver(FromNode.shelf));
+                            robot.addTask(new RobotReset());
+                            ToNode.shelf = FromNode.shelf;
+                            ToNode.shelf.updateStatus();
+                            robot.updateStatus();
+                            alreadyDestinated.Add(FromNode);
+                        }
+                    }
+                    else if (train.GetItemlist().Count() == 0 && robots.Exists(x => x.Status() == true) == false && g.getNodes().Exists(x => x.name.Contains("Res") && x.shelf != null) == false)
+                    {
+                        alreadyDestinated.Clear();
+                        train.updateArrived();
+                        train.AddDestination(g.transportVehicle("TrainEnd"));
+                    }
                     break;
                 case -8:
                     train.Move(32, 0, 32);
@@ -99,6 +133,10 @@ namespace Models
             foreach (Robot r in robots)
                 if (r.Status() == true && r.getTasksCount() == 0)
                     r.updateStatus();
+
+            foreach (Forklift f in forklifts)
+                if (f.Status() == true && f.getTasksCount() == 0)
+                    f.updateStatus();
         }
 
         /// <summary>
@@ -107,21 +145,23 @@ namespace Models
         /// <param name="train">Train that brings the shelves</param>
         private void shelfRestock(Train train)
         {
-            foreach (Shelf s in shelfs)
-                if (s.Status() == false)
-                    if (Math.Round(s.x, 1) == 16 && Math.Round(s.z, 1) == 2)
-                    {
-                        //robot tasks geven
-                        Node node = g.getNodes().First(x => x.name.Contains("Shelf") && x.shelf == null);
-                        s.Move(node.x, node.y, node.z);
-                        s.Rotate(0, 0, 0);
-                        s.updateStatus();
-                        node.shelf = s;
-                    }
-            train.updateArrived();
-            for (int i = 0; i < train.GetItemlist().Count(); i++)
+            Forklift forklift = forklifts.Find(x => x.Status() == false);
+            Shelf shelf = shelfs.First(x => x.Status() == false && Math.Round(x.x, 1) == 16 && Math.Round(x.z, 1) == 2);
+            Node node = g.getNodes().First(x => x.name.Contains("Res") && x.shelf == null);
+            if (forklift != null && shelf != null && node != null)
+            {
+                forklift.Move(18, 0, 31);
+                shelf.Move(18, 0, 31);
+                forklift.addShelf(shelf);
+                forklift.addTask(new ForkliftPickUp(shelf));
+                forklift.addTask(new ForkliftMove(g.shortest_path("Forklift", node.name)));
+                forklift.addTask(new ForkliftDeliver(node, shelf));
+                forklift.addTask(new ForkliftMove(g.shortest_path(node.name, "Forklift")));
+                forklift.addTask(new ForkliftReset());
+                forklift.updateStatus();
                 train.itemListRemove();
-            train.AddDestination(g.transportVehicle("TrainEnd"));
+                node.shelf = shelf;
+            }
         }
 
         /// <summary>
@@ -170,6 +210,15 @@ namespace Models
         public void AddTrainToList(Train train)
         {
             trains.Add(train);
+        }
+
+        /// <summary>
+        /// Add forklift to list
+        /// </summary>
+        /// <param name="train">Train</param>
+        public void AddForkliftToList(Forklift forklift)
+        {
+            forklifts.Add(forklift);
         }
 
         /// <summary>

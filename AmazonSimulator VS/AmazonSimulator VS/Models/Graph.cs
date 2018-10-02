@@ -102,8 +102,21 @@ namespace Models
             nodes[nodes.FindIndex(a => a.name == "B")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "S")], nodes[nodes.FindIndex(a => a.name == "D")] });
             nodes[nodes.FindIndex(a => a.name == "C")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "A")], nodes[nodes.FindIndex(a => a.name == "E")], nodes[nodes.FindIndex(a => a.name == "G")] });
             nodes[nodes.FindIndex(a => a.name == "D")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "B")], nodes[nodes.FindIndex(a => a.name == "F")], nodes[nodes.FindIndex(a => a.name == "ShelfI")] });
-            nodes[nodes.FindIndex(a => a.name == "E")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "C")], nodes[nodes.FindIndex(a => a.name == "F")] });
-            nodes[nodes.FindIndex(a => a.name == "F")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "D")], nodes[nodes.FindIndex(a => a.name == "E")] });
+            nodes[nodes.FindIndex(a => a.name == "E")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "C")], nodes[nodes.FindIndex(a => a.name == "ConA")] });
+            nodes[nodes.FindIndex(a => a.name == "ConA")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "E")], nodes[nodes.FindIndex(a => a.name == "ConB")], nodes[nodes.FindIndex(a => a.name == "ResA")] });
+            nodes[nodes.FindIndex(a => a.name == "ResA")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConA")] });
+            nodes[nodes.FindIndex(a => a.name == "ConB")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConA")], nodes[nodes.FindIndex(a => a.name == "ConC")], nodes[nodes.FindIndex(a => a.name == "ResB")] });
+            nodes[nodes.FindIndex(a => a.name == "ResB")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConB")] });
+            nodes[nodes.FindIndex(a => a.name == "ConC")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConB")], nodes[nodes.FindIndex(a => a.name == "ConD")], nodes[nodes.FindIndex(a => a.name == "ResC")] });
+            nodes[nodes.FindIndex(a => a.name == "ResC")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConC")] });
+            nodes[nodes.FindIndex(a => a.name == "ConD")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConC")], nodes[nodes.FindIndex(a => a.name == "ConE")], nodes[nodes.FindIndex(a => a.name == "ResD")] });
+            nodes[nodes.FindIndex(a => a.name == "ResD")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConD")] });
+            nodes[nodes.FindIndex(a => a.name == "ConE")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConD")], nodes[nodes.FindIndex(a => a.name == "ConF")], nodes[nodes.FindIndex(a => a.name == "ResE")] });
+            nodes[nodes.FindIndex(a => a.name == "ResE")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConE")] });
+            nodes[nodes.FindIndex(a => a.name == "ConF")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConE")], nodes[nodes.FindIndex(a => a.name == "E")], nodes[nodes.FindIndex(a => a.name == "Forklift")], nodes[nodes.FindIndex(a => a.name == "ResF")] });
+            nodes[nodes.FindIndex(a => a.name == "ResF")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConF")] });
+            nodes[nodes.FindIndex(a => a.name == "Forklift")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "ConF")] });
+            nodes[nodes.FindIndex(a => a.name == "F")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "D")], nodes[nodes.FindIndex(a => a.name == "ConF")] });
             nodes[nodes.FindIndex(a => a.name == "G")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "C")], nodes[nodes.FindIndex(a => a.name == "J")], nodes[nodes.FindIndex(a => a.name == "ShelfI")], nodes[nodes.FindIndex(a => a.name == "ShelfH")] });
             nodes[nodes.FindIndex(a => a.name == "ShelfH")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "G")] });
             nodes[nodes.FindIndex(a => a.name == "ShelfI")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "G")] });
@@ -145,6 +158,19 @@ namespace Models
             nodes.Add(new Node("C", 2, 0, 16));//midden links
             nodes.Add(new Node("D", 30, 0, 16));//midden rechts
             nodes.Add(new Node("E", 2, 0, 30));//hoekpunt
+            nodes.Add(new Node("ConA", 8, 0, 30));//connectie naar ResA
+            nodes.Add(new Node("ResA", 8, 0, 28));//Shelf Restock1
+            nodes.Add(new Node("ConB", 10, 0, 30));//connectie naar ResB
+            nodes.Add(new Node("ResB", 10, 0, 28));//Shelf Restock2
+            nodes.Add(new Node("ConC", 12, 0, 30));//connectie naar ResC
+            nodes.Add(new Node("ResC", 12, 0, 28));//Shelf Restock3
+            nodes.Add(new Node("ConD", 14, 0, 30));//connectie naar ResD
+            nodes.Add(new Node("ResD", 14, 0, 28));//Shelf Restock4
+            nodes.Add(new Node("ConE", 16, 0, 30));//connectie naar ResE
+            nodes.Add(new Node("ResE", 16, 0, 28));//Shelf Restock5
+            nodes.Add(new Node("ConF", 18, 0, 30));//connectie naar ResF
+            nodes.Add(new Node("ResF", 18, 0, 28));//Shelf Restock6
+            nodes.Add(new Node("Forklift", 18, 0, 31));//Forklift node
             nodes.Add(new Node("F", 30, 0, 30));//hoekpunt
             nodes.Add(new Node("G", 4, 0, 16));//connectie node
             nodes.Add(new Node("ShelfH", 4, 0, 14));//shelf node

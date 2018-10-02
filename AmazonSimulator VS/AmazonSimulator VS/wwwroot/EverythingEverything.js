@@ -158,6 +158,15 @@ window.onload = function () {
                     scene.add(Train);
                     worldObjects[command.parameters.guid] = Train;
                 }
+                if (command.parameters.type === 'forklift') {
+                    var Forklift = new THREE.Group();
+                    LoadOBJModel('textures/', 'forklift.obj', 'textures/', 'forklift.mtl', mesh => {
+                        Forklift.add(mesh);
+                    });
+                    Forklift.scale.set(4, 4, 4);
+                    scene.add(Forklift);
+                    worldObjects[command.parameters.guid] = Forklift;
+                }
             }
             var object = worldObjects[command.parameters.guid];
             object.position.x = command.parameters.x;

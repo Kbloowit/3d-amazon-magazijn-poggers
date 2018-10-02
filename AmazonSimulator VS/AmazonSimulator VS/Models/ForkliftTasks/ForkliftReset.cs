@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class RobotDeliver : IRobotTask
+    public class ForkliftReset : IForkliftTask
     {
-        public void startTask(Robot robot)
+        public void startTask(Forklift forklift)
         {
-            robot.removeShelf();
+            forklift.Move(32, 1000, 32);
         }
 
-        public bool taskCompleted(Robot robot)
+        public bool taskCompleted(Forklift forklift)
         {
             return true;
         }

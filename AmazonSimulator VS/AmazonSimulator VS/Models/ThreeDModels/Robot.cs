@@ -137,9 +137,9 @@ namespace Models
         /// Adds a task to the tasklist of the robot
         /// </summary>
         /// <param name="robotMove"></param>
-        public void addTask(IRobotTask robotMove)
+        public void addTask(IRobotTask robottask)
         {
-            tasks.Add(robotMove);
+            tasks.Add(robottask);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Models
         }
 
         /// <summary>
-        /// removes the shelf from the robot();
+        /// removes the shelf from the robot
         /// </summary>
         public void removeShelf()
         {
