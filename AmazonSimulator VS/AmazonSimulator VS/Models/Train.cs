@@ -10,7 +10,6 @@ namespace Models
         private List<Node> destinations = new List<Node>();
         private List<string> cargolist = new List<string>();
         private bool arrived = false;
-        private bool done = false;
         private double deltaX;
 
         /// <summary>
@@ -28,7 +27,7 @@ namespace Models
         }
 
         /// <summary>
-        /// Updates the Truck
+        /// Updates the Train
         /// </summary>
         /// <param name="tick">Tick time (50 = 20 times per second)</param>
         /// <returns>Update(Tick)</returns>
@@ -66,15 +65,6 @@ namespace Models
         }
 
         /// <summary>
-        /// Get the status of the train
-        /// </summary>
-        /// <returns>done</returns>
-        public override bool Status()
-        {
-            return done;
-        }
-
-        /// <summary>
         /// Get if the train arrived or not
         /// </summary>
         /// <returns>arrived</returns>
@@ -104,20 +94,9 @@ namespace Models
         /// Add cargo to cargolist
         /// </summary>
         /// <param name="cargo">cargo</param>
-        public void addPackage(string cargo)
+        public void addCargo(string cargo)
         {
             cargolist.Add(cargo);
-        }
-
-        /// <summary>
-        /// Update Done
-        /// </summary>
-        public void updateDone()
-        {
-            if (done == true)
-                done = false;
-            else if (done == false)
-                done = true;
         }
 
         /// <summary>
@@ -125,10 +104,15 @@ namespace Models
         /// </summary>
         public void updateArrived()
         {
-            if (done == true)
-                done = false;
-            else if (done == false)
-                done = true;
+            if (arrived == true)
+                arrived = false;
+            else if (arrived == false)
+                arrived = true;
+        }
+
+        public override bool Status()
+        {
+            throw new NotImplementedException();
         }
     }
 }

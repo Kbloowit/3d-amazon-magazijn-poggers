@@ -125,10 +125,10 @@ namespace Models
         /// </summary>
         public void updateArrived()
         {
-            if (done == true)
-                done = false;
-            else if (done == false)
-                done = true;
+            if (arrived == true)
+                arrived = false;
+            else if (arrived == false)
+                arrived = true;
         }
     }
 }

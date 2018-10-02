@@ -46,6 +46,7 @@ namespace Models
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Returns the name of the node
         /// </summary>
@@ -54,6 +55,7 @@ namespace Models
         {
             return name;
         }
+
         /// <summary>
         /// Returns the x coridnate of the node
         /// </summary>

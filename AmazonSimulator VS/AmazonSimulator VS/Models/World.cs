@@ -29,7 +29,7 @@ namespace Models
             Robot robot2 = CreateRobot("Q", 14, 0, 2);
             Robot robot3 = CreateRobot("R", 15, 0, 2);
             Truck truck1 = CreateTruck(0, 1, -5);
-            Train train = CreateTrain(40, 0, 40);
+            Train train = CreateTrain(32, 0, 32);
             foreach(Node n in worldManager.getGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)
                 {
@@ -93,7 +93,7 @@ namespace Models
         /// <returns>Train object</returns>
         private Train CreateTrain(double x, double y, double z)
         {
-            Train train = new Train(x, y, z, 0, 0, 0);
+            Train train = new Train(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(train);
             worldManager.AddTrainToList(train);
             return train;
