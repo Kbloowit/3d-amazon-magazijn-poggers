@@ -36,7 +36,7 @@ namespace Models
                     truck.AddDestination(g.transportVehicle("TruckMid"));
                     break;
                 case 16:
-                    if (truck.GetPacklist().Count() == 0 && truck.Arrived() == false)
+                    if (truck.GetItemlist().Count() == 0 && truck.Status() == false)
                     {
                         truck.updateArrived();
                         if (shelvesInPlace.Count() != 0)
@@ -44,10 +44,10 @@ namespace Models
                             Random r = new Random();
                             int random = r.Next(1, shelvesInPlace.Count());
                             for (int j = 0; j < 6; j++)
-                                truck.addPackage("1");
+                                truck.addItem("1");
                         }
                     }
-                    else if (truck.GetPacklist().Count() != 0 && robot != null)
+                    else if (truck.GetItemlist().Count() != 0 && robot != null)
                     {
                         if (shelvesInPlace.Count() != 0)
                         {
@@ -60,12 +60,12 @@ namespace Models
                             robot.addTask(new RobotDeliver());
                             robot.addTask(new RobotReset());
                             robot.updateStatus();
-                            truck.packlistRemove();
+                            truck.itemListRemove();
                             shelfNode.shelf.updateStatus();
                             shelfNode.shelf = null;
                         }
                     }
-                    else if (truck.GetPacklist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
+                    else if (truck.GetItemlist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
                     {
                         truck.updateArrived();
                         truck.AddDestination(g.transportVehicle("TruckEnd"));
@@ -81,14 +81,14 @@ namespace Models
                     train.AddDestination(g.transportVehicle("TrainMid"));
                     break;
                 case 16:
-                    if (train.GetCargoList().Count() == 0 && train.Arrived() == false)
+                    if (train.GetItemlist().Count() == 0 && train.Status() == false)
                     {
                         foreach (Shelf s in shelfs)
                             if (s.Status() == false)
-                                train.addCargo("1");
+                                train.addItem("1");
                         train.updateArrived();
                     }
-                    else if (train.GetCargoList().Count() != 0)
+                    else if (train.GetItemlist().Count() != 0)
                         shelfRestock(train);
                     break;
                 case -8:
@@ -119,8 +119,8 @@ namespace Models
                         node.shelf = s;
                     }
             train.updateArrived();
-            for (int i = 0; i < train.GetCargoList().Count(); i++)
-                train.cargolistRemove();
+            for (int i = 0; i < train.GetItemlist().Count(); i++)
+                train.itemListRemove();
             train.AddDestination(g.transportVehicle("TrainEnd"));
         }
 
