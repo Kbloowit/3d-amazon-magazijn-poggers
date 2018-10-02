@@ -14,14 +14,26 @@ namespace Models
         private double deltaZ;
         private bool busy;
 
-        //private double speed;
-
+        /// <summary>
+        /// Constructor of the robot
+        /// </summary>
+        /// <param name="robotStation">Node the robot charges/starts and resets</param>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        /// <param name="z">Z postiion</param>
+        /// <param name="rotationX">X Rotation</param>
+        /// <param name="rotationY">Y Rotation</param>
+        /// <param name="rotationZ">Z Rotatoin</param>
         public Robot(Node robotStation, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("robot", x, y, z, rotationX, rotationY, rotationZ)
         {
             this.robotStation = robotStation;
-            this.Move(this.x, this.y, this.z);
         }
 
+        /// <summary>
+        /// Updates the robot
+        /// </summary>
+        /// <param name="tick">Tick time (50 = 20 times per second)</param>
+        /// <returns>Update(Tick)</returns>
         public override bool Update(int tick)
         {
             if (tasks.Count != 0)
@@ -81,13 +93,12 @@ namespace Models
                         path.RemoveAt(0);
                     }
                 }
-
                 if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
                 {
                     this.Move(this.x + 0.20, this.y, this.z);
                     if (shelf != null)
                         shelf.Move(this.x, shelf.y, this.z);
-                    deltaX -= 0.20;
+                    deltaX -= 0.20; //deltaX -= speed * tick/1000
                 }
                 else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
                 {
@@ -143,7 +154,7 @@ namespace Models
         /// <summary>
         /// Updates the status of the robot
         /// </summary>
-        public override void updateStatus()
+        public void updateStatus()
         {
             if(busy == false)
                 busy = true;

@@ -10,21 +10,28 @@ namespace Models
         private List<Robot> robots = new List<Robot>();
         private List<Truck> trucks = new List<Truck>();
         private List<Shelf> shelfs = new List<Shelf>();
+        private List<Train> trains = new List<Train>();
         private Graph g = new Graph();
 
+        //shelfs verwijder list maken die de world checkt en verwijderd uit de worldobjectlist hij blijft dan nog wel in de wereld dus dan verplaats je hem naar 2000 ofzo
+        
         public WorldManager()
         {
             g.addNodes();
         }
 
+        /// <summary>
+        /// Manages the complete simulation, move trucks, robots, shelfs and trains
+        /// </summary>
         public void Update()
         {
+            Train train = trains.First();
             Truck truck = trucks.First();
             Robot robot = robots.Find(x => x.Status() == false);
             List<Node> shelvesInPlace = new List<Node>();
             foreach (Node s in g.getNodes())
                 if (s.shelf != null)
-                    if (s.shelf.inPlace == true)
+                    if (s.shelf.Status() == true)
                         shelvesInPlace.Add(s); //vul de lijst van shelverInPlace met nodes die een shelferop hebben staan
             if (Math.Round(truck.x) == 0)
             {
@@ -63,7 +70,7 @@ namespace Models
                 }
                 if (truck.GetPacklist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
                 {
-                    truck.updateStatus();
+                    truck.updateArrived();
                     truck.updateArrived();
                     truck.AddDestination(g.truckPath("v"));
                 }
@@ -76,19 +83,40 @@ namespace Models
                     r.updateStatus();
         }
 
+        /// <summary>
+        /// Add robot to list
+        /// </summary>
+        /// <param name="robot">Robot</param>
         public void AddRobotToList(Robot robot)
         {
             robots.Add(robot);
         }
 
+        /// <summary>
+        /// Add truck to list
+        /// </summary>
+        /// <param name="truck">Truck</param>
         public void AddTruckToList(Truck truck)
         {
             trucks.Add(truck);
         }
 
+        /// <summary>
+        /// Add shelf to list
+        /// </summary>
+        /// <param name="shelf">Shelfs</param>
         public void AddShelfToList(Shelf shelf)
         {
             shelfs.Add(shelf);
+        }
+
+        /// <summary>
+        /// Add train to list
+        /// </summary>
+        /// <param name="train">Train</param>
+        public void AddTrainToList(Train train)
+        {
+            trains.Add(train);
         }
 
         public List<Node> getGraphNodes()

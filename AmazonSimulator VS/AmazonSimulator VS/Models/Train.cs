@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Truck : ThreeDModels
+    public class Train : ThreeDModels
     {
         private List<Node> destinations = new List<Node>();
-        private List<string> packlist = new List<string>();
+        private List<string> cargolist = new List<string>();
         private bool arrived = false;
         private bool done = false;
         private double deltaX;
 
         /// <summary>
-        /// Constructor of the Truck
+        /// Constructor of the train
         /// </summary>
         /// <param name="x">X position</param>
         /// <param name="y">Y position</param>
@@ -22,7 +22,7 @@ namespace Models
         /// <param name="rotationX">X Rotation</param>
         /// <param name="rotationY">Y Rotation</param>
         /// <param name="rotationZ">Z Rotatoin</param>
-        public Truck(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("truck", x, y, z, rotationX, rotationY, rotationZ)
+        public Train(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("train", x, y, z, rotationX, rotationY, rotationZ)
         {
 
         }
@@ -42,22 +42,22 @@ namespace Models
                     deltaX = destinations[0].x - this.x; //waar hij naar toe moet - waar hij is
                     destinations.RemoveAt(0);
                 }
-                }
-                if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
-                {
-                    this.Move(this.x + 0.20, this.y, this.z);
-                    deltaX -= 0.20;
-                }
-                else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
-                {
-                    this.Move(this.x - 0.20, this.y, this.z);
-                    deltaX += 0.20;
-                }
-           return base.Update(tick);
+            }
+            if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
+            {
+                this.Move(this.x + 0.20, this.y, this.z);
+                deltaX -= 0.20;
+            }
+            else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
+            {
+                this.Move(this.x - 0.20, this.y, this.z);
+                deltaX += 0.20;
+            }
+            return base.Update(tick);
         }
 
         /// <summary>
-        /// Add a new destination to destination
+        /// Add a new destination to destinations
         /// </summary>
         /// <param name="d">Node</param>
         public void AddDestination(Node d)
@@ -66,7 +66,7 @@ namespace Models
         }
 
         /// <summary>
-        /// Get the status of the truck
+        /// Get the status of the train
         /// </summary>
         /// <returns>done</returns>
         public override bool Status()
@@ -75,7 +75,7 @@ namespace Models
         }
 
         /// <summary>
-        /// Get if the truck arrived or not
+        /// Get if the train arrived or not
         /// </summary>
         /// <returns>arrived</returns>
         public bool Arrived()
@@ -84,29 +84,29 @@ namespace Models
         }
 
         /// <summary>
-        /// Package list of the truck
+        /// Cargo list of the train
         /// </summary>
-        /// <returns>packlist</returns>
-        public List<string> GetPacklist()
+        /// <returns>cargolist</returns>
+        public List<string> GetCargoList()
         {
-            return packlist;
+            return cargolist;
         }
 
         /// <summary>
-        /// Remove pack from packlist
+        /// Remove cargo from cargolist
         /// </summary>
-        public void packlistRemove()
+        public void cargolistRemove()
         {
-            packlist.RemoveAt(0);
+            cargolist.RemoveAt(0);
         }
 
         /// <summary>
-        /// Add package to packlist
+        /// Add cargo to cargolist
         /// </summary>
-        /// <param name="package">package</param>
-        public void addPackage(string package)
+        /// <param name="cargo">cargo</param>
+        public void addPackage(string cargo)
         {
-            packlist.Add(package);
+            cargolist.Add(cargo);
         }
 
         /// <summary>

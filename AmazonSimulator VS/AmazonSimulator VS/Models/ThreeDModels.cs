@@ -5,9 +5,8 @@ using Newtonsoft.Json;
 
 namespace Models
 {
-    public class ThreeDModels : IUpdatable
+    public abstract class ThreeDModels : IUpdatable
     {
-      
         private double _x = 0;
         private double _y = 0;
         private double _z = 0;
@@ -68,18 +67,6 @@ namespace Models
             return false;
         }
 
-        public virtual void AddDestination(Node d)
-        {
-
-        }
-        public virtual bool Status()
-        {
-            return false;
-        }
-
-        public virtual void updateStatus()
-        {
-            
-        }
+        public abstract bool Status();
     }
 }
