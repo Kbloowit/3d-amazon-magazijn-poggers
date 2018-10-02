@@ -7,36 +7,35 @@ namespace Models
 {
     public class Shelf : ThreeDModels
     {
-        public bool inPlace = true;
+        private bool inPlace = true;
 
+        /// <summary>
+        /// Constructor of the Shelf
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        /// <param name="z">Z postiion</param>
+        /// <param name="rotationX">X Rotation</param>
+        /// <param name="rotationY">Y Rotation</param>
+        /// <param name="rotationZ">Z Rotatoin</param>
         public Shelf(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("shelf", x, y, z, rotationX, rotationY, rotationZ)
         {
             
         }
 
-        public override void Rotate(double rotationX, double rotationY, double rotationZ)
-        {
-            base.Rotate(rotationX, rotationY, rotationZ);
-        }
-
-        public override void Move(double x, double y, double z)
-        {
-            base.Move(x, y, z);
-        }
-
-        public override bool Update(int tick)
-        {
-            this.Move(this.x, this.y, this.z);
-            this.Rotate(this.rotationX, this.rotationY, this.rotationZ);
-            return base.Update(tick);
-        }
-
+        /// <summary>
+        /// Get the status of the shelf
+        /// </summary>
+        /// <returns>InPlace</returns>
         public override bool Status()
         {
             return inPlace;
         }
 
-        public override void updateStatus()
+        /// <summary>
+        /// Update the status of the shelf (inPlace or not)
+        /// </summary>
+        public void updateStatus()
         {
             if (inPlace == false)
                 inPlace = true;

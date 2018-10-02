@@ -12,6 +12,8 @@ namespace Models
         private List<Shelf> shelfs = new List<Shelf>();
         private Graph g = new Graph();
 
+        //shelfs verwijder list maken die de world checkt en verwijderd uit de worldobjectlist hij blijft dan nog wel in de wereld dus dan verplaats je hem naar 2000 ofzo
+        
         public WorldManager()
         {
             g.addNodes();
@@ -24,7 +26,7 @@ namespace Models
             List<Node> shelvesInPlace = new List<Node>();
             foreach (Node s in g.getNodes())
                 if (s.shelf != null)
-                    if (s.shelf.inPlace == true)
+                    if (s.shelf.Status() == true)
                         shelvesInPlace.Add(s); //vul de lijst van shelverInPlace met nodes die een shelferop hebben staan
             if (Math.Round(truck.x) == 0)
             {
@@ -63,7 +65,7 @@ namespace Models
                 }
                 if (truck.GetPacklist().Count() == 0 && robots.Exists(x => x.Status() == true) == false)
                 {
-                    truck.updateStatus();
+                    truck.updateArrived();
                     truck.updateArrived();
                     truck.AddDestination(g.truckPath("v"));
                 }
