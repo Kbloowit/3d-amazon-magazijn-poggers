@@ -162,9 +162,9 @@ namespace Models
             nodes.Add(new Node("TruckStart", 0, 0, 0));//truck start
             nodes.Add(new Node("TruckMid", 16, 0, 0));//truck midden
             nodes.Add(new Node("TruckEnd", 32, 0, 0));//truck eind
-            nodes.Add(new Node("TrainStart", 32, 0, 40));//train start
-            nodes.Add(new Node("TrainMid", 32, 0, 16));//train midden
-            nodes.Add(new Node("TrainEnd", 32, 0, -8));//train eind
+            nodes.Add(new Node("TrainStart", 40, 0, 32));//train start
+            nodes.Add(new Node("TrainMid", 16, 0, 32));//train midden
+            nodes.Add(new Node("TrainEnd", -8, 0, 32));//train eind
             AddConnections();
         }
     }
