@@ -104,7 +104,7 @@ namespace Models
         /// Add cargo to cargolist
         /// </summary>
         /// <param name="cargo">cargo</param>
-        public void addPackage(string cargo)
+        public void addCargo(string cargo)
         {
             cargolist.Add(cargo);
         }

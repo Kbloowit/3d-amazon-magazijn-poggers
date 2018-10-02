@@ -90,7 +90,7 @@ namespace Models
             return nodes;
         }
 
-        public Node truckPath(string to)
+        public Node transportVehicle(string to)
         {
             Node node = nodes.Find(x => x.name == to);
             return node;
@@ -117,9 +117,12 @@ namespace Models
             nodes[nodes.FindIndex(a => a.name == "Q")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "P")], nodes[nodes.FindIndex(a => a.name == "R")] });
             nodes[nodes.FindIndex(a => a.name == "R")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "Q")] });
             nodes[nodes.FindIndex(a => a.name == "S")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "B")] });
-            nodes[nodes.FindIndex(a => a.name == "t")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "u")] });
-            nodes[nodes.FindIndex(a => a.name == "u")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "t")], nodes[nodes.FindIndex(a => a.name == "v")] });
-            nodes[nodes.FindIndex(a => a.name == "v")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "u")] });
+            nodes[nodes.FindIndex(a => a.name == "TruckStart")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TruckMid")] });
+            nodes[nodes.FindIndex(a => a.name == "TruckMid")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TruckStart")], nodes[nodes.FindIndex(a => a.name == "TrainEnd")] });
+            nodes[nodes.FindIndex(a => a.name == "TruckEnd")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TruckMid")] });
+            nodes[nodes.FindIndex(a => a.name == "TrainStart")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TrainMid")] });
+            nodes[nodes.FindIndex(a => a.name == "TrainMid")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TrainStart")], nodes[nodes.FindIndex(a => a.name == "TrainEnd")] });
+            nodes[nodes.FindIndex(a => a.name == "TrainEnd")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TrainMid")] });
 
             foreach (Node item in nodes)
             {
@@ -156,9 +159,12 @@ namespace Models
             nodes.Add(new Node("Q", 14, 0, 2));//robot node
             nodes.Add(new Node("R", 15, 0, 2));//robot node
             nodes.Add(new Node("S", 16, 0, 2));//robot node
-            nodes.Add(new Node("t", 0, 0, 0));//truck start
-            nodes.Add(new Node("u", 16, 0, 0));//truck midden
-            nodes.Add(new Node("v", 32, 0, 0));//truck eind
+            nodes.Add(new Node("TruckStart", 0, 0, 0));//truck start
+            nodes.Add(new Node("TruckMid", 16, 0, 0));//truck midden
+            nodes.Add(new Node("TruckEnd", 32, 0, 0));//truck eind
+            nodes.Add(new Node("TrainStart", 32, 0, 40));//train start
+            nodes.Add(new Node("TrainMid", 32, 0, 16));//train midden
+            nodes.Add(new Node("TrainEnd", 32, 0, -8));//train eind
             AddConnections();
         }
     }

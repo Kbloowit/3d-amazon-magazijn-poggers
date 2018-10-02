@@ -25,7 +25,6 @@ namespace Models
         /// </summary>
         public void Update()
         {
-            Train train = trains.First();
             Truck truck = trucks.First();
             Robot robot = robots.Find(x => x.Status() == false);
             List<Node> shelvesInPlace = new List<Node>();
@@ -35,7 +34,7 @@ namespace Models
                         shelvesInPlace.Add(s); //vul de lijst van shelverInPlace met nodes die een shelferop hebben staan
             if (Math.Round(truck.x) == 0)
             {
-                truck.AddDestination(g.truckPath("u"));
+                truck.AddDestination(g.transportVehicle("TruckMid"));
             }
             else if (Math.Round(truck.x, 1) == 16)
             {
@@ -72,7 +71,7 @@ namespace Models
                 {
                     truck.updateArrived();
                     truck.updateArrived();
-                    truck.AddDestination(g.truckPath("v"));
+                    truck.AddDestination(g.transportVehicle("TruckEnd"));
                 }
             }
             else if (Math.Round(truck.x, 1) == 32)
@@ -81,6 +80,41 @@ namespace Models
             foreach (Robot r in robots)
                 if (r.Status() == true && r.getTasksCount() == 0)
                     r.updateStatus();
+
+            //if(shelvesInPlace.Count() == 0 && robot.Status() == false && truck.Status())
+            //{
+            //    shelfRestock();
+            //}
+        }
+
+        private void shelfRestock()
+        {
+            Train train = trains.First();
+            train.Move(32, 0, 32);
+            train.AddDestination(g.transportVehicle("TrainMid"));
+            if(Math.Round(train.x, 1) == 16)
+            {
+                if (train.GetCargoList().Count() == 0 && train.Status() == false && train.Arrived() == false)
+                {
+                    foreach (Node node in g.getNodes())
+                        if (node.shelf == null)
+                            train.addCargo("1");
+                    train.updateArrived();
+                }
+                else if(train.GetCargoList().Count() != 0 && train.Status() == false)
+                {
+
+                    foreach (Shelf s in shelfs)
+                    {
+                        if (s.Status() == false && s.x == 16 && s.z == 2)
+                        {
+                            s.Move(g.getNodes().Find(z => z.shelf == null).x, g.getNodes().Find(z => z.shelf == null).y, g.getNodes().Find(z => z.shelf == null).x);
+                        }
+                    }
+                }
+
+            }
+
         }
 
         /// <summary>
