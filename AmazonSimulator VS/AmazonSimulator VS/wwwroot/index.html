@@ -90,10 +90,10 @@
                                 mesh.scale.set(30, 30, 30);
                                 Truck.add(mesh);
                             });
-                            AddPointLight(Truck, 0xffffff, 0.001, 0, -2.69, -0.3, -0.8);
-                            AddPointLight(Truck, 0xffffff, 0.001, 0, -2.69, -0.3, 0.8);
-                            AddPointLight(Truck, 0xff0000, 1, 0, 2.45, -0.3, -0.8);
-                            AddPointLight(Truck, 0xff0000, 1, 0, 2.45, -0.3, 0.8);
+                            AddPointLight(Truck, 0xffffff, 1, 1, -3.45, -0.3, -0.8);
+                            AddPointLight(Truck, 0xffffff, 1, 1, -3.45, -0.3, 0.8);
+                            AddPointLight(Truck, 0xff0000, 1, 1, 3.10, -0.3, -0.8);
+                            AddPointLight(Truck, 0xff0000, 1, 1, 3.10, -0.3, 0.8);
                             AddSpotLight(Truck, 0xffffff, 1, 0, -2.69, -0.3, -0.8, -7.45, -0.3, 0.8)
                             AddSpotLight(Truck, 0xffffff, 1, 0, -2.69, -0.3, 0.8, -7.45, -0.3, 0.8)
 
@@ -186,11 +186,12 @@
 
             var Light = new THREE.PointLight(colour, intensity, distance);
             Light.position.set(x, y, z);
+            Light.decay = 2;
             object.add(Light);
 
-            var box = new THREE.Mesh(new THREE.BoxGeometry(1, 0.8, 0.8), new THREE.MeshBasicMaterial(0xffffff));
-            box.position.set(x, y, z);
-            object.add(box);
+            //var box = new THREE.Mesh(new THREE.BoxGeometry(1, 0.8, 0.8), new THREE.MeshBasicMaterial(0xffffff));
+            //box.position.set(x, y, z);
+            //object.add(box);
             
 
 
@@ -200,6 +201,7 @@
             var Light = new THREE.SpotLight(colour, intensity, distance);
             Light.castShadow = true;
             Light.position.set(x, y, z);
+            Light.decay = 2;
             object.add(Light);
 
             object.add(Light.target);
