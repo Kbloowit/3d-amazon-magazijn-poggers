@@ -145,6 +145,19 @@ window.onload = function () {
                     scene.add(Shelf);
                     worldObjects[command.parameters.guid] = Shelf;
                 }
+                if (command.parameters.type === 'train') {
+                    var Train = new THREE.Group();
+                    LoadOBJModel('textures/', 'train.obj', 'textures/', 'train.mtl', mesh => {
+                        //var box = new THREE.Box3().setFromObject(mesh);
+                        //box.center(mesh.position); // this re-sets the mesh position
+                        //mesh.position.y = 0;
+                        //mesh.position.multiplyScalar(- 1);
+                        Train.add(mesh);
+                    });
+                    Train.scale.set(4, 4, 4);
+                    scene.add(Train);
+                    worldObjects[command.parameters.guid] = Train;
+                }
             }
             var object = worldObjects[command.parameters.guid];
             object.position.x = command.parameters.x;
