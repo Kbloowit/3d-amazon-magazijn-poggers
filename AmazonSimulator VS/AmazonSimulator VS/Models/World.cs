@@ -29,14 +29,13 @@ namespace Models
             Robot robot2 = CreateRobot("Q", 14, 0, 2);
             Robot robot3 = CreateRobot("R", 15, 0, 2);
             Truck truck1 = CreateTruck(0, 1, -5);
+            Train train = CreateTrain(40, 0, 40);
             foreach(Node n in worldManager.getGraphNodes())
-            {
                 if (n.name.Contains("Shelf") && n.shelf == null)
                 {
                     Shelf shelf  = CreateShelf(n.x, n.y, n.z);
                     n.shelf = shelf;
                 }
-            }
         }
 
         /// <summary>
@@ -54,6 +53,7 @@ namespace Models
             worldManager.AddRobotToList(r);
             return r;
         }
+
         /// <summary>
         /// Creates a new instance of a truck object
         /// </summary>
@@ -68,6 +68,7 @@ namespace Models
             worldManager.AddTruckToList(t);
             return t;
         }
+
         /// <summary>
         /// Creates a new instance of a truck object
         /// </summary>
@@ -81,6 +82,21 @@ namespace Models
             worldObjects.Add(s);
             worldManager.AddShelfToList(s);
             return s;
+        }
+
+        /// <summary>
+        /// Creates a new instance of a train object
+        /// </summary>
+        /// <param name="x">starting x cordinate in the world</param>
+        /// <param name="y">starting y cordinate in the world</param>
+        /// <param name="z">starting z cordinate in the world</param>
+        /// <returns>Train object</returns>
+        private Train CreateTrain(double x, double y, double z)
+        {
+            Train train = new Train(x, y, z, 0, 0, 0);
+            worldObjects.Add(train);
+            worldManager.AddTrainToList(train);
+            return train;
         }
 
         /// <summary>
