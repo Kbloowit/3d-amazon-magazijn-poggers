@@ -17,7 +17,7 @@ namespace Models
         }
         public void startTask(Forklift forklift)
         {
-            node.shelf = null;
+            node.shelf = shelf;
             shelf.Move(shelf.x, 0, shelf.z);
             forklift.removeShelf();
         }
