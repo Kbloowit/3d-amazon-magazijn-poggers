@@ -13,6 +13,7 @@ namespace Models
         {
             this.shelf = shelf;
         }
+
         public void startTask(Robot robot)
         {
             shelf.Move(shelf.x, 0, shelf.z);

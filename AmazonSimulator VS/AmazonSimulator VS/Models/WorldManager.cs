@@ -66,11 +66,20 @@ namespace Models
                                     robot.addTask(new RobotPickUp(FromNode, FromNode.shelf));
                                     robot.addTask(new RobotMove(g.shortest_path(FromNode.name, ToNode.name)));
                                     robot.addTask(new RobotDeliver(FromNode.shelf));
-                                    robot.addTask(new RobotReset());
                                     ToNode.shelf = FromNode.shelf;
                                     ToNode.shelf.updateStatus();
-                                    robot.updateStatus();
                                     ShelfReplace.RemoveAt(0);
+                                    robot.addTask(new RobotMove(g.shortest_path(ToNode.name, ShelfReplace.First().name)));
+                                    FromNode = ShelfReplace.First();
+                                    ToNode = g.getNodes().First(x => x.shelf == null && x.name.Contains("Shelf"));
+                                    robot.addTask(new RobotPickUp(FromNode, FromNode.shelf));
+                                    robot.addTask(new RobotMove(g.shortest_path(FromNode.name, ToNode.name)));
+                                    robot.addTask(new RobotDeliver(FromNode.shelf));
+                                    robot.addTask(new RobotMove(g.shortest_path(ToNode.name, robot.getRobotStation().name)));
+                                    ToNode.shelf = FromNode.shelf;
+                                    ToNode.shelf.updateStatus();
+                                    ShelfReplace.RemoveAt(0);
+                                    robot.updateStatus();
                                 }
                             }
                             else if (train.GetItemlist().Count() == 0 && robots.Exists(x => x.Status() == true) == false && g.getNodes().Exists(x => x.name.Contains("Res") && x.shelf != null) == false)
@@ -104,7 +113,7 @@ namespace Models
                             {
                                 Random r = new Random();
                                 int random = r.Next(0, shelvesInPlace.Count());
-                                Node shelfNode = shelvesInPlace[random]; //random node met een shelf erop
+                                Node shelfNode = shelvesInPlace[random]; //random node met een shelf 
                                 robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
                                 robot.addTask(new RobotPickUp(shelfNode, shelfNode.shelf));
                                 robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
