@@ -8,7 +8,7 @@
         var selfref = this;
 
 
-        LoadOBJModel('textures/', 'truck.obj', 'textures/', 'truck.mtl', mesh => {
+        LoadOBJModel('textures/truck/', 'truck.obj', 'textures/truck/', 'truck.mtl', mesh => {
             mesh.scale.set(30, 30, 30);
             selfref.add(mesh);
         });

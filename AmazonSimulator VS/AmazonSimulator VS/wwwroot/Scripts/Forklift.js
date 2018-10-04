@@ -7,7 +7,7 @@
 
     init() {
         var selfref = this;
-        LoadOBJModel('textures/', 'forklift.obj', 'textures/', 'forklift.mtl', mesh => {
+        LoadOBJModel('textures/forklift/', 'forklift.obj', 'textures/forklift/', 'forklift.mtl', mesh => {
             selfref.add(mesh);
         });
         selfref.scale.set(4, 4, 4);

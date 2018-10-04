@@ -27,13 +27,17 @@ window.onload = function () {
         window.addEventListener('resize', onWindowResize, false);
 
         var geometryPlane = new THREE.PlaneGeometry(32, 32, 32);
-        var material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/floor.jpg"), side: THREE.DoubleSide });
+        var material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/floor/floor.jpg"), side: THREE.DoubleSide });
         var plane = new THREE.Mesh(geometryPlane, material);
         plane.rotation.x = Math.PI / 2.0;
         plane.position.y = 0;
         plane.position.x = 15;
         plane.position.z = 15;
         scene.add(plane);
+
+        var worldStandards = new WorldStandards();
+        scene.add(worldStandards);
+
 
         var cubeSkyboxGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
         var cubeSkyboxMaterial = [
