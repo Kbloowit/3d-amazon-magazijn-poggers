@@ -7,14 +7,41 @@ namespace Models
 {
     public class WorldManager
     {
+        /// <summary>
+        /// List of all robots in the world
+        /// </summary>
         private List<Robot> robots = new List<Robot>();
+        /// <summary>
+        /// List of all trucks in the world
+        /// </summary>
         private List<Truck> trucks = new List<Truck>();
+        /// <summary>
+        /// list of all shelfs in the world
+        /// </summary>
         private List<Shelf> shelfs = new List<Shelf>();
+        /// <summary>
+        /// list of all train in the world
+        /// </summary>
         private List<Train> trains = new List<Train>();
+        /// <summary>
+        /// list of all forklifts in the world
+        /// </summary>
         private List<Forklift> forklifts = new List<Forklift>();
+        /// <summary>
+        /// List of all shelves that are in place and ready to be picked up
+        /// </summary>
         private List<Node> shelvesInPlace = new List<Node>();
+        /// <summary>
+        /// List of all shelves that are ready to be restocked(set back to its place)
+        /// </summary>
         private List<Node> ShelfReplace = new List<Node>();
+        /// <summary>
+        /// Instance of the Graph class
+        /// </summary>
         private Graph g = new Graph();
+        /// <summary>
+        /// Instance of Random
+        /// </summary>
         private Random r = new Random();
 
         /// <summary>
@@ -112,6 +139,22 @@ namespace Models
         }
 
         /// <summary>
+        /// Give a robot tasks to get a shelf and bring it to the truck
+        /// </summary>
+        /// <param name="robot">Robot</param>
+        private void robotGetShelf(Robot robot)
+        {
+            Node shelfNode = shelvesInPlace[r.Next(0, shelvesInPlace.Count())];
+            robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
+            robot.addTask(new RobotPickUp(shelfNode, shelfNode.shelf));
+            robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
+            robot.addTask(new RobotDeliver(shelfNode.shelf));
+            robot.addTask(new RobotReset());
+            robot.updateStatus();
+            shelfNode.shelf.updateStatus();
+        }
+
+        /// <summary>
         /// Restock the shelves
         /// </summary>
         /// <param name="train">Train that brings the shelves</param>
@@ -135,22 +178,6 @@ namespace Models
                 node.shelf = shelf;
                 ShelfReplace.Add(node);
             }
-        }
-
-        /// <summary>
-        /// Give a robot tasks to get a shelf and bring it to the truck
-        /// </summary>
-        /// <param name="robot">Robot</param>
-        private void robotGetShelf(Robot robot)
-        {
-            Node shelfNode = shelvesInPlace[r.Next(0, shelvesInPlace.Count())];
-            robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
-            robot.addTask(new RobotPickUp(shelfNode, shelfNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
-            robot.addTask(new RobotDeliver(shelfNode.shelf));
-            robot.addTask(new RobotReset());
-            robot.updateStatus();
-            shelfNode.shelf.updateStatus();
         }
 
         /// <summary>

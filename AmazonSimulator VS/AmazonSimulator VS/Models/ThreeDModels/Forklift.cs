@@ -7,10 +7,19 @@ namespace Models
 {
     public class Forklift : ThreeDModels
     {
+        /// <summary>
+        /// List of tasks for the forklift
+        /// </summary>
         private List<IForkliftTask> tasks = new List<IForkliftTask>();
+        /// <summary>
+        /// Shelf the forklift is carrying
+        /// </summary>
         private Shelf shelf;
         private double deltaX;
         private double deltaZ;
+        /// <summary>
+        /// Bool if the forklift is busy
+        /// </summary>
         private bool busy;
 
         /// <summary>
@@ -24,7 +33,6 @@ namespace Models
         /// <param name="rotationZ">Z Rotatoin</param>
         public Forklift(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("forklift", x, y, z, rotationX, rotationY, rotationZ)
         {
-
         }
 
         /// <summary>
@@ -163,12 +171,12 @@ namespace Models
         }
 
         /// <summary>
-        /// Adds a shelf to the robot
+        /// Adds a shelf to the forklift
         /// </summary>
-        /// <param name="s">Shelf to add</param>
-        public void addShelf(Shelf s)
+        /// <param name="shelf">Shelf to add</param>
+        public void addShelf(Shelf shelf)
         {
-            shelf = s;
+            this.shelf = shelf;
         }
 
         /// <summary>

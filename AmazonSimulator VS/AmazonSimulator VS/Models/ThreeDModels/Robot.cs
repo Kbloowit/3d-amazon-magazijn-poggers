@@ -7,11 +7,23 @@ namespace Models
 {
     public class Robot : ThreeDModels
     {
+        /// <summary>
+        /// Node where the robot starts and resets
+        /// </summary>
         private Node robotStation;
+        /// <summary>
+        /// List of tasks for the robot
+        /// </summary>
         private List<IRobotTask> tasks = new List<IRobotTask>();
+        /// <summary>
+        /// Shelf the robot is carrying
+        /// </summary>
         private Shelf shelf;
         private double deltaX;
         private double deltaZ;
+        /// <summary>
+        /// Bool if robot is busy (if he has tasks)
+        /// </summary>
         private bool busy;
 
         /// <summary>
@@ -41,7 +53,7 @@ namespace Models
                 if (tasks.First().taskCompleted(this) == true)
                     tasks.RemoveAt(0);
 
-                if(tasks.Count != 0)
+                if (tasks.Count != 0)
                     tasks.First().startTask(this);
             }
             return base.Update(tick);
@@ -80,13 +92,14 @@ namespace Models
                             if (shelf != null)
                                 shelf.Rotate(rotationX, rotationY - rotationY, rotationZ);
                         }
-                        else if (path.First().z < Math.Round(this.z)){
+                        else if (path.First().z < Math.Round(this.z))
+                        {
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY + Math.PI, this.rotationZ);
                             if (shelf != null)
                                 shelf.Rotate(rotationX, rotationY - rotationY + Math.PI, rotationZ);
                         }
-                        if(path.Count != 1)
-                        path.RemoveAt(0);
+                        if (path.Count != 1)
+                            path.RemoveAt(0);
                     }
                 }
                 if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
@@ -114,7 +127,7 @@ namespace Models
                 else if (Math.Round(deltaZ, 1) < 0) // als deltaY negatief is dan gaat hij achteruit
                 {
                     this.Move(this.x, this.y, this.z - 0.20);
-                    if (shelf != null) 
+                    if (shelf != null)
                         shelf.Move(this.x, shelf.y, this.z);
                     deltaZ += 0.20;
                 }
@@ -132,7 +145,7 @@ namespace Models
         /// <summary>
         /// Adds a task to the tasklist of the robot
         /// </summary>
-        /// <param name="robotMove"></param>
+        /// <param name="robottask"></param>
         public void addTask(IRobotTask robottask)
         {
             tasks.Add(robottask);
@@ -152,7 +165,7 @@ namespace Models
         /// </summary>
         public void updateStatus()
         {
-            if(busy == false)
+            if (busy == false)
                 busy = true;
             else
                 busy = false;
@@ -170,10 +183,10 @@ namespace Models
         /// <summary>
         /// Adds a shelf to the robot
         /// </summary>
-        /// <param name="s">Shelf to add</param>
-        public void addShelf(Shelf s)
+        /// <param name="shelf">Shelf to add</param>
+        public void addShelf(Shelf shelf)
         {
-            shelf = s;
+            this.shelf = shelf;
         }
 
         /// <summary>
@@ -182,6 +195,14 @@ namespace Models
         public void removeShelf()
         {
             shelf = null;
+        }
+
+        public bool robotShelfStatus()
+        {
+            if (shelf == null)
+                return false;
+            else
+                return true;
         }
 
         /// <summary>
