@@ -7,20 +7,34 @@ namespace Models
 {
     public class ForkliftMove : IForkliftTask
     {
-        private bool startupComplete = false;
-        private bool complete = false;
-        private List<Node> path = new List<Node>();
+        /// <summary>
+        /// List of nodes the forklift should take
+        /// </summary>
+        private List<Node> path;
 
+        /// <summary>
+        /// Constructor of ForkliftMove
+        /// </summary>
+        /// <param name="path">Path the forklift should take</param>
         public ForkliftMove(List<Node> path)
         {
             this.path = path;
         }
 
+        /// <summary>
+        /// Move robot of his path
+        /// </summary>
+        /// <param name="robot">robot</param>
         public void startTask(Forklift forklift)
         {
             forklift.MoveOverPath(this.path);
         }
 
+        /// <summary>
+        /// Bool if forklift has arrived at his last destination
+        /// </summary>
+        /// <param name="forklift">Forklift</param>
+        /// <returns>Forklift arrived</returns>
         public bool taskCompleted(Forklift forklift)
         {
             return Math.Round(forklift.x, 1) == path.Last().x && Math.Round(forklift.z, 1) == path.Last().z;

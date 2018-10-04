@@ -162,6 +162,18 @@ namespace Models
         }
 
         /// <summary>
+        /// Bool if forklift has a shelf
+        /// </summary>
+        /// <returns>forkliftShelfStatus</returns>
+        public bool forkliftShelfStatus()
+        {
+            if (shelf == null)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
         /// Task count
         /// </summary>
         /// <returns>Ammount of tasks</returns>

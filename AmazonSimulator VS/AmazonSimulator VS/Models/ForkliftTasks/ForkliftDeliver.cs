@@ -21,17 +21,18 @@ namespace Models
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="node">see this.node</param>
-        /// <param name="shelf">see this.shelf</param>
+        /// <param name="node">Node to place shelf on</param>
+        /// <param name="shelf">Shelf to deliver</param>
         public ForkliftDeliver(Node node, Shelf shelf)
         {
             this.node = node;
             this.shelf = shelf;
         }
+
         /// <summary>
         /// Starts the delivery task
         /// </summary>
-        /// <param name="forklift">The forklift that needs to move the shelf</param>
+        /// <param name="forklift">The forklift that needs to deliver the shelf</param>
         public void startTask(Forklift forklift)
         {
             node.shelf = shelf;
@@ -39,9 +40,14 @@ namespace Models
             forklift.removeShelf();
         }
 
+        /// <summary>
+        /// Bool Check if shelf is delivered
+        /// </summary>
+        /// <param name="forklift"></param>
+        /// <returns>Shelf delivered</returns>
         public bool taskCompleted(Forklift forklift)
         {
-            return true;
+            return forklift.forkliftShelfStatus() == false && node.shelf != null;
         }
     }
 }

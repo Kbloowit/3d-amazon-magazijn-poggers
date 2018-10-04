@@ -7,14 +7,23 @@ namespace Models
 {
     public class ForkliftReset : IForkliftTask
     {
+        /// <summary>
+        /// Resets the forklift
+        /// </summary>
+        /// <param name="forklift">Forklift</param>
         public void startTask(Forklift forklift)
         {
             forklift.Move(32, 1000, 32);
         }
 
+        /// <summary>
+        /// Bool check if robot has reset
+        /// </summary>
+        /// <param name="forklift">Forklift</param>
+        /// <returns>Forklift reset</returns>
         public bool taskCompleted(Forklift forklift)
         {
-            return true;
+            return Math.Round(forklift.x, 1) == 32 && Math.Round(forklift.y, 1) == 1000 && Math.Round(forklift.z, 1) == 32;
         }
     }
 }

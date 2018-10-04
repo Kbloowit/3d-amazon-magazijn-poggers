@@ -197,6 +197,10 @@ namespace Models
             shelf = null;
         }
 
+        /// <summary>
+        /// Bool if robot has a shelf
+        /// </summary>
+        /// <returns>robotShelfStatus</returns>
         public bool robotShelfStatus()
         {
             if (shelf == null)
