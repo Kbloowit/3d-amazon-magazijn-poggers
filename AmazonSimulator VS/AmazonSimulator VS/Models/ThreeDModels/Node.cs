@@ -29,7 +29,10 @@ namespace Models
         /// <summary>
         /// Shelf that is on the node
         /// </summary>
-        public Shelf  shelf { get; set; }
+        public Shelf shelf { get; set; }
+        /// <summary>
+        /// List of node the node is connected to
+        /// </summary>
         public List<Node> connections = new List<Node>();
 
         /// <summary>
@@ -45,24 +48,6 @@ namespace Models
             this.x = x;
             this.y = y;
             this.z = z;
-        }
-
-        /// <summary>
-        /// Returns the name of the node
-        /// </summary>
-        /// <returns>Char name</returns>
-        public string GetName()
-        {
-            return name;
-        }
-
-        /// <summary>
-        /// Returns the x coridnate of the node
-        /// </summary>
-        /// <returns>Double x</returns>
-        public double GetX()
-        {
-            return x;
         }
     }
 }

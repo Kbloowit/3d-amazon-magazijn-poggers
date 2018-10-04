@@ -8,7 +8,7 @@ namespace Models
     public class World : IObservable<Command>, IUpdatable
     {
         /// <summary>
-        /// List containing all objects currently loaded in the world
+        /// List containing all three D objects currently loaded in the world
         /// </summary>
         List<ThreeDModels> worldObjects = new List<ThreeDModels>();
         /// <summary>
@@ -21,21 +21,20 @@ namespace Models
         WorldManager worldManager = new WorldManager();
 
         /// <summary>
-        /// Constructor
+        /// Constructor of World
         /// </summary>
         public World()
         {
-            Robot robot1 = CreateRobot("P", 13, 0, 2);
-            Robot robot2 = CreateRobot("Q", 14, 0, 2);
-            Robot robot3 = CreateRobot("R", 15, 0, 2);
-            Truck truck1 = CreateTruck(0, 1, -5);
-            Train train = CreateTrain(32, 1.4, 32);
-            foreach(Node n in worldManager.getGraphNodes())
+            CreateRobot("P", 13, 0, 2);
+            CreateRobot("Q", 14, 0, 2);
+            CreateRobot("R", 15, 0, 2);
+            CreateTruck(0, 1, -5);
+            CreateTrain(32, 1.4, 32);
+
+            foreach (Node n in worldManager.getGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)
-                {
-                    Shelf shelf  = CreateShelf(n.x, n.y, n.z);
-                    n.shelf = shelf;
-                }
+                    n.shelf = CreateShelf(n.x, n.y, n.z);
+
             for (int i = 0; i < 6; i++)
                 CreateForklift(32, 1000, 32);
         }
@@ -46,14 +45,12 @@ namespace Models
         /// <param name="x">starting x cordinate in the world</param>
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
-        /// <returns>Robot object</returns>
-        private Robot CreateRobot(string robotStation, double x, double y, double z)
+        private void CreateRobot(string robotStation, double x, double y, double z)
         {
-            Node node = worldManager.getGraphNodes()[worldManager.getGraphNodes().FindIndex(a => a.GetName() == robotStation)];
+            Node node = worldManager.getGraphNodes()[worldManager.getGraphNodes().FindIndex(a => a.name == robotStation)];
             Robot r = new Robot(node, x, y, z, 0, 0, 0);
             worldObjects.Add(r);
             worldManager.AddRobotToList(r);
-            return r;
         }
 
         /// <summary>
@@ -62,13 +59,11 @@ namespace Models
         /// <param name="x">starting x cordinate in the world</param>
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
-        /// <returns>Truck object</returns>
-        private Truck CreateTruck(double x, double y, double z)
+        private void CreateTruck(double x, double y, double z)
         {
             Truck t = new Truck(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
             worldManager.AddTruckToList(t);
-            return t;
         }
 
         /// <summary>
@@ -77,7 +72,7 @@ namespace Models
         /// <param name="x">starting x cordinate in the world</param>
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
-        /// <returns>Shelf object</returns>
+        /// <returns>Shelf</returns>
         private Shelf CreateShelf(double x, double y, double z)
         {
             Shelf s = new Shelf(x, y, z, 0, 0, 0);
@@ -92,13 +87,11 @@ namespace Models
         /// <param name="x">starting x cordinate in the world</param>
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
-        /// <returns>Train object</returns>
-        private Train CreateTrain(double x, double y, double z)
+        private void CreateTrain(double x, double y, double z)
         {
             Train train = new Train(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(train);
             worldManager.AddTrainToList(train);
-            return train;
         }
 
         /// <summary>
@@ -107,7 +100,6 @@ namespace Models
         /// <param name="x">starting x cordinate in the world</param>
         /// <param name="y">starting y cordinate in the world</param>
         /// <param name="z">starting z cordinate in the world</param>
-        /// <returns>Forklift object</returns>
         private void CreateForklift(double x, double y, double z)
         {
             Forklift forklift = new Forklift(x, y, z, 0, Math.PI, 0);
@@ -119,7 +111,7 @@ namespace Models
         /// Adds observers to a list
         /// </summary>
         /// <param name="observer"></param>
-        /// <returns></returns>
+        /// <returns>Observer</returns>
         public IDisposable Subscribe(IObserver<Command> observer)
         {
             if (!observers.Contains(observer))
@@ -167,21 +159,21 @@ namespace Models
         }
     }
 
-internal class Unsubscriber<Command> : IDisposable
-{
-    private List<IObserver<Command>> _observers;
-    private IObserver<Command> _observer;
-
-    internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
+    internal class Unsubscriber<Command> : IDisposable
     {
-        this._observers = observers;
-        this._observer = observer;
-    }
+        private List<IObserver<Command>> _observers;
+        private IObserver<Command> _observer;
 
-    public void Dispose()
-    {
-        if (_observers.Contains(_observer))
-            _observers.Remove(_observer);
+        internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
+        {
+            this._observers = observers;
+            this._observer = observer;
+        }
+
+        public void Dispose()
+        {
+            if (_observers.Contains(_observer))
+                _observers.Remove(_observer);
+        }
     }
-}
 }

@@ -25,6 +25,16 @@ namespace Models
 
         public bool needsUpdate = true;
 
+        /// <summary>
+        /// Constructor of ThreeDModels
+        /// </summary>
+        /// <param name="type">Type of the ThreeDObject</param>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        /// <param name="z">Z postiion</param>
+        /// <param name="rotationX">X Rotation</param>
+        /// <param name="rotationY">Y Rotation</param>
+        /// <param name="rotationZ">Z Rotatoin</param>
         public ThreeDModels(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ)
         {
             this.type = type;
@@ -39,6 +49,12 @@ namespace Models
             this._rZ = rotationZ;
         }
 
+        /// <summary>
+        /// Move the ThreeDModel
+        /// </summary>
+        /// <param name="x">Move to this X</param>
+        /// <param name="y">Move to this Y</param>
+        /// <param name="z">Move to this Z</param>
         public virtual void Move(double x, double y, double z)
         {
             this._x = x;
@@ -48,6 +64,12 @@ namespace Models
             needsUpdate = true;
         }
 
+        /// <summary>
+        /// Rotate the ThreeDModel
+        /// </summary>
+        /// <param name="rotationX">Rotation on X</param>
+        /// <param name="rotationY">Rotation on Y</param>
+        /// <param name="rotationZ">Rotation on Z</param>
         public virtual void Rotate(double rotationX, double rotationY, double rotationZ)
         {
             this._rX = rotationX;
@@ -57,6 +79,11 @@ namespace Models
             needsUpdate = true;
         }
 
+        /// <summary>
+        /// Updates the ThreeDModel
+        /// </summary>
+        /// <param name="tick">Tick time (50 = 20 times per second)</param>
+        /// <returns>Update(Tick)</returns>
         public virtual bool Update(int tick)
         {
             if (needsUpdate)
@@ -67,6 +94,10 @@ namespace Models
             return false;
         }
 
+        /// <summary>
+        /// Status of the ThreeDModel
+        /// </summary>
+        /// <returns>Status</returns>
         public abstract bool Status();
     }
 }

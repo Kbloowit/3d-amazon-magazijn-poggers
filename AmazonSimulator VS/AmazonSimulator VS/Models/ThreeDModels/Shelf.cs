@@ -7,6 +7,9 @@ namespace Models
 {
     public class Shelf : ThreeDModels
     {
+        /// <summary>
+        /// Bool shelf in place to pickup
+        /// </summary>
         private bool inPlace = true;
 
         /// <summary>
@@ -20,7 +23,6 @@ namespace Models
         /// <param name="rotationZ">Z Rotatoin</param>
         public Shelf(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("shelf", x, y, z, rotationX, rotationY, rotationZ)
         {
-            
         }
 
         /// <summary>
