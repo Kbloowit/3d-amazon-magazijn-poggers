@@ -63,7 +63,7 @@ namespace Models
         {
             Truck t = new Truck(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
-            worldManager.AddTruckToList(t);
+            worldManager.AddTruck(t);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Models
         {
             Train train = new Train(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(train);
-            worldManager.AddTrainToList(train);
+            worldManager.AddTrain(train);
         }
 
         /// <summary>
