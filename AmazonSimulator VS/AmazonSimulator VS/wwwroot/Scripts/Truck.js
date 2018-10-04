@@ -16,8 +16,8 @@
         AddPointLight(selfref, 0xffffff, 1, 2, -3.45, -0.3, 0.8);
         AddPointLight(selfref, 0xff0000, 1, 2, 3.10, -0.3, -0.8);
         AddPointLight(selfref, 0xff0000, 1, 2, 3.10, -0.3, 0.8);
-        AddSpotLight(selfref, 0xffffff, 1, 0, -2.69, -0.3, -0.8, -7.45, -0.3, 0.8);
-        AddSpotLight(selfref, 0xffffff, 1, 0, -2.69, -0.3, 0.8, -7.45, -0.3, 0.8);
+        AddSpotLight(selfref, 0xffffff, 1, 50 -2.69, -0.3, -0.8, -7.45, -0.3, 0.8);
+        AddSpotLight(selfref, 0xffffff, 1, 50, -2.69, -0.3, 0.8, -7.45, -0.3, 0.8);
 
     }
 }

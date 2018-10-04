@@ -5,26 +5,40 @@ namespace Models
 {
     public class Graph
     {
+        /// <summary>
+        /// list containing the connections between nodes
+        /// </summary>
         Dictionary<string, Dictionary<string, int>> vertices = new Dictionary<string, Dictionary<string, int>>();
         /// <summary>
         /// List containing all of the nodes on the main plane
         /// </summary>
         private List<Node> nodes = new List<Node>();
-
+        /// <summary>
+        /// adds connections per node to the vertices list
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="edges"></param>
         public void add_vertex(string name, Dictionary<string, int> edges)
         {
             vertices[name] = edges;
         }
-
+        /// <summary>
+        /// calculates the shortest path between 2 nodes on the graph using the Dijkstra algorithm
+        /// </summary>
+        /// <param name="from">Starting node</param>
+        /// <param name="to">Destination node</param>
+        /// <returns>The list of nodes between the starting and destination node constituting the shortest path between the two nodes</returns>
         public List<Node> shortest_path(string from, string to)
         {
-            var previous = new Dictionary<string, string>();
+            // previously checked node
+            var previous = new Dictionary<string, string>();         
             var distances = new Dictionary<string, int>();
             var nodeChar = new List<string>();
-
+           
             List<string> path = new List<string>();
             List<Node> nodePath = new List<Node>();
 
+            // sets the starting node's distance to itself at 0, and sets the nodes not connected to maxvalue for a later check
             foreach (var vertex in vertices)
             {
                 if (vertex.Key == from)
@@ -39,11 +53,14 @@ namespace Models
                 nodeChar.Add(vertex.Key);
             }
 
+            
             while (nodeChar.Count != 0)
             {
+                //sorts nodes by distance from starting node
                 nodeChar.Sort((x, y) => distances[x] - distances[y]);
-
+                // first node in the list is the starting node since we set it to 0, so smallest is the starting node on first loop, afterwards its the node with the shortest distance from the starting node
                 var smallest = nodeChar[0];
+                // removes smallest node from the list of unvisted nodes
                 nodeChar.Remove(smallest);
 
                 if (smallest == to)
@@ -55,12 +72,12 @@ namespace Models
                     }
                     break;
                 }
-
+                // if this is true, there are no more nodes connected to the previous node
                 if (distances[smallest] == int.MaxValue)
                 {
                     break;
                 }
-
+                //checks if the distance between the previously selected node and the currently selected node is shorter then the other options
                 foreach (var neighbor in vertices[smallest])
                 {
                     var alt = distances[smallest] + neighbor.Value;
@@ -72,6 +89,7 @@ namespace Models
                 }
             }
             path.Reverse();
+            // adds the nodes with the shortest distances between them to the list
             for (int i = 0; i < path.Count; i++)
             {
                 foreach (Node l in nodes)
@@ -84,18 +102,27 @@ namespace Models
             }
             return nodePath;
         }
-
+        /// <summary>
+        /// Get method for the list of all nodes
+        /// </summary>
+        /// <returns>List</returns>
         public List<Node> getNodes()
         {
             return nodes;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="to"></param>
+        /// <returns></returns>
         public Node transportVehicle(string to)
         {
             Node node = nodes.Find(x => x.name == to);
             return node;
         }
-
+        /// <summary>
+        /// Creates the connections between the nodes and calls the method that adds them
+        /// </summary>
         public void AddConnections()
         {
             nodes[nodes.FindIndex(a => a.name == "A")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "P")], nodes[nodes.FindIndex(a => a.name == "C")] });
@@ -150,7 +177,9 @@ namespace Models
                 add_vertex(item.name, een);
             }
         }
-
+        /// <summary>
+        /// Creates the nodes on the main plane, and calls the method that adds connections between them
+        /// </summary>
         public void addNodes()
         {
             nodes.Add(new Node("A", 2, 0, 2));//hoekpunt
