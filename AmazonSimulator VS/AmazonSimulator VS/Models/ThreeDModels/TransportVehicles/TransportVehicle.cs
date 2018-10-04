@@ -8,7 +8,7 @@ namespace Models
     public class TransportVehicle : ThreeDModels
     {
         private List<Node> destinations = new List<Node>();
-        private List<string> itemList = new List<string>();
+        private int items;
         private bool arrived = false;
         private double deltaX;
 
@@ -77,26 +77,26 @@ namespace Models
         /// Item list of the TransportVehicle
         /// </summary>
         /// <returns>itemlist</returns>
-        public List<string> GetItemlist()
+        public int GetItems()
         {
-            return itemList;
+            return items;
         }
 
         /// <summary>
         /// Remove pack from itemlist
         /// </summary>
-        public void itemListRemove()
+        public void itemRemove()
         {
-            itemList.RemoveAt(0);
+            this.items--;
         }
 
         /// <summary>
         /// Add package to itemlist
         /// </summary>
         /// <param name="item">item</param>
-        public void addItem(string item)
+        public void setItems(int item)
         {
-            itemList.Add(item);
+            this.items = item;
         }
 
         /// <summary>
