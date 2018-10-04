@@ -41,12 +41,8 @@ namespace Models
                 if (tasks.First().taskCompleted(this) == true)
                     tasks.RemoveAt(0);
 
-                if (tasks.Count == 0)
-                {
-                    tasks.Clear();
-                }
                 if(tasks.Count != 0)
-                tasks.First().startTask(this);
+                    tasks.First().startTask(this);
             }
             return base.Update(tick);
         }
