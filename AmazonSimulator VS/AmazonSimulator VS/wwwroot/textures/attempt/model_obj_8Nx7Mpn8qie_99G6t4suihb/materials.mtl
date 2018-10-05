@@ -1,0 +1,6 @@
+newmtl mat10
+  Kd 0.30 0.69 0.31
+
+newmtl mat22
+  Kd 0.62 0.62 0.62
+
