@@ -38,7 +38,7 @@ namespace Models
         /// <returns>robotShelfStatus</returns>
         public bool taskCompleted(ShelfTransporters robot)
         {
-            return robot.robotShelfStatus() == false;
+            return robot.ShelfTransporterShelfStatus() == false;
         }
     }
 }
