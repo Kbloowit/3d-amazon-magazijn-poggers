@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public interface IForkliftTask
+    public interface IForkliftTask : ITask
     {
         /// <summary>
         /// Start a task

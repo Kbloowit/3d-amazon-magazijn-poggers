@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class RobotPickUp : IRobotTask
+    public class RobotPickUp : ITask
     {
         /// <summary>
         /// Shelf to pickup

@@ -1,42 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Forklift : ThreeDModels
+    public  class ShelfTransporters : ThreeDModels
     {
         /// <summary>
-        /// List of tasks for the forklift
+        /// List of tasks for the ShelfTransporter
         /// </summary>
-        private List<IForkliftTask> tasks = new List<IForkliftTask>();
+        List<ITask> tasks = new List<ITask>();
         /// <summary>
-        /// Shelf the forklift is carrying
+        /// Shelf the ShelfTransporter is carrying
         /// </summary>
         private Shelf shelf;
         private double deltaX;
         private double deltaZ;
         /// <summary>
-        /// Bool if the forklift is busy
+        /// Bool if the ShelfTransporter is busy
         /// </summary>
         private bool busy;
 
+
         /// <summary>
-        /// Constructor of the forklift
+        /// Constructor of the ShelfTransporters class
         /// </summary>
-        /// <param name="x">X position</param>
-        /// <param name="y">Y position</param>
-        /// <param name="z">Z postiion</param>
+        /// <param name="type">type of object</param>
+        /// <param name="x">X coördinate</param>
+        /// <param name="y">Y coördinate</param>
+        /// <param name="z">Z coördinate</param>
         /// <param name="rotationX">X Rotation</param>
         /// <param name="rotationY">Y Rotation</param>
-        /// <param name="rotationZ">Z Rotatoin</param>
-        public Forklift(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("forklift", x, y, z, rotationX, rotationY, rotationZ)
+        /// <param name="rotationZ">Z Rotation</param>
+        public ShelfTransporters(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base(type, x, y, z, rotationX, rotationY, rotationZ)
         {
+
         }
 
         /// <summary>
-        /// Updates the forklift
+        /// Updates the shelftransporter
         /// </summary>
         /// <param name="tick">Tick time (50 = 20 times per second)</param>
         /// <returns>Update(Tick)</returns>
@@ -58,9 +61,9 @@ namespace Models
         }
 
         /// <summary>
-        /// Move the forklift over his path
+        /// Move the ShelfTransporter over his path
         /// </summary>
-        /// <param name="path">Path that the forklift should take</param>
+        /// <param name="path">Path that the ShelfTransporter should take</param>
         public void MoveOverPath(List<Node> path)
         {
             if (path.Count() != 0)
@@ -133,16 +136,16 @@ namespace Models
         }
 
         /// <summary>
-        /// Adds a task to the tasklist of the forklift
+        /// Adds a task to the tasklist of the ShelfTransporter
         /// </summary>
-        /// <param name="forkliftTask"></param>
-        public void addTask(IForkliftTask forkliftTask)
+        /// <param name="Task"></param>
+        public void addTask(ITask Task)
         {
-            tasks.Add(forkliftTask);
+            tasks.Add(Task);
         }
 
         /// <summary>
-        /// Get the status of the forklift
+        /// Get the status of the ShelfTransporter
         /// </summary>
         /// <returns>busy</returns>
         public override bool Status()
@@ -151,7 +154,7 @@ namespace Models
         }
 
         /// <summary>
-        /// Updates the status of the forklift
+        /// Updates the status of the ShelfTransporter
         /// </summary>
         public void updateStatus()
         {
@@ -162,10 +165,10 @@ namespace Models
         }
 
         /// <summary>
-        /// Bool if forklift has a shelf
+        /// Bool if ShelfTransporter has a shelf
         /// </summary>
-        /// <returns>forkliftShelfStatus</returns>
-        public bool forkliftShelfStatus()
+        /// <returns>ShelfTransporterShelfStatus</returns>
+        public bool ShelfTransporterShelfStatus()
         {
             if (shelf == null)
                 return false;
@@ -183,7 +186,7 @@ namespace Models
         }
 
         /// <summary>
-        /// Adds a shelf to the forklift
+        /// Adds a shelf to the ShelfTransporter
         /// </summary>
         /// <param name="shelf">Shelf to add</param>
         public void addShelf(Shelf shelf)
@@ -192,7 +195,7 @@ namespace Models
         }
 
         /// <summary>
-        /// removes the shelf from the forklift;
+        /// removes the shelf from the ShelfTransporter
         /// </summary>
         public void removeShelf()
         {
@@ -200,3 +203,6 @@ namespace Models
         }
     }
 }
+
+    
+
