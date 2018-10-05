@@ -30,7 +30,6 @@ namespace Models
             CreateRobot("R", 15, 0, 2);
             CreateTruck(-45, 1.5, -6);
             CreateTrain(58, 1.4, 35.2);
-
             foreach (Node n in worldManager.getGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)
                     n.shelf = CreateShelf(n.x, n.y, n.z);

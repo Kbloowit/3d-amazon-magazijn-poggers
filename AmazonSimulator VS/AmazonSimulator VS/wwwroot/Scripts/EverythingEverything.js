@@ -38,7 +38,6 @@ window.onload = function () {
         var worldStandards = new WorldStandards();
         scene.add(worldStandards);
 
-
         var cubeSkyboxGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
         var cubeSkyboxMaterial = [
 
@@ -69,7 +68,6 @@ window.onload = function () {
         cameraControls.update();
         renderer.render(scene, camera);
     }
-
 
     exampleSocket = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port + '/connect_client');
     exampleSocket.onmessage = function (event) {
