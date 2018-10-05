@@ -164,7 +164,7 @@ namespace Models
             nodes[nodes.FindIndex(a => a.name == "TrainMid")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TrainStart")], nodes[nodes.FindIndex(a => a.name == "TrainEnd")] });
             nodes[nodes.FindIndex(a => a.name == "TrainEnd")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "TrainMid")] });
             nodes[nodes.FindIndex(a => a.name == "T")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "S2")] });
-            nodes[nodes.FindIndex(a => a.name == "S2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "S")], nodes[nodes.FindIndex(a => a.name == "T")] });
+            nodes[nodes.FindIndex(a => a.name == "S2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "S")], nodes[nodes.FindIndex(a => a.name == "T")], nodes[nodes.FindIndex(a => a.name == "R2")] });
             nodes[nodes.FindIndex(a => a.name == "R2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "S2")], nodes[nodes.FindIndex(a => a.name == "Q2")] });
             nodes[nodes.FindIndex(a => a.name == "Q2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "R2")], nodes[nodes.FindIndex(a => a.name == "P2")] });
             nodes[nodes.FindIndex(a => a.name == "P2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "Q2")] });
@@ -216,14 +216,14 @@ namespace Models
             nodes.Add(new Node("ShelfN", 28, 0, 14));//shelf node
             nodes.Add(new Node("ShelfO", 28, 0, 18));//shelf node
             nodes.Add(new Node("P", 13, 0, 2));//robot node
-            nodes.Add(new Node("P2", 13, 0, 1.9));//robot reset node
+            nodes.Add(new Node("P2", 13, 0, 2));//robot reset node
             nodes.Add(new Node("Q", 14, 0, 2));//robot node
-            nodes.Add(new Node("Q2", 14, 0, 1.9));//robot reset node
+            nodes.Add(new Node("Q2", 14, 0, 2));//robot reset node
             nodes.Add(new Node("R", 15, 0, 2));//robot node
-            nodes.Add(new Node("R2", 15, 0, 1.9));//robot reset node
+            nodes.Add(new Node("R2", 15, 0, 2));//robot reset node
             nodes.Add(new Node("S", 16, 0, 2));//hoeknode naar T
-            nodes.Add(new Node("S2", 16, 0, 1.9));//connectie naar robot reset nodes
-            nodes.Add(new Node("T", 16, 0, 0));//to the truck
+            nodes.Add(new Node("S2", 16, 0, 2));//connectie naar robot reset nodes
+            nodes.Add(new Node("T", 16, 0, -2));//to the truck
             nodes.Add(new Node("TruckStart", 0, 0, 0));//truck start
             nodes.Add(new Node("TruckMid", 16, 0, 0));//truck midden
             nodes.Add(new Node("TruckEnd", 32, 0, 0));//truck eind

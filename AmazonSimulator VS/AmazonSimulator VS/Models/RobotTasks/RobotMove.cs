@@ -37,7 +37,7 @@ namespace Models
         /// <returns>Robot arrived at last destination</returns>
         public bool taskCompleted(Robot robot)
         {
-            return Math.Round(robot.x, 1) == path.Last().x && Math.Round(robot.z, 1) == path.Last().z;
+            return Math.Round(robot.x, 2) == path.Last().x && Math.Round(robot.z, 2) == path.Last().z;
         }
     }
 }

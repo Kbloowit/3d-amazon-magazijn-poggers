@@ -61,7 +61,7 @@ namespace Models
             Robot robot = robots.Find(x => x.Status() == false);
             switch (Math.Round(truck.x, 1))
             {
-                case 0:
+                case -45:
                     bool trainBusy = false;
                     switch (Math.Round(train.x, 1))
                     {
@@ -125,7 +125,7 @@ namespace Models
                     }
                     break;
                 case 32:
-                    truck.Move(0, 0, -5);
+                    truck.Move(-45, 1.5, -6);
                     break;
             }
             foreach (Robot r in robots)
