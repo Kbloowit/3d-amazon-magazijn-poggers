@@ -25,7 +25,7 @@ namespace Models
         /// Forklift pick up the shelf
         /// </summary>
         /// <param name="forklift">Forklift</param>
-        public void startTask(Forklift forklift)
+        public void startTask(ShelfTransporters forklift)
         {
             shelf.Move(shelf.x, shelf.y + 0.3, shelf.z);
             forklift.addShelf(shelf);
@@ -36,7 +36,7 @@ namespace Models
         /// </summary>
         /// <param name="forklift">Forklift</param>
         /// <returns>Shelf picked-upS</returns>
-        public bool taskCompleted(Forklift forklift)
+        public bool taskCompleted(ShelfTransporters forklift)
         {
             return Math.Round(forklift.x, 1) == shelf.x && Math.Round(forklift.z, 1) == shelf.z;
         }

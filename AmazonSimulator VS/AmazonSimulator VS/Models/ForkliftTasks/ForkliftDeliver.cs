@@ -8,7 +8,7 @@ namespace Models
     /// <summary>
     /// Class that gives the forklift the task to put a shelf on a delivery node
     /// </summary>
-    public class ForkliftDeliver : IForkliftTask
+    public class ForkliftDeliver : ITask
     {
         /// <summary>
         /// Shelf to be delivered
@@ -32,22 +32,22 @@ namespace Models
         /// <summary>
         /// Starts the delivery task
         /// </summary>
-        /// <param name="forklift">The forklift that needs to deliver the shelf</param>
-        public void startTask(Forklift forklift)
+        /// <param name="ShelfTransporter">The forklift that needs to deliver the shelf</param>
+        public void startTask(ShelfTransporters ShelfTransporter)
         {
             node.shelf = shelf;
             shelf.Move(shelf.x, 0, shelf.z);
-            forklift.removeShelf();
+            ShelfTransporter.removeShelf();
         }
 
         /// <summary>
         /// Bool Check if shelf is delivered
         /// </summary>
-        /// <param name="forklift"></param>
+        /// <param name="ShelfTransporter"></param>
         /// <returns>Shelf delivered</returns>
-        public bool taskCompleted(Forklift forklift)
+        public bool taskCompleted(ShelfTransporters ShelfTransporter)
         {
-            return forklift.forkliftShelfStatus() == false && node.shelf != null;
+            return ShelfTransporter.ShelfTransporterShelfStatus() == false && node.shelf != null;
         }
     }
 }

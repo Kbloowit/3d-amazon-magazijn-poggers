@@ -102,7 +102,7 @@ namespace Models
         /// <param name="z">starting z cordinate in the world</param>
         private void CreateForklift(double x, double y, double z)
         {
-            Forklift forklift = new Forklift(x, y, z, 0, Math.PI, 0);
+            ShelfTransporters forklift = new ShelfTransporters(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(forklift);
             worldManager.AddForkliftToList(forklift);
         }

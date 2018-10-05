@@ -18,7 +18,7 @@ namespace Models
         /// <summary>
         /// list of all forklifts in the world
         /// </summary>
-        private List<Forklift> forklifts = new List<Forklift>();
+        private List<ShelfTransporters> forklifts = new List<ShelfTransporters>();
         /// <summary>
         /// List of all shelves that are in place and ready to be picked up
         /// </summary>
@@ -132,7 +132,7 @@ namespace Models
                 if (r.Status() == true && r.getTasksCount() == 0)
                     r.updateStatus();
 
-            foreach (Forklift f in forklifts)
+            foreach (ShelfTransporters f in forklifts)
                 if (f.Status() == true && f.getTasksCount() == 0)
                     f.updateStatus();
         }
@@ -161,7 +161,7 @@ namespace Models
         /// <param name="train">Train that brings the shelves</param>
         private void shelfRestock(Train train)
         {
-            Forklift forklift = forklifts.Find(x => x.Status() == false);
+            ShelfTransporters forklift = forklifts.Find(x => x.Status() == false);
             Shelf shelf = shelfs.First(x => x.Status() == false && Math.Round(x.x, 1) == 16 && Math.Round(x.z, 1) == -2.4 && Math.Round(x.y, 1) == 1000);
             Node node = g.getNodes().First(x => x.name.Contains("Res") && x.shelf == null);
             if (forklift != null && shelf != null && node != null)
@@ -261,7 +261,7 @@ namespace Models
         /// Add forklift to list
         /// </summary>
         /// <param name="train">Train</param>
-        public void AddForkliftToList(Forklift forklift)
+        public void AddForkliftToList(ShelfTransporters forklift)
         {
             forklifts.Add(forklift);
         }

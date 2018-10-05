@@ -25,7 +25,7 @@ namespace Models
         /// Move robot of his path
         /// </summary>
         /// <param name="robot">robot</param>
-        public void startTask(Forklift forklift)
+        public void startTask(ShelfTransporters forklift)
         {
             forklift.MoveOverPath(this.path);
         }
@@ -35,7 +35,7 @@ namespace Models
         /// </summary>
         /// <param name="forklift">Forklift</param>
         /// <returns>Forklift arrived</returns>
-        public bool taskCompleted(Forklift forklift)
+        public bool taskCompleted(ShelfTransporters forklift)
         {
             return Math.Round(forklift.x, 1) == path.Last().x && Math.Round(forklift.z, 1) == path.Last().z;
         }

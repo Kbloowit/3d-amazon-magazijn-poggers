@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Models
 {
-    public class Forklift : ShelfTransporters
+    public class ShelfTransporters : ShelfTransporters
     {
 
 
@@ -18,7 +18,7 @@ namespace Models
         /// <param name="rotationX">X Rotation</param>
         /// <param name="rotationY">Y Rotation</param>
         /// <param name="rotationZ">Z Rotatoin</param>
-        public Forklift(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("forklift", x, y, z, rotationX, rotationY, rotationZ)
+        public ShelfTransporters(double x, double y, double z, double rotationX, double rotationY, double rotationZ) : base("forklift", x, y, z, rotationX, rotationY, rotationZ)
         {
 
         }
