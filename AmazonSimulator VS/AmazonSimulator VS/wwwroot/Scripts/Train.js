@@ -14,6 +14,6 @@
             //mesh.position.multiplyScalar(- 1);
             selfref.add(mesh);
         });
-        selfref.scale.set(4, 4, 4);
+        selfref.scale.set(8, 8, 8);
     }
 }
