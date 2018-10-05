@@ -18,8 +18,8 @@ function AddPointLight(object, colour, intensity, distance, x, y, z) {
     object.add(Light);
 }
 
-function AddSpotLight(object, colour, intensity, distance, x, y, z, tx, ty, tz) {
-    var Light = new THREE.SpotLight(colour, intensity, distance);
+function AddSpotLight(object, colour, intensity, distance, penumbra, angle, x, y, z, tx, ty, tz,) {
+    var Light = new THREE.SpotLight(colour, intensity, distance, angle, penumbra);
     Light.castShadow = true;
     Light.position.set(x, y, z);
     Light.decay = 2;

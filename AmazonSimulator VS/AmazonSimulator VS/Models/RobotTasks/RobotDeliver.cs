@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class RobotDeliver : IRobotTask
+    public class RobotDeliver : ITask
     {
         /// <summary>
         /// Shelf to Deliver
@@ -25,7 +25,7 @@ namespace Models
         /// Deliver the shelf
         /// </summary>
         /// <param name="robot">Robot</param>
-        public void startTask(Robot robot)
+        public void startTask(ShelfTransporters robot)
         {
             shelf.Move(shelf.x, 1000, shelf.z);
             robot.removeShelf();
@@ -36,7 +36,7 @@ namespace Models
         /// </summary>
         /// <param name="robot">robot</param>
         /// <returns>robotShelfStatus</returns>
-        public bool taskCompleted(Robot robot)
+        public bool taskCompleted(ShelfTransporters robot)
         {
             return robot.robotShelfStatus() == false;
         }
