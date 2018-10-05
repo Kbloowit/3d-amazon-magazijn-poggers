@@ -29,7 +29,7 @@ namespace Models
             CreateRobot("Q", 14, 0, 2);
             CreateRobot("R", 15, 0, 2);
             CreateTruck(-45, 1.5, -6);
-            CreateTrain(32, 1.4, 34.2);
+            CreateTrain(58, 1.4, 35);
 
             foreach (Node n in worldManager.getGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)

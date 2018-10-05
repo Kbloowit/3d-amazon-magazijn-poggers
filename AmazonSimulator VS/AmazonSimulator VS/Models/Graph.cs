@@ -223,10 +223,10 @@ namespace Models
             nodes.Add(new Node("R2", 15, 0, 2));//robot reset node
             nodes.Add(new Node("S", 16, 0, 2));//hoeknode naar T
             nodes.Add(new Node("S2", 16, 0, 2));//connectie naar robot reset nodes
-            nodes.Add(new Node("T", 16, 0, -2));//to the truck
-            nodes.Add(new Node("TruckStart", 0, 0, 0));//truck start
+            nodes.Add(new Node("T", 16, 0, -2.4));//to the truck
+            nodes.Add(new Node("TruckStart", -45, 0, 0));//truck start
             nodes.Add(new Node("TruckMid", 16, 0, 0));//truck midden
-            nodes.Add(new Node("TruckEnd", 32, 0, 0));//truck eind
+            nodes.Add(new Node("TruckEnd", 58, 0, 0));//truck eind
             nodes.Add(new Node("TrainStart", 40, 0, 32));//train start
             nodes.Add(new Node("TrainMid", 16, 0, 32));//train midden
             nodes.Add(new Node("TrainEnd", -8, 0, 32));//train eind

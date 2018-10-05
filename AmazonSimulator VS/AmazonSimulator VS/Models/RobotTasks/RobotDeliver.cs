@@ -27,7 +27,7 @@ namespace Models
         /// <param name="robot">Robot</param>
         public void startTask(ShelfTransporters robot)
         {
-            shelf.Move(shelf.x, 0, shelf.z);
+            shelf.Move(shelf.x, 1000, shelf.z);
             robot.removeShelf();
         }
 
