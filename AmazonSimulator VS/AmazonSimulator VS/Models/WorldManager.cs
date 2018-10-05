@@ -146,8 +146,10 @@ namespace Models
             Node shelfNode = shelvesInPlace[r.Next(0, shelvesInPlace.Count())];
             robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
             robot.addTask(new RobotPickUp(shelfNode, shelfNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "S")));
+            robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "T")));
             robot.addTask(new RobotDeliver(shelfNode.shelf));
+            string test = robot.getRobotStation().name + "2";
+            robot.addTask(new RobotMove(g.shortest_path("T", test)));
             robot.addTask(new RobotReset());
             robot.updateStatus();
             shelfNode.shelf.updateStatus();

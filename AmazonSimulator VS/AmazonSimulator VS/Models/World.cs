@@ -28,7 +28,7 @@ namespace Models
             CreateRobot("P", 13, 0, 2);
             CreateRobot("Q", 14, 0, 2);
             CreateRobot("R", 15, 0, 2);
-            CreateTruck(0, 1.3, -6);
+            CreateTruck(0, 1.5, -6);
             CreateTrain(32, 1.4, 34.2);
 
             foreach (Node n in worldManager.getGraphNodes())
