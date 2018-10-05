@@ -65,7 +65,7 @@ namespace Models
                     bool trainBusy = false;
                     switch (Math.Round(train.x, 1))
                     {
-                        case 32:
+                        case 58:
                             if (shelvesInPlace.Count() == 0 && robots.Exists(x => x.Status() == true) == false)
                             {
                                 train.AddDestination(g.transportVehicle("TrainMid"));
@@ -97,11 +97,11 @@ namespace Models
                                 train.AddDestination(g.transportVehicle("TrainEnd"));
                             }
                             break;
-                        case -8:
-                            train.Move(32, 0, 32);
+                        case -45:
+                            train.Move(58, 1.4, 35);
                             break;
                     }
-                    if (Math.Round(train.x, 1) == 32 && ShelfReplace.Count() == 0 && train.Status() == false && trainBusy == false)
+                    if (Math.Round(train.x, 1) == 58 && ShelfReplace.Count() == 0 && train.Status() == false && trainBusy == false)
                         truck.AddDestination(g.transportVehicle("TruckMid"));
                     break;
                 case 16:
@@ -124,7 +124,7 @@ namespace Models
                         truck.AddDestination(g.transportVehicle("TruckEnd"));
                     }
                     break;
-                case 32:
+                case 58:
                     truck.Move(-45, 1.5, -6);
                     break;
             }
@@ -162,7 +162,7 @@ namespace Models
         private void shelfRestock(Train train)
         {
             Forklift forklift = forklifts.Find(x => x.Status() == false);
-            Shelf shelf = shelfs.First(x => x.Status() == false && Math.Round(x.x, 1) == 16 && Math.Round(x.z, 1) == 2);
+            Shelf shelf = shelfs.First(x => x.Status() == false && Math.Round(x.x, 1) == 16 && Math.Round(x.z, 1) == -2.4 && Math.Round(x.y, 1) == 1000);
             Node node = g.getNodes().First(x => x.name.Contains("Res") && x.shelf == null);
             if (forklift != null && shelf != null && node != null)
             {

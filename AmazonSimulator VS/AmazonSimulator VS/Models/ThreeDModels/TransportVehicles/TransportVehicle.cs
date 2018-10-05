@@ -44,13 +44,13 @@ namespace Models
             }
             if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
             {
-                this.Move(this.x + 0.20, this.y, this.z);
-                deltaX -= 0.20;
+                this.Move(this.x + 0.5, this.y, this.z);
+                deltaX -= 0.5;
             }
             else if (Math.Round(deltaX, 1) < 0) // als deltaX negatief is gaat hij actheruit
             {
-                this.Move(this.x - 0.20, this.y, this.z);
-                deltaX += 0.20;
+                this.Move(this.x - 0.5, this.y, this.z);
+                deltaX += 0.5;
             }
             return base.Update(tick);
         }
