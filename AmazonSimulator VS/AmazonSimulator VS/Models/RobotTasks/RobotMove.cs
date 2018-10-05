@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class RobotMove : IRobotTask
+    public class RobotMove : ITask
     {
         /// <summary>
         /// List of nodes the robot should take
@@ -25,7 +25,7 @@ namespace Models
         /// Move robot of his path
         /// </summary>
         /// <param name="robot">robot</param>
-        public void startTask(Robot robot)
+        public void startTask(ShelfTransporters robot)
         {
             robot.MoveOverPath(this.path);
         }
@@ -35,7 +35,7 @@ namespace Models
         /// </summary>
         /// <param name="robot">robot</param>
         /// <returns>Robot arrived at last destination</returns>
-        public bool taskCompleted(Robot robot)
+        public bool taskCompleted(ShelfTransporters robot)
         {
             return Math.Round(robot.x, 2) == path.Last().x && Math.Round(robot.z, 2) == path.Last().z;
         }

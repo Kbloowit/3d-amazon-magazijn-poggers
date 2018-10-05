@@ -31,7 +31,7 @@ namespace Models
         /// Pick up the shelf
         /// </summary>
         /// <param name="robot">Robot</param>
-        public void startTask(Robot robot)
+        public void startTask(ShelfTransporters robot)
         {
             node.shelf = null;
             shelf.Move(shelf.x, shelf.y + 0.3, shelf.z);
@@ -43,9 +43,9 @@ namespace Models
         /// </summary>
         /// <param name="robot">robot</param>
         /// <returns>robotShelfStatus</returns>
-        public bool taskCompleted(Robot robot)
+        public bool taskCompleted(ShelfTransporters robot)
         {
-            return robot.robotShelfStatus() == true;
+            return robot.ShelfTransporterShelfStatus() == true;
         }
     }
 }
