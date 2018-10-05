@@ -22,7 +22,7 @@ d 1.000000
 illum 2
 
 newmtl Mat
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -33,7 +33,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.001
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -44,7 +44,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.002
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -55,7 +55,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.003
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -66,7 +66,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.005
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -77,7 +77,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.006
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -88,7 +88,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.007
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -99,7 +99,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.008
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -110,7 +110,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.009
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -121,7 +121,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.010
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -132,7 +132,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.011
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -143,7 +143,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.012
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -154,7 +154,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.013
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -165,7 +165,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.014
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -176,7 +176,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.015
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -187,7 +187,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Mat.016
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -198,7 +198,7 @@ illum 2
 map_Kd forest_obj_79xo-C_-n1J_5rMbIP_aFhj\tree_texture.png
 
 newmtl Material.001
-Ns 96.078431
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.194718 0.640000 0.127783
 Ks 0.500000 0.500000 0.500000
@@ -228,11 +228,13 @@ d 1.000000
 illum 2
 
 newmtl None
-Ns 0
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 
 newmtl RailSides.001
@@ -279,7 +281,7 @@ map_Ka c2b2y_2.png
 map_d c2b2y_2.png
 
 newmtl mat10
-Ns 96.078431
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.300000 0.690000 0.310000
 Ks 0.500000 0.500000 0.500000
@@ -289,7 +291,7 @@ d 1.000000
 illum 2
 
 newmtl mat22
-Ns 96.078431
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.620000 0.620000 0.620000
 Ks 0.500000 0.500000 0.500000
@@ -299,7 +301,7 @@ d 1.000000
 illum 2
 
 newmtl mat23
-Ns 96.078431
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.100000 0.100000 0.100000
 Ks 0.500000 0.500000 0.500000
