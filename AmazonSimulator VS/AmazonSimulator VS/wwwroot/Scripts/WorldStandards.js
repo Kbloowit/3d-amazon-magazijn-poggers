@@ -16,9 +16,7 @@
 
         });
         selfref.scale.set(4, 4, 4);
-        AddPointLight(selfref, 0x00ffff, 1, 50, 2, 2.5, 4);
-        AddPointLight(selfref, 0x00ffff, 1, 50, 4, 2.5, 4);
-        AddPointLight(selfref, 0x00ffff, 1, 50, 7, 2.5, 4);
+
         AddSpotLight(selfref, 0xff0000, 1, 50, 1, Math.PI / 6, 4, 2.5, 4, 4, 0, 4);
         AddSpotLight(selfref, 0xff0000, 1, 50, 1, Math.PI / 6, 2, 2.5, 4, 1, 0, 4);
         AddSpotLight(selfref, 0xff0000, 1, 50, 1, Math.PI / 6, 7, 2.5, 4, 7, 0, 4);
