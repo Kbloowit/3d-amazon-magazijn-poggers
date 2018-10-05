@@ -32,22 +32,22 @@ namespace Models
         /// <summary>
         /// Starts the delivery task
         /// </summary>
-        /// <param name="ShelfTransporter">The forklift that needs to deliver the shelf</param>
-        public void startTask(ShelfTransporters ShelfTransporter)
+        /// <param name="forklift">The forklift that needs to deliver the shelf</param>
+        public void startTask(ShelfTransporters forklift)
         {
             node.shelf = shelf;
             shelf.Move(shelf.x, 0, shelf.z);
-            ShelfTransporter.removeShelf();
+            forklift.removeShelf();
         }
 
         /// <summary>
         /// Bool Check if shelf is delivered
         /// </summary>
-        /// <param name="ShelfTransporter"></param>
+        /// <param name="forklift"></param>
         /// <returns>Shelf delivered</returns>
-        public bool taskCompleted(ShelfTransporters ShelfTransporter)
+        public bool taskCompleted(ShelfTransporters forklift)
         {
-            return ShelfTransporter.ShelfTransporterShelfStatus() == false && node.shelf != null;
+            return forklift.ShelfTransporterShelfStatus() == false && node.shelf != null;
         }
     }
 }

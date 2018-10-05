@@ -227,9 +227,9 @@ namespace Models
             nodes.Add(new Node("TruckStart", -45, 0, 0));//truck start
             nodes.Add(new Node("TruckMid", 16, 0, 0));//truck midden
             nodes.Add(new Node("TruckEnd", 58, 0, 0));//truck eind
-            nodes.Add(new Node("TrainStart", 40, 0, 32));//train start
+            nodes.Add(new Node("TrainStart", 58, 0, 32));//train start
             nodes.Add(new Node("TrainMid", 16, 0, 32));//train midden
-            nodes.Add(new Node("TrainEnd", -8, 0, 32));//train eind
+            nodes.Add(new Node("TrainEnd", -45, 0, 32));//train eind
             AddConnections();
         }
     }

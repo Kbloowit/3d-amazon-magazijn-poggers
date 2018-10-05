@@ -98,7 +98,7 @@ namespace Models
                             }
                             break;
                         case -45:
-                            train.Move(58, 1.4, 35);
+                            train.Move(58, 1.4, 35.2);
                             break;
                     }
                     if (Math.Round(train.x, 1) == 58 && ShelfReplace.Count() == 0 && train.Status() == false && trainBusy == false)
@@ -108,7 +108,8 @@ namespace Models
                     if (truck.GetItems() == 0 && truck.Status() == false)
                     {
                         truck.updateArrived();
-                        truck.setItems(r.Next(1, shelvesInPlace.Count()));
+                        truck.setItems(6);
+                        //truck.setItems(r.Next(1, shelvesInPlace.Count()));
                     }
                     else if (truck.GetItems() != 0 && robot != null)
                     {
@@ -150,7 +151,6 @@ namespace Models
             robot.addTask(new RobotDeliver(shelfNode.shelf));
             string test = robot.getRobotStation().name + "2";
             robot.addTask(new RobotMove(g.shortest_path("T", test)));
-            robot.addTask(new RobotReset());
             robot.updateStatus();
             shelfNode.shelf.updateStatus();
         }

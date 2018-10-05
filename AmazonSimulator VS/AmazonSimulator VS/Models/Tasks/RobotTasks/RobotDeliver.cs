@@ -27,7 +27,10 @@ namespace Models
         /// <param name="robot">Robot</param>
         public void startTask(ShelfTransporters robot)
         {
-            shelf.Move(shelf.x, 1000, shelf.z);
+            if (Math.Round(robot.x, 1) == 16 && Math.Round(robot.z, 1) == -2.4)
+                shelf.Move(shelf.x, 1000, shelf.z);
+            else
+                shelf.Move(shelf.x, 0, shelf.z);
             robot.removeShelf();
         }
 

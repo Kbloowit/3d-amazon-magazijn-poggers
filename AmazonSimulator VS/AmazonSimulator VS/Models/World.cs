@@ -29,7 +29,7 @@ namespace Models
             CreateRobot("Q", 14, 0, 2);
             CreateRobot("R", 15, 0, 2);
             CreateTruck(-45, 1.5, -6);
-            CreateTrain(58, 1.4, 35);
+            CreateTrain(58, 1.4, 35.2);
 
             foreach (Node n in worldManager.getGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)
@@ -102,7 +102,7 @@ namespace Models
         /// <param name="z">starting z cordinate in the world</param>
         private void CreateForklift(double x, double y, double z)
         {
-            ShelfTransporters forklift = new ShelfTransporters(x, y, z, 0, Math.PI, 0);
+            Forklift forklift = new Forklift(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(forklift);
             worldManager.AddForkliftToList(forklift);
         }
