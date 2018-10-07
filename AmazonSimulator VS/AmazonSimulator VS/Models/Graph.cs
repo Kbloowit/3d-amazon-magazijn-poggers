@@ -16,12 +16,13 @@ namespace Models
         /// <summary>
         /// adds connections per node to the vertices list
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="edges"></param>
+        /// <param name="name">Name of the node</param>
+        /// <param name="edges">Distance to the next node</param>
         public void Add_Vertex(string name, Dictionary<string, int> edges)
         {
             vertices[name] = edges;
         }
+
         /// <summary>
         /// calculates the shortest path between 2 nodes on the graph using the Dijkstra algorithm
         /// </summary>
@@ -49,7 +50,6 @@ namespace Models
                 {
                     distances[vertex.Key] = int.MaxValue;
                 }
-
                 nodeChar.Add(vertex.Key);
             }
 
@@ -102,24 +102,27 @@ namespace Models
             }
             return nodePath;
         }
+
         /// <summary>
         /// Get method for the list of all nodes
         /// </summary>
         /// <returns>List</returns>
-        public List<Node> getNodes()
+        public List<Node> GetNodes()
         {
             return nodes;
         }
+
         /// <summary>
-        /// 
+        ///  Node the transport vehicle should move to
         /// </summary>
-        /// <param name="to"></param>
-        /// <returns></returns>
-        public Node transportVehicle(string to)
+        /// <param name="to">Name of the node the transport vehicle should move to</param>
+        /// <returns>Node the transport vehicle should move to</returns>
+        public Node TransportVehicles(string to)
         {
             Node node = nodes.Find(x => x.name == to);
             return node;
         }
+
         /// <summary>
         /// Creates the connections between the nodes and calls the method that adds them
         /// </summary>
@@ -169,6 +172,7 @@ namespace Models
             nodes[nodes.FindIndex(a => a.name == "Q2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "R2")], nodes[nodes.FindIndex(a => a.name == "P2")] });
             nodes[nodes.FindIndex(a => a.name == "P2")].connections.AddRange(new List<Node> { nodes[nodes.FindIndex(a => a.name == "Q2")] });
 
+            //Loops trough the disctionary and adds the distances between the nodes
             foreach (Node item in nodes)
             {
                 Dictionary<string, int> een = new Dictionary<string, int>();
@@ -179,13 +183,14 @@ namespace Models
                     int sum = deltaX + deltaZ;
                     een.Add(connection.name, sum);
                 }
+                //Add the distances to the vertexes list
                 Add_Vertex(item.name, een);
             }
         }
         /// <summary>
         /// Creates the nodes on the main plane, and calls the method that adds connections between them
         /// </summary>
-        public void addNodes()
+        public void AddNodes()
         {
             nodes.Add(new Node("A", 2, 0, 2));//hoekpunt
             nodes.Add(new Node("B", 30, 0, 2));//hoekpunt

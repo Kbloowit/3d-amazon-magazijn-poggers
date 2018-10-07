@@ -11,12 +11,13 @@ namespace Models
         /// Tasks for the shelf Transporters
         /// </summary>
         /// <param name="shelfTransporters">Robots/Forklifts</param>
-        void startTask(ShelfTransporters shelfTransporters);
+        void StartTask(ShelfTransporters shelfTransporter);
+
         /// <summary>
         /// Bool check if task is completed
         /// </summary>
         /// <param name="shelfTransporters">Robots/Forklifts</param>
         /// <returns>Bool Completed</returns>
-        bool taskCompleted(ShelfTransporters shelfTransporters);
+        bool TaskCompleted(ShelfTransporters shelfTransporter);
     }
 }

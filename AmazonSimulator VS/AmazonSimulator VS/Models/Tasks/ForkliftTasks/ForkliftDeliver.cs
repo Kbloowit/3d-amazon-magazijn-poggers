@@ -33,11 +33,11 @@ namespace Models
         /// Starts the delivery task
         /// </summary>
         /// <param name="forklift">The forklift that needs to deliver the shelf</param>
-        public void startTask(ShelfTransporters forklift)
+        public void StartTask(ShelfTransporters forklift)
         {
             node.shelf = shelf;
             shelf.Move(shelf.x, 0, shelf.z);
-            forklift.removeShelf();
+            forklift.RemoveShelf();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Models
         /// </summary>
         /// <param name="forklift"></param>
         /// <returns>Shelf delivered</returns>
-        public bool taskCompleted(ShelfTransporters forklift)
+        public bool TaskCompleted(ShelfTransporters forklift)
         {
             return forklift.ShelfTransporterShelfStatus() == false && node.shelf != null;
         }

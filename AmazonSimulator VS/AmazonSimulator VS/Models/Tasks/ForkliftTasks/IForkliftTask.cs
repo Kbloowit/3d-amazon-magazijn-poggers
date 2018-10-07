@@ -11,13 +11,13 @@ namespace Models
         /// Start a task
         /// </summary>
         /// <param name="forklift">Forklift</param>
-        void startTask(ShelfTransporters forklift);
+        void StartTask(ShelfTransporters forklift);
 
         /// <summary>
         /// Bool check if task is completed
         /// </summary>
         /// <param name="forklift">forklift</param>
         /// <returns>TaskCompleted</returns>
-        bool taskCompleted(ShelfTransporters forklift);
+        bool TaskCompleted(ShelfTransporters forklift);
     }
 }

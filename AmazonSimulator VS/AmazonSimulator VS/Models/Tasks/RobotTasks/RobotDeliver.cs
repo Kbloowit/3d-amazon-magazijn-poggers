@@ -25,13 +25,13 @@ namespace Models
         /// Deliver the shelf
         /// </summary>
         /// <param name="robot">Robot</param>
-        public void startTask(ShelfTransporters robot)
+        public void StartTask(ShelfTransporters robot)
         {
             if (Math.Round(robot.x, 1) == 16 && Math.Round(robot.z, 1) == -2.4)
                 shelf.Move(shelf.x, 1000, shelf.z);
             else
                 shelf.Move(shelf.x, 0, shelf.z);
-            robot.removeShelf();
+            robot.RemoveShelf();
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Models
         /// </summary>
         /// <param name="robot">robot</param>
         /// <returns>robotShelfStatus</returns>
-        public bool taskCompleted(ShelfTransporters robot)
+        public bool TaskCompleted(ShelfTransporters robot)
         {
             return robot.ShelfTransporterShelfStatus() == false;
         }

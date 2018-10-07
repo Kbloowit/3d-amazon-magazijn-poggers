@@ -45,7 +45,7 @@ namespace Models
         {
             if (tasks.Count != 0)
             {
-                if (tasks.First().taskCompleted(this) == true)
+                if (tasks.First().TaskCompleted(this) == true)
                     tasks.RemoveAt(0);
 
                 if (tasks.Count == 0)
@@ -53,7 +53,7 @@ namespace Models
                     tasks.Clear();
                 }
                 if (tasks.Count != 0)
-                    tasks.First().startTask(this);
+                    tasks.First().StartTask(this);
             }
             return base.Update(tick);
         }
@@ -135,7 +135,7 @@ namespace Models
         /// Adds a task to the tasklist of the ShelfTransporter
         /// </summary>
         /// <param name="Task"></param>
-        public void addTask(ITask Task)
+        public void AddTask(ITask Task)
         {
             tasks.Add(Task);
         }
@@ -152,7 +152,7 @@ namespace Models
         /// <summary>
         /// Updates the status of the ShelfTransporter
         /// </summary>
-        public void updateStatus()
+        public void UpdateStatus()
         {
             if (busy == false)
                 busy = true;
@@ -176,7 +176,7 @@ namespace Models
         /// Task count
         /// </summary>
         /// <returns>Ammount of tasks</returns>
-        public int getTasksCount()
+        public int GetTaskCount()
         {
             return tasks.Count;
         }
@@ -185,7 +185,7 @@ namespace Models
         /// Adds a shelf to the ShelfTransporter
         /// </summary>
         /// <param name="shelf">Shelf to add</param>
-        public void addShelf(Shelf shelf)
+        public void AddShelf(Shelf shelf)
         {
             this.shelf = shelf;
         }
@@ -193,7 +193,7 @@ namespace Models
         /// <summary>
         /// removes the shelf from the ShelfTransporter
         /// </summary>
-        public void removeShelf()
+        public void RemoveShelf()
         {
             shelf = null;
         }

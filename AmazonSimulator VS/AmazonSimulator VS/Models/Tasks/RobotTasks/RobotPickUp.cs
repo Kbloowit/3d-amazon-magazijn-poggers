@@ -31,11 +31,11 @@ namespace Models
         /// Pick up the shelf
         /// </summary>
         /// <param name="robot">Robot</param>
-        public void startTask(ShelfTransporters robot)
+        public void StartTask(ShelfTransporters robot)
         {
             node.shelf = null;
             shelf.Move(shelf.x, shelf.y + 0.3, shelf.z);
-            robot.addShelf(shelf);
+            robot.AddShelf(shelf);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Models
         /// </summary>
         /// <param name="robot">robot</param>
         /// <returns>robotShelfStatus</returns>
-        public bool taskCompleted(ShelfTransporters robot)
+        public bool TaskCompleted(ShelfTransporters robot)
         {
             return robot.ShelfTransporterShelfStatus() == true;
         }

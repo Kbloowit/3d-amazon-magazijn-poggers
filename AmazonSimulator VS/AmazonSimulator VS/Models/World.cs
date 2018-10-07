@@ -30,10 +30,11 @@ namespace Models
             CreateRobot("R", 15, 0, 2);
             CreateTruck(-45, 1.5, -6);
             CreateTrain(58, 2, 35.8);
-            foreach (Node n in worldManager.getGraphNodes())
+            //For every node that can have a shelf on it, add a shelf
+            foreach (Node n in worldManager.GetGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)
                     n.shelf = CreateShelf(n.x, n.y, n.z);
-
+            //Create 6 forklifts that can restock the shelfs
             for (int i = 0; i < 6; i++)
                 CreateForklift(32, 1000, 32);
         }
@@ -46,7 +47,7 @@ namespace Models
         /// <param name="z">starting z cordinate in the world</param>
         private void CreateRobot(string robotStation, double x, double y, double z)
         {
-            Node node = worldManager.getGraphNodes()[worldManager.getGraphNodes().FindIndex(a => a.name == robotStation)];
+            Node node = worldManager.GetGraphNodes()[worldManager.GetGraphNodes().FindIndex(a => a.name == robotStation)];
             Robot r = new Robot(node, x, y, z, 0, 0, 0);
             worldObjects.Add(r);
             worldManager.AddRobotToList(r);
@@ -121,6 +122,10 @@ namespace Models
             return new Unsubscriber<Command>(observers, observer);
         }
 
+        /// <summary>
+        /// Sends command to the observers
+        /// </summary>
+        /// <param name="c">Command</param>
         private void SendCommandToObservers(Command c)
         {
             for (int i = 0; i < this.observers.Count; i++)
@@ -129,6 +134,10 @@ namespace Models
             }
         }
 
+        /// <summary>
+        /// Sends creation command to the observer
+        /// </summary>
+        /// <param name="obs">IOberser command</param>
         private void SendCreationCommandsToObserver(IObserver<Command> obs)
         {
             foreach (ThreeDModels m3d in worldObjects)
@@ -136,6 +145,7 @@ namespace Models
                 obs.OnNext(new UpdateModel3DCommand(m3d));
             }
         }
+
         /// <summary>
         /// Updates the world (excuted 20 times per second)
         /// </summary>
