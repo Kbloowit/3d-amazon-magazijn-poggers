@@ -23,6 +23,7 @@ window.onload = function () {
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight + 5);
+        renderer.shadowMapEnabled = true;
         document.body.appendChild(renderer.domElement);
 
         window.addEventListener('resize', onWindowResize, false);
@@ -34,7 +35,8 @@ window.onload = function () {
         plane.position.y = 0;
         plane.position.x = 15;
         plane.position.z = 15;
-        plane.recieveShadow = true;
+        plane.receiveShadow = true;
+        plane.castShadow = true;
         scene.add(plane);
 
         var worldStandards = new WorldStandards();

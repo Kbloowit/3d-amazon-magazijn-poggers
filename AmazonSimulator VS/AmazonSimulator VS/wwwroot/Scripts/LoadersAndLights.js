@@ -54,8 +54,12 @@ function AddPointLight(object, colour, intensity, distance, x, y, z) {
 function AddSpotLight(object, colour, intensity, distance, penumbra, angle, x, y, z, tx, ty, tz,) {
     var Light = new THREE.SpotLight(colour, intensity, distance, angle, penumbra);
     Light.castShadow = true;
+    Light.shadowCameraVisible = true;
     Light.position.set(x, y, z);
     Light.decay = 2;
+    Light.shadowCameraNear = 1;
+    Light.shadowMapWidth = 2048;
+    Light.shadowMapHeight = 2048;
     object.add(Light);
 
     object.add(Light.target);
