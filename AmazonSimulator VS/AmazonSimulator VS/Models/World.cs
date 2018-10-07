@@ -29,7 +29,7 @@ namespace Models
             CreateRobot("Q", 14, 0, 2);
             CreateRobot("R", 15, 0, 2);
             CreateTruck(-45, 1.5, -6);
-            CreateTrain(58, 1.4, 35.2);
+            CreateTrain(58, 2, 35.8);
             foreach (Node n in worldManager.getGraphNodes())
                 if (n.name.Contains("Shelf") && n.shelf == null)
                     n.shelf = CreateShelf(n.x, n.y, n.z);
@@ -62,7 +62,7 @@ namespace Models
         {
             Truck t = new Truck(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(t);
-            worldManager.AddTruck(t);
+            worldManager.SetTruck(t);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Models
         {
             Train train = new Train(x, y, z, 0, Math.PI, 0);
             worldObjects.Add(train);
-            worldManager.AddTrain(train);
+            worldManager.SetTrain(train);
         }
 
         /// <summary>

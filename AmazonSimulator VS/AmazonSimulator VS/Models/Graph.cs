@@ -18,7 +18,7 @@ namespace Models
         /// </summary>
         /// <param name="name"></param>
         /// <param name="edges"></param>
-        public void add_vertex(string name, Dictionary<string, int> edges)
+        public void Add_Vertex(string name, Dictionary<string, int> edges)
         {
             vertices[name] = edges;
         }
@@ -28,7 +28,7 @@ namespace Models
         /// <param name="from">Starting node</param>
         /// <param name="to">Destination node</param>
         /// <returns>The list of nodes between the starting and destination node constituting the shortest path between the two nodes</returns>
-        public List<Node> shortest_path(string from, string to)
+        public List<Node> Shortest_Path(string from, string to)
         {
             // previously checked node
             var previous = new Dictionary<string, string>();         
@@ -179,7 +179,7 @@ namespace Models
                     int sum = deltaX + deltaZ;
                     een.Add(connection.name, sum);
                 }
-                add_vertex(item.name, een);
+                Add_Vertex(item.name, een);
             }
         }
         /// <summary>

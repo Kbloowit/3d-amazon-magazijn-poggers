@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public  class ShelfTransporters : ThreeDModels
+    public class ShelfTransporters : ThreeDModels
     {
         /// <summary>
         /// List of tasks for the ShelfTransporter
@@ -15,8 +15,6 @@ namespace Models
         /// Shelf the ShelfTransporter is carrying
         /// </summary>
         private Shelf shelf;
-        private double deltaX;
-        private double deltaZ;
         /// <summary>
         /// Bool if the ShelfTransporter is busy
         /// </summary>
@@ -66,43 +64,41 @@ namespace Models
         /// <param name="path">Path that the ShelfTransporter should take</param>
         public void MoveOverPath(List<Node> path)
         {
+            double deltaX;
+            double deltaZ;
             if (path.Count() != 0)
             {
-                if (Math.Round(deltaZ) == 0 && Math.Round(deltaX) == 0)
-                {
-                    if (path.Count() != 0)
-                    {
-                        deltaX = path.First().x - this.x; //waar hij naar toe moet - waar hij is
-                        deltaZ = path.First().z - this.z; //waar hij naar toe moet - waar hij is
+                if (path.First().x == Math.Round(this.x, 1) && path.First().z == Math.Round(this.z, 1))
+                    path.RemoveAt(0);
 
-                        if (path.First().x > Math.Round(this.x))
-                        {
-                            this.Rotate(this.rotationX, this.rotationY - this.rotationY + (Math.PI / 2), this.rotationZ);
-                            if (shelf != null)
-                                shelf.Rotate(rotationX, rotationY - rotationY + (Math.PI / 2), rotationZ);
-                        }
-                        else if (path.First().x < Math.Round(this.x))
-                        {
-                            this.Rotate(this.rotationX, this.rotationY - this.rotationY - (Math.PI / 2), this.rotationZ);
-                            if (shelf != null)
-                                shelf.Rotate(rotationX, rotationY - rotationY - (Math.PI / 2), rotationZ);
-                        }
-                        else if (path.First().z > Math.Round(this.z))
-                        {
-                            this.Rotate(this.rotationX, this.rotationY - this.rotationY, this.rotationZ);
-                            if (shelf != null)
-                                shelf.Rotate(rotationX, rotationY - rotationY, rotationZ);
-                        }
-                        else if (path.First().z < Math.Round(this.z))
-                        {
-                            this.Rotate(this.rotationX, this.rotationY - this.rotationY + Math.PI, this.rotationZ);
-                            if (shelf != null)
-                                shelf.Rotate(rotationX, rotationY - rotationY + Math.PI, rotationZ);
-                        }
-                        if (path.Count != 1)
-                            path.RemoveAt(0);
-                    }
+                deltaX = path.First().x - this.x; //waar hij naar toe moet - waar hij is
+                deltaZ = path.First().z - this.z; //waar hij naar toe moet - waar hij is
+
+                if (path.First().x > Math.Round(this.x))
+                {
+                    this.Rotate(this.rotationX, this.rotationY - this.rotationY + (Math.PI / 2), this.rotationZ);
+                    if (shelf != null)
+                        shelf.Rotate(rotationX, rotationY - rotationY + (Math.PI / 2), rotationZ);
                 }
+                else if (path.First().x < Math.Round(this.x))
+                {
+                    this.Rotate(this.rotationX, this.rotationY - this.rotationY - (Math.PI / 2), this.rotationZ);
+                    if (shelf != null)
+                        shelf.Rotate(rotationX, rotationY - rotationY - (Math.PI / 2), rotationZ);
+                }
+                else if (path.First().z > Math.Round(this.z))
+                {
+                    this.Rotate(this.rotationX, this.rotationY - this.rotationY, this.rotationZ);
+                    if (shelf != null)
+                        shelf.Rotate(rotationX, rotationY - rotationY, rotationZ);
+                }
+                else if (path.First().z < Math.Round(this.z))
+                {
+                    this.Rotate(this.rotationX, this.rotationY - this.rotationY + Math.PI, this.rotationZ);
+                    if (shelf != null)
+                        shelf.Rotate(rotationX, rotationY - rotationY + Math.PI, rotationZ);
+                }
+
                 if (Math.Round(deltaX, 1) > 0) // als deltaX positief is gaat hij vooruit
                 {
                     this.Move(this.x + 0.20, this.y, this.z);
@@ -204,5 +200,5 @@ namespace Models
     }
 }
 
-    
+
 

@@ -98,7 +98,7 @@ namespace Models
                             }
                             break;
                         case -45:
-                            train.Move(58, 1.4, 35.2);
+                            train.Move(58, 2, 35.8);
                             break;
                     }
                     if (Math.Round(train.x, 1) == 58 && ShelfReplace.Count() == 0 && train.Status() == false && trainBusy == false)
@@ -108,8 +108,7 @@ namespace Models
                     if (truck.GetItems() == 0 && truck.Status() == false)
                     {
                         truck.updateArrived();
-                        truck.setItems(6);
-                        //truck.setItems(r.Next(1, shelvesInPlace.Count()));
+                        truck.setItems(r.Next(1, shelvesInPlace.Count()));
                     }
                     else if (truck.GetItems() != 0 && robot != null)
                     {
@@ -145,12 +144,12 @@ namespace Models
         private void robotGetShelf(Robot robot)
         {
             Node shelfNode = shelvesInPlace[r.Next(0, shelvesInPlace.Count())];
-            robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, shelfNode.name)));
+            robot.addTask(new RobotMove(g.Shortest_Path(robot.getRobotStation().name, shelfNode.name)));
             robot.addTask(new RobotPickUp(shelfNode, shelfNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(shelfNode.name, "T")));
+            robot.addTask(new RobotMove(g.Shortest_Path(shelfNode.name, "T")));
             robot.addTask(new RobotDeliver(shelfNode.shelf));
             string test = robot.getRobotStation().name + "2";
-            robot.addTask(new RobotMove(g.shortest_path("T", test)));
+            robot.addTask(new RobotMove(g.Shortest_Path("T", test)));
             robot.updateStatus();
             shelfNode.shelf.updateStatus();
         }
@@ -170,9 +169,9 @@ namespace Models
                 shelf.Move(18, 0, 31);
                 forklift.addShelf(shelf);
                 forklift.addTask(new ForkliftPickUp(shelf));
-                forklift.addTask(new ForkliftMove(g.shortest_path("Forklift", node.name)));
+                forklift.addTask(new ForkliftMove(g.Shortest_Path("Forklift", node.name)));
                 forklift.addTask(new ForkliftDeliver(node, shelf));
-                forklift.addTask(new ForkliftMove(g.shortest_path(node.name, "Forklift")));
+                forklift.addTask(new ForkliftMove(g.Shortest_Path(node.name, "Forklift")));
                 forklift.addTask(new ForkliftReset());
                 forklift.updateStatus();
                 train.itemRemove();
@@ -187,24 +186,24 @@ namespace Models
         /// <param name="robot">Robot</param>
         private void robotRestockShelf(Robot robot)
         {
-            Node FromNode = ShelfReplace.First();
-            Node ToNode = g.getNodes().First(x => x.shelf == null && x.name.Contains("Shelf"));
-            robot.addTask(new RobotMove(g.shortest_path(robot.getRobotStation().name, FromNode.name)));
-            robot.addTask(new RobotPickUp(FromNode, FromNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(FromNode.name, ToNode.name)));
-            robot.addTask(new RobotDeliver(FromNode.shelf));
-            ToNode.shelf = FromNode.shelf;
-            ToNode.shelf.updateStatus();
+            Node pickupNode = ShelfReplace.First();
+            Node deliverNode = g.getNodes().First(x => x.shelf == null && x.name.Contains("Shelf"));
+            robot.addTask(new RobotMove(g.Shortest_Path(robot.getRobotStation().name, pickupNode.name)));
+            robot.addTask(new RobotPickUp(pickupNode, pickupNode.shelf));
+            robot.addTask(new RobotMove(g.Shortest_Path(pickupNode.name, deliverNode.name)));
+            robot.addTask(new RobotDeliver(pickupNode.shelf));
+            deliverNode.shelf = pickupNode.shelf;
+            deliverNode.shelf.updateStatus();
             ShelfReplace.RemoveAt(0);
-            robot.addTask(new RobotMove(g.shortest_path(ToNode.name, ShelfReplace.First().name)));
-            FromNode = ShelfReplace.First();
-            ToNode = g.getNodes().First(x => x.shelf == null && x.name.Contains("Shelf"));
-            robot.addTask(new RobotPickUp(FromNode, FromNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(FromNode.name, ToNode.name)));
-            robot.addTask(new RobotDeliver(FromNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(ToNode.name, robot.getRobotStation().name + "2")));
-            ToNode.shelf = FromNode.shelf;
-            ToNode.shelf.updateStatus();
+            robot.addTask(new RobotMove(g.Shortest_Path(deliverNode.name, ShelfReplace.First().name)));
+            pickupNode = ShelfReplace.First();
+            deliverNode = g.getNodes().First(x => x.shelf == null && x.name.Contains("Shelf"));
+            robot.addTask(new RobotPickUp(pickupNode, pickupNode.shelf));
+            robot.addTask(new RobotMove(g.Shortest_Path(pickupNode.name, deliverNode.name)));
+            robot.addTask(new RobotDeliver(pickupNode.shelf));
+            robot.addTask(new RobotMove(g.Shortest_Path(deliverNode.name, robot.getRobotStation().name + "2")));
+            deliverNode.shelf = pickupNode.shelf;
+            deliverNode.shelf.updateStatus();
             ShelfReplace.RemoveAt(0);
             robot.updateStatus();
         }
@@ -231,10 +230,10 @@ namespace Models
         }
 
         /// <summary>
-        /// Add truck
+        /// sets the truck
         /// </summary>
         /// <param name="truck">Truck</param>
-        public void AddTruck(Truck truck)
+        public void SetTruck(Truck truck)
         {
             this.truck = truck;
         }
@@ -249,10 +248,10 @@ namespace Models
         }
 
         /// <summary>
-        /// Add train
+        /// Sets the train
         /// </summary>
         /// <param name="train">Train</param>
-        public void AddTrain(Train train)
+        public void SetTrain(Train train)
         {
             this.train = train;
         }
