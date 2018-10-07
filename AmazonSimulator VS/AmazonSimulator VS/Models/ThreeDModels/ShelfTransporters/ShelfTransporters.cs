@@ -77,15 +77,15 @@ namespace Models
 
                         if (path.First().x > Math.Round(this.x))
                         {
-                            this.Rotate(this.rotationX, this.rotationY - this.rotationY - (Math.PI / 2), this.rotationZ);
-                            if (shelf != null)
-                                shelf.Rotate(rotationX, rotationY - rotationY - (Math.PI / 2), rotationZ);
-                        }
-                        else if (path.First().x < Math.Round(this.x))
-                        {
                             this.Rotate(this.rotationX, this.rotationY - this.rotationY + (Math.PI / 2), this.rotationZ);
                             if (shelf != null)
                                 shelf.Rotate(rotationX, rotationY - rotationY + (Math.PI / 2), rotationZ);
+                        }
+                        else if (path.First().x < Math.Round(this.x))
+                        {
+                            this.Rotate(this.rotationX, this.rotationY - this.rotationY - (Math.PI / 2), this.rotationZ);
+                            if (shelf != null)
+                                shelf.Rotate(rotationX, rotationY - rotationY - (Math.PI / 2), rotationZ);
                         }
                         else if (path.First().z > Math.Round(this.z))
                         {
