@@ -34,13 +34,5 @@ namespace Models
         {
             return robotStation;
         }
-
-        /// <summary>
-        /// Reset the robot to its robot station
-        /// </summary>
-        public void robotReset()
-        {
-            Move(this.x - this.x + robotStation.x, this.y - this.y + robotStation.y, this.z - this.z + robotStation.z);
-        }
     }
 }

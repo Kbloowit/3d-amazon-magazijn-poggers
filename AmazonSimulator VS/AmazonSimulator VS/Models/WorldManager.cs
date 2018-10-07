@@ -202,7 +202,7 @@ namespace Models
             robot.addTask(new RobotPickUp(FromNode, FromNode.shelf));
             robot.addTask(new RobotMove(g.shortest_path(FromNode.name, ToNode.name)));
             robot.addTask(new RobotDeliver(FromNode.shelf));
-            robot.addTask(new RobotMove(g.shortest_path(ToNode.name, robot.getRobotStation().name)));
+            robot.addTask(new RobotMove(g.shortest_path(ToNode.name, robot.getRobotStation().name + "2")));
             ToNode.shelf = FromNode.shelf;
             ToNode.shelf.updateStatus();
             ShelfReplace.RemoveAt(0);

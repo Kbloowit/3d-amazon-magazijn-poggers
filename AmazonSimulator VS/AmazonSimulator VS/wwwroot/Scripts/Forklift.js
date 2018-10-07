@@ -1,9 +1,11 @@
-﻿class Forklift extends THREE.Group {
+﻿/** Creates forklift model*/
+class Forklift extends THREE.Group {
     constructor() {
         super();
         this.init();
     }
 
+    /** Initializes the forklift model */
     init() {
         var selfref = this;
 
@@ -12,6 +14,7 @@
             box.center(mesh.position); // this re-sets the mesh position
             mesh.position.y = 0.1;
             mesh.position.z = -0.2;
+            mesh.position.x = -0.1;
             selfref.add(mesh);
         });
 

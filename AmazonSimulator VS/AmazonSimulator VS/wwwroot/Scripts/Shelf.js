@@ -1,9 +1,11 @@
-﻿class Shelf extends THREE.Group {
+﻿/** Creates shelf model*/
+class Shelf extends THREE.Group {
     constructor() {
         super();
         this.init();
     }
 
+    /** Initializes the shelf model */
     init() {
         var selfref = this;
 
@@ -19,7 +21,3 @@
         selfref.scale.set(0.3, 0.3, 0.3);
     }
 }
-
-
-    
-
