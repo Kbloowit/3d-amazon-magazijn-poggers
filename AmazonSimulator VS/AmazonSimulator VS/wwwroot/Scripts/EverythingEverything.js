@@ -33,6 +33,7 @@ window.onload = function () {
         plane.position.y = 0;
         plane.position.x = 15;
         plane.position.z = 15;
+        plane.recieveShadow = true;
         scene.add(plane);
 
         var worldStandards = new WorldStandards();
