@@ -1,13 +1,15 @@
-﻿class Robot extends THREE.Group {
+﻿/** Creates robot model*/
+class Robot extends THREE.Group {
     constructor() {
         super();
         this.init();
     }
 
+    /** Initializes the robot model */
     init() {
         var selfref = this;
         var geometryRobot = new THREE.BoxGeometry(0.9, 0.3, 0.9);
-       
+
         var cubeMaterialsRobot = [
             new THREE.MeshPhongMaterial({
                 map: new THREE.TextureLoader().load('textures/robot/robot_side.png'),
@@ -43,17 +45,7 @@
         //var materialRobot = new THREE.MeshFaceMaterial(cubeMaterialsRobot);
         var modelRobot = new THREE.Mesh(geometryRobot, cubeMaterialsRobot);
         modelRobot.position.y = 0.15;
-        
+
         selfref.add(modelRobot);
-
-
-
     }
 }
-
-        
-
-            
-        
-    
-

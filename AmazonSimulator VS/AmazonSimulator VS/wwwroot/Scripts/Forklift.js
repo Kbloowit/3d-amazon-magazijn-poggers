@@ -1,9 +1,11 @@
-﻿class Forklift extends THREE.Group {
+﻿/** Creates forklift model*/
+class Forklift extends THREE.Group {
     constructor() {
         super();
         this.init();
     }
 
+    /** Initializes the forklift model */
     init() {
         var selfref = this;
 

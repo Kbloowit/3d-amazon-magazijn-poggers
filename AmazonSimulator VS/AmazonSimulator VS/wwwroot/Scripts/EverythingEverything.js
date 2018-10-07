@@ -4,12 +4,13 @@
 
 var exampleSocket;
 
+/** Check when webpage is loaded */
 window.onload = function () {
     var camera, scene, renderer;
     var cameraControls;
 
     var worldObjects = {};
-
+    /** Occurs upon loading the page, initializes the world */
     function init() {
         camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1500);
         cameraControls = new THREE.OrbitControls(camera);
@@ -57,19 +58,26 @@ window.onload = function () {
         scene.add(light);
     }
 
+    /** Adjusts the window size on window size change */
     function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
+    /** Can be used to reqeust animations */
     function animate() {
         requestAnimationFrame(animate);
         cameraControls.update();
         renderer.render(scene, camera);
     }
 
+    // Creates socket connection
     exampleSocket = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port + '/connect_client');
+    /**
+     * Does things upon recieving commands, like loading objects
+     * @param {any} event command
+     */
     exampleSocket.onmessage = function (event) {
         var command = parseCommand(event.data);
         if (command.command === 'update') {
@@ -116,4 +124,3 @@ window.onload = function () {
     init();
     animate();
 };
-
