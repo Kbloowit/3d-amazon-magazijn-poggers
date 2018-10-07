@@ -9,7 +9,7 @@ class Forklift extends THREE.Group {
     init() {
         var selfref = this;
 
-        LoadOBJModel('textures/forklift/', 'forklift.obj', 'textures/forklift/', 'forklift.mtl', mesh => {
+        LoadOBJModel('textures/ThreeDModels/forklift/', 'forklift.obj', 'textures/ThreeDModels/forklift/', 'forklift.mtl', mesh => {
             var box = new THREE.Box3().setFromObject(mesh);
             box.center(mesh.position); // this re-sets the mesh position
             mesh.position.y = 0.1;

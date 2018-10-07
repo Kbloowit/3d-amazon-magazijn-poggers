@@ -11,13 +11,24 @@ namespace Views
 {
     public class ClientView : View
     {
+        /// <summary>
+        /// WebSocket that the view uses
+        /// </summary>
         private WebSocket socket;
 
+        /// <summary>
+        /// Constructor of ClientView, sets socket
+        /// </summary>
+        /// <param name="socket"></param>
         public ClientView(WebSocket socket)
         {
             this.socket = socket;
         }
 
+        /// <summary>
+        /// recieve async task, lissens to socket
+        /// </summary>
+        /// <returns>message the socket sends</returns>
         public async Task StartReceiving()
         {
             var buffer = new byte[1024 * 4];
@@ -37,6 +48,10 @@ namespace Views
             await socket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
         }
 
+        /// <summary>
+        /// Send async message trough socket
+        /// </summary>
+        /// <param name="message">Message</param>
         private async void SendMessage(string message)
         {
             byte[] buffer = Encoding.UTF8.GetBytes(message);
@@ -55,16 +70,27 @@ namespace Views
             SendMessage(c.ToJson());
         }
 
+        /// <summary>
+        /// On completed
+        /// </summary>
         public override void OnCompleted()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// On error
+        /// </summary>
+        /// <param name="error"></param>
         public override void OnError(Exception error)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// On next
+        /// </summary>
+        /// <param name="value">Send command value</param>
         public override void OnNext(Command value)
         {
             SendCommand(value);

@@ -30,7 +30,7 @@ namespace Models
         /// get the station that belongs to this robot
         /// </summary>
         /// <returns>robotStation</returns>
-        public Node getRobotStation()
+        public Node GetRobotStation()
         {
             return robotStation;
         }

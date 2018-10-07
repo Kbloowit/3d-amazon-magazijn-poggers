@@ -7,7 +7,7 @@
     init() {
         var selfref = this;
 
-        LoadOBJModel('textures/attempt/', 'attempt.obj', 'textures/attempt/', 'attempt.mtl', mesh => {
+        LoadOBJModel('textures/world/', 'world.obj', 'textures/world/', 'world.mtl', mesh => {
             mesh.rotation.y = Math.PI / 2.0;
             mesh.position.y = 0;
             mesh.position.x = 4;

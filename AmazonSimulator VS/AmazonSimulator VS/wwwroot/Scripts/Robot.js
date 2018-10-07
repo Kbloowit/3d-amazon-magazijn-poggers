@@ -12,32 +12,32 @@ class Robot extends THREE.Group {
 
         var cubeMaterialsRobot = [
             new THREE.MeshPhongMaterial({
-                map: new THREE.TextureLoader().load('textures/robot/robot_side.png'),
+                map: new THREE.TextureLoader().load('textures/ThreeDModels/robot/robot_side.png'),
                 side: THREE.DoubleSide
             }),
             //LEFT
             new THREE.MeshPhongMaterial({
-                map: new THREE.TextureLoader().load('textures/robot/robot_side.png'),
+                map: new THREE.TextureLoader().load('textures/ThreeDModels/robot/robot_side.png'),
                 side: THREE.DoubleSide
             }),
             //RIGHT
             new THREE.MeshPhongMaterial({
-                map: new THREE.TextureLoader().load('textures/robot/robot_top.png'),
+                map: new THREE.TextureLoader().load('textures/ThreeDModels/robot/robot_top.png'),
                 side: THREE.DoubleSide
             }),
             //TOP
             new THREE.MeshPhongMaterial({
-                map: new THREE.TextureLoader().load('textures/robot/robot_bottom.png'),
+                map: new THREE.TextureLoader().load('textures/ThreeDModels/robot/robot_bottom.png'),
                 side: THREE.DoubleSide
             }),
             //BOTTOM
             new THREE.MeshPhongMaterial({
-                map: new THREE.TextureLoader().load('textures/robot/robot_front.png'),
+                map: new THREE.TextureLoader().load('textures/ThreeDModels/robot/robot_front.png'),
                 side: THREE.DoubleSide
             }),
             //FRONT
             new THREE.MeshPhongMaterial({
-                map: new THREE.TextureLoader().load('textures/robot/robot_front.png'),
+                map: new THREE.TextureLoader().load('textures/ThreeDModels/robot/robot_front.png'),
                 side: THREE.DoubleSide
             })
         ];

@@ -11,7 +11,7 @@ namespace Models
         /// Resets the forklift
         /// </summary>
         /// <param name="forklift">Forklift</param>
-        public void startTask(ShelfTransporters forklift)
+        public void StartTask(ShelfTransporters forklift)
         {
             forklift.Move(32, 1000, 32);
         }
@@ -21,7 +21,7 @@ namespace Models
         /// </summary>
         /// <param name="forklift">Forklift</param>
         /// <returns>Forklift reset</returns>
-        public bool taskCompleted(ShelfTransporters forklift)
+        public bool TaskCompleted(ShelfTransporters forklift)
         {
             return Math.Round(forklift.x, 1) == 32 && Math.Round(forklift.y, 1) == 1000 && Math.Round(forklift.z, 1) == 32;
         }

@@ -9,7 +9,7 @@ class Train extends THREE.Group {
     init() {
         var selfref = this;
 
-        LoadOBJModel('textures/train/', 'train.obj', 'textures/train/', 'train.mtl', mesh => {
+        LoadOBJModel('textures/ThreeDModels/train/', 'train.obj', 'textures/ThreeDModels/train/', 'train.mtl', mesh => {
             selfref.add(mesh);
         });
 
