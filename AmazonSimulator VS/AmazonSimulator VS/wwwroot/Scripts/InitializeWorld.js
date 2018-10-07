@@ -36,7 +36,7 @@ window.onload = function () {
         plane.position.x = 15;
         plane.position.z = 15;
         plane.receiveShadow = true;
-        plane.castShadow = true;
+        plane.castShadow = false;
         scene.add(plane);
 
         var worldStandards = new WorldStandards();

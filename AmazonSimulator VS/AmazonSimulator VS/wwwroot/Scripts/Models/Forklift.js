@@ -13,8 +13,6 @@ class Forklift extends THREE.Group {
             var box = new THREE.Box3().setFromObject(mesh);
             box.center(mesh.position); // this re-sets the mesh position
             mesh.position.y = 0.1;
-            mesh.position.z = -0.2;
-            mesh.position.x = -0.1;
             selfref.add(mesh);
         });
 
