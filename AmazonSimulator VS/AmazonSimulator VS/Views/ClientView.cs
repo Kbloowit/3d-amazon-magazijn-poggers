@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using System.Text;
 using Controllers;
 
-namespace Views {
-    public class ClientView : IObserver<Command> {
+namespace Views
+{
+    public class ClientView : View
+    {
         private WebSocket socket;
 
         public ClientView(WebSocket socket)
@@ -16,7 +18,8 @@ namespace Views {
             this.socket = socket;
         }
 
-        public async Task StartReceiving() {
+        public async Task StartReceiving()
+        {
             var buffer = new byte[1024 * 4];
 
             Console.WriteLine("ClientView connection started");
@@ -34,30 +37,35 @@ namespace Views {
             await socket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
         }
 
-        private async void SendMessage(string message) {
+        private async void SendMessage(string message)
+        {
             byte[] buffer = Encoding.UTF8.GetBytes(message);
-            try {
+            try
+            {
                 await socket.SendAsync(new ArraySegment<byte>(buffer, 0, message.Length), WebSocketMessageType.Text, true, CancellationToken.None);
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Error while sending information to client, probably a Socket disconnect");
             }
         }
 
-        public void SendCommand(Command c) {
+        public void SendCommand(Command c)
+        {
             SendMessage(c.ToJson());
         }
 
-        public void OnCompleted()
+        public override void OnCompleted()
         {
             throw new NotImplementedException();
         }
 
-        public void OnError(Exception error)
+        public override void OnError(Exception error)
         {
             throw new NotImplementedException();
         }
 
-        public void OnNext(Command value)
+        public override void OnNext(Command value)
         {
             SendCommand(value);
         }
