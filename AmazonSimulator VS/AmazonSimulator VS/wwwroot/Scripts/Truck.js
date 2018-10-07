@@ -8,7 +8,7 @@ class Truck extends THREE.Group {
     init() {
         var selfref = this;
 
-        LoadOBJModel('textures/truck/', 'truck.obj', 'textures/truck/', 'truck.mtl', mesh => {
+        LoadOBJModel('textures/ThreeDModels/truck/', 'truck.obj', 'textures/ThreeDModels/truck/', 'truck.mtl', mesh => {
             mesh.scale.set(30, 30, 30);
             selfref.add(mesh);
         });

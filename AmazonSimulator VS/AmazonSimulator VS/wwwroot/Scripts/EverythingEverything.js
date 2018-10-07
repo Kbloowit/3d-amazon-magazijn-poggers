@@ -28,7 +28,7 @@ window.onload = function () {
         window.addEventListener('resize', onWindowResize, false);
 
         var geometryPlane = new THREE.PlaneGeometry(32, 32, 32);
-        var material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/floor/floor.jpg"), side: THREE.DoubleSide });
+        var material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/world/floor/floor.jpg"), side: THREE.DoubleSide });
         var plane = new THREE.Mesh(geometryPlane, material);
         plane.rotation.x = Math.PI / 2.0;
         plane.position.y = 0;
@@ -42,12 +42,12 @@ window.onload = function () {
         var cubeSkyboxGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
         var cubeSkyboxMaterial = [
 
-            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_lf.tga"), side: THREE.DoubleSide }), //LEFT
-            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_rt.tga"), side: THREE.DoubleSide }), //RIGHT
-            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_up.tga"), side: THREE.DoubleSide }), //TOP
-            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_dn.tga"), side: THREE.DoubleSide }), //BOTTOM
-            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_ft.tga"), side: THREE.DoubleSide }), //FRONT
-            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/mp_crimson/crimson-tide_bk.tga"), side: THREE.DoubleSide }) //BACK
+            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/skybox/crimson-tide_lf.tga"), side: THREE.DoubleSide }), //LEFT
+            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/skybox/crimson-tide_rt.tga"), side: THREE.DoubleSide }), //RIGHT
+            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/skybox/crimson-tide_up.tga"), side: THREE.DoubleSide }), //TOP
+            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/skybox/crimson-tide_dn.tga"), side: THREE.DoubleSide }), //BOTTOM
+            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/skybox/crimson-tide_ft.tga"), side: THREE.DoubleSide }), //FRONT
+            new THREE.MeshBasicMaterial({ map: new THREE.TGALoader().load("textures/skybox/crimson-tide_bk.tga"), side: THREE.DoubleSide }) //BACK
         ];
 
         var cubeSkybox = new THREE.Mesh(cubeSkyboxGeometry, cubeSkyboxMaterial);
